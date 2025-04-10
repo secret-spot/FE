@@ -32,12 +32,8 @@
   
   .button-container {
     width: 100%;
-    opacity: 0;
     padding-bottom: 4rem; /* 하단 여백 감소 */
     margin-top: auto; /* 컨테이너를 위로 밀기 */
     
-    &.show {
-      opacity: 1;
-    }
   }
   
