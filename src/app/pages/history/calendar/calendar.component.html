@@ -1,0 +1,11 @@
+<div class="calendar-container">
+  <div class="calendar-header">
+    <h2>여행 날짜 선택</h2>
+  </div>
+  <div class="calendar-body">
+    <input type="date" [value]="selectedDate | date:'yyyy-MM-dd'" (change)="onDateSelect($event)">
+  </div>
+  <div class="calendar-footer">
+    <button class="next-btn" (click)="onNext()">다음</button>
+  </div>
+</div>
