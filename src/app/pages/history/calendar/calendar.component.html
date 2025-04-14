@@ -2,10 +2,45 @@
   <div class="calendar-header">
     <h2>여행 날짜 선택</h2>
   </div>
-  <div class="calendar-body">
-    <input type="date" [value]="selectedDate | date:'yyyy-MM-dd'" (change)="onDateSelect($event)">
+  
+  <div class="selected-dates" *ngIf="startDate || endDate">
+    <div class="date-range">
+      <div class="date-item" *ngIf="startDate">
+        <span class="label">여행 시작일:</span>
+        <span class="date">{{startDate | date:'yyyy년 MM월 dd일'}}</span>
+      </div>
+      <div class="date-item" *ngIf="endDate">
+        <span class="label">여행 종료일:</span>
+        <span class="date">{{endDate | date:'yyyy년 MM월 dd일'}}</span>
+      </div>
+    </div>
+    <button class="clear-btn" (click)="clearDates()" *ngIf="startDate && endDate">선택 초기화</button>
   </div>
+  
+  <div class="calendar-body">
+    <div class="calendar-controls">
+      <button class="month-btn" (click)="previousMonth()">&lt;</button>
+      <h3>{{currentYear}}년 {{currentMonth + 1}}월</h3>
+      <button class="month-btn" (click)="nextMonth()">&gt;</button>
+    </div>
+    
+    <div class="calendar-grid">
+      <div class="weekday" *ngFor="let day of weekDays">{{day}}</div>
+      <div 
+        *ngFor="let day of calendarDays" 
+        class="day" 
+        [class.other-month]="day.isOtherMonth"
+        [class.selected]="isSelected(day.date)"
+        [class.in-range]="isInRange(day.date)"
+        [class.start-date]="isStartDate(day.date)"
+        [class.end-date]="isEndDate(day.date)"
+        (click)="selectDate(day.date)">
+        {{day.date.getDate()}}
+      </div>
+    </div>
+  </div>
+  
   <div class="calendar-footer">
-    <button class="next-btn" (click)="onNext()">다음</button>
+    <button class="next-btn" (click)="onNext()" [disabled]="!startDate || !endDate">다음</button>
   </div>
 </div>
