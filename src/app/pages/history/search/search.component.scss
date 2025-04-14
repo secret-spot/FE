@@ -82,15 +82,30 @@
 
   .search-footer {
     padding: 20px 0;
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 
-    .next-btn {
+    .map-btn, .next-btn {
       padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      font-size: 16px;
+    }
+
+    .map-btn {
+      background-color: #28a745;
+      color: white;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
+
+    .next-btn {
+      background-color: #007bff;
+      color: white;
 
       &:hover {
         background-color: #0056b3;
