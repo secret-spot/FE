@@ -35,9 +35,14 @@ export class SearchComponent {
     this.selectedLocation = location;
   }
 
+  onMapClick(): void {
+    this.router.navigate(['/history/map']);
+  }
+
   onNext(): void {
-    if (this.selectedLocation) {
-      this.router.navigate(['/history/record']);
-    }
+    // if (this.selectedLocation) {
+    //   this.router.navigate(['/history/record']);
+    // }
+    this.router.navigate(['/history/record']);
   }
 }

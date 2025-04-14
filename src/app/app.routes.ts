@@ -10,6 +10,7 @@ import { MypageComponent } from './pages/mypage/mypage.component';
 import { CalendarComponent } from './pages/history/calendar/calendar.component';
 import { SearchComponent } from './pages/history/search/search.component';
 import { TravelRecordComponent } from './pages/history/travel-record/travel-record.component';
+import { MapComponent } from './pages/history/map/map.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'splash', pathMatch: 'full' },
@@ -24,6 +25,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: CalendarComponent },
       { path: 'search', component: SearchComponent },
+      { path: 'map', component: MapComponent },
       { path: 'record', component: TravelRecordComponent }
     ]
   },

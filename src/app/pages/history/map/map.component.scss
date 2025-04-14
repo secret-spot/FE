@@ -1,0 +1,129 @@
+.map-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .map-header {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .back-btn {
+      padding: 8px 15px;
+      background-color: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+
+      &:hover {
+        background-color: #e9ecef;
+      }
+    }
+
+    h2 {
+      margin: 0;
+      color: #333;
+      font-size: 18px;
+    }
+  }
+
+  .map-body {
+    flex: 1;
+    display: flex;
+    position: relative;
+
+    .google-map {
+      flex: 1;
+      height: 100%;
+    }
+
+    .selected-places {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 300px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      max-height: calc(100% - 40px);
+      overflow-y: auto;
+
+      h3 {
+        margin: 0 0 15px 0;
+        color: #333;
+        font-size: 16px;
+      }
+
+      .place-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .place-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+
+          .place-info {
+            flex: 1;
+
+            h4 {
+              margin: 0 0 5px 0;
+              color: #333;
+              font-size: 14px;
+            }
+
+            p {
+              margin: 0;
+              color: #666;
+              font-size: 12px;
+            }
+          }
+
+          .remove-btn {
+            padding: 5px 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+
+            &:hover {
+              background-color: #c82333;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .map-footer {
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    text-align: right;
+
+    .save-btn {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
+  }
+}
