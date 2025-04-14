@@ -1,9 +1,10 @@
 .calendar-container {
   padding: 20px;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: white;
+  overflow: hidden;
 
   .calendar-header {
     text-align: center;
@@ -63,6 +64,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-height: 0;
     
     .calendar-controls {
       display: flex;
@@ -93,6 +95,7 @@
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 5px;
+      flex: 1;
       
       .weekday {
         text-align: center;
