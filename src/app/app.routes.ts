@@ -7,6 +7,9 @@ import { ExploreComponent } from './pages/explore/explore.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { ChatbotComponent } from './pages/chatbot/chatbot.component';
 import { MypageComponent } from './pages/mypage/mypage.component';
+import { CalendarComponent } from './pages/history/calendar/calendar.component';
+import { SearchComponent } from './pages/history/search/search.component';
+import { TravelRecordComponent } from './pages/history/travel-record/travel-record.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'splash', pathMatch: 'full' },
@@ -15,7 +18,15 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'explore', component: ExploreComponent },
-  { path: 'history', component: HistoryComponent },
+  { 
+    path: 'history', 
+    component: HistoryComponent,
+    children: [
+      { path: '', component: CalendarComponent },
+      { path: 'search', component: SearchComponent },
+      { path: 'record', component: TravelRecordComponent }
+    ]
+  },
   { path: 'chatbot', component: ChatbotComponent },
   { path: 'mypage', component: MypageComponent },
 ];

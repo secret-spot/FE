@@ -1,0 +1,20 @@
+<div class="search-container">
+  <div class="search-header">
+    <h2>여행지 검색</h2>
+  </div>
+  <div class="search-body">
+    <div class="search-input">
+      <input type="text" placeholder="여행지를 검색해보세요" [(ngModel)]="searchQuery">
+      <button class="search-btn" (click)="onSearch()">검색</button>
+    </div>
+    <div class="search-results" *ngIf="searchResults.length > 0">
+      <div class="result-item" *ngFor="let result of searchResults" (click)="selectLocation(result)">
+        <h3>{{result.name}}</h3>
+        <p>{{result.address}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="search-footer">
+    <button class="next-btn" (click)="onNext()">다음</button>
+  </div>
+</div>
