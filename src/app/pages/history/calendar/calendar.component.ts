@@ -115,22 +115,19 @@ export class CalendarComponent {
     }
   }
 
+  clearDates(): void {
+    this.startDate = null;
+    this.endDate = null;
+  }
+
   isSelected(date: Date): boolean {
-    return this.isStartDate(date) || this.isEndDate(date);
-  }
-
-  isStartDate(date: Date): boolean {
-    return this.startDate ? 
-      date.getDate() === this.startDate.getDate() && 
-      date.getMonth() === this.startDate.getMonth() && 
-      date.getFullYear() === this.startDate.getFullYear() : false;
-  }
-
-  isEndDate(date: Date): boolean {
-    return this.endDate ? 
-      date.getDate() === this.endDate.getDate() && 
-      date.getMonth() === this.endDate.getMonth() && 
-      date.getFullYear() === this.endDate.getFullYear() : false;
+    if (!this.startDate && !this.endDate) return false;
+    
+    if (this.startDate && !this.endDate) {
+      return this.isSameDay(date, this.startDate);
+    }
+    
+    return this.isSameDay(date, this.startDate!) || this.isSameDay(date, this.endDate!);
   }
 
   isInRange(date: Date): boolean {
@@ -139,14 +136,30 @@ export class CalendarComponent {
     return date > this.startDate && date < this.endDate;
   }
 
-  clearDates(): void {
-    this.startDate = null;
-    this.endDate = null;
+  isStartDate(date: Date): boolean {
+    if (!this.startDate) return false;
+    return this.isSameDay(date, this.startDate);
+  }
+
+  isEndDate(date: Date): boolean {
+    if (!this.endDate) return false;
+    return this.isSameDay(date, this.endDate);
+  }
+
+  isSameDay(date1: Date, date2: Date): boolean {
+    return date1.getDate() === date2.getDate() &&
+           date1.getMonth() === date2.getMonth() &&
+           date1.getFullYear() === date2.getFullYear();
   }
 
   onNext(): void {
     if (this.startDate && this.endDate) {
       this.router.navigate(['/history/search']);
     }
+  }
+  
+  onBack(): void {
+    // 홈 페이지로 이동
+    this.router.navigate(['/home']);
   }
 }

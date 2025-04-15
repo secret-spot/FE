@@ -45,4 +45,9 @@ export class SearchComponent {
     // }
     this.router.navigate(['/history/record']);
   }
+  
+  onBack(): void {
+    // 캘린더 페이지로 이동
+    this.router.navigate(['/history']);
+  }
 }
