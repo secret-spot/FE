@@ -11,6 +11,8 @@ import { CalendarComponent } from './pages/history/calendar/calendar.component';
 import { SearchComponent } from './pages/history/search/search.component';
 import { TravelRecordComponent } from './pages/history/travel-record/travel-record.component';
 import { MapComponent } from './pages/history/map/map.component';
+import { SummaryComponent } from './pages/history/summary/summary.component';
+import { LoadingComponent } from './pages/history/loading/loading.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'splash', pathMatch: 'full' },
@@ -26,9 +28,12 @@ export const routes: Routes = [
       { path: '', component: CalendarComponent },
       { path: 'search', component: SearchComponent },
       { path: 'map', component: MapComponent },
-      { path: 'record', component: TravelRecordComponent }
+      { path: 'record', component: TravelRecordComponent },
+      { path: 'loading', component: LoadingComponent },
+      { path: 'summary', component: SummaryComponent }
     ]
   },
   { path: 'chatbot', component: ChatbotComponent },
   { path: 'mypage', component: MypageComponent },
+  { path: 'guide/:id', component: MypageComponent },
 ];
