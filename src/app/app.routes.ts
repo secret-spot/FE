@@ -13,6 +13,7 @@ import { TravelRecordComponent } from './pages/history/travel-record/travel-reco
 import { MapComponent } from './pages/history/map/map.component';
 import { SummaryComponent } from './pages/history/summary/summary.component';
 import { LoadingComponent } from './pages/history/loading/loading.component';
+import { OAuthCallbackComponent } from './pages/auth/oauth-callback/oauth-callback.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'splash', pathMatch: 'full' },
@@ -36,4 +37,5 @@ export const routes: Routes = [
   { path: 'chatbot', component: ChatbotComponent },
   { path: 'mypage', component: MypageComponent },
   { path: 'guide/:id', component: MypageComponent },
+  { path: 'oauth2/redirect', component: OAuthCallbackComponent },
 ];
