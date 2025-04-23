@@ -28,6 +28,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   map: any = null;
   markers: any[] = [];
   selectedPlaces: Place[] = [];
+  searchBox: any = null;
 
   constructor(private router: Router) {}
 
@@ -60,12 +61,76 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     this.map = new window.google.maps.Map(document.getElementById('map') as HTMLElement, mapOptions);
 
+    // 검색 박스 초기화
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    this.searchBox = new window.google.maps.places.SearchBox(searchInput);
+
+    // 검색 결과가 변경될 때마다 마커 업데이트
+    this.searchBox.addListener('places_changed', () => {
+      this.clearMarkers();
+      const places = this.searchBox.getPlaces();
+      this.displaySearchResults(places);
+    });
+
+    // 지도 영역이 변경될 때 검색 범위 업데이트
+    this.map.addListener('bounds_changed', () => {
+      this.searchBox.setBounds(this.map.getBounds());
+    });
+
     // 맵 클릭 이벤트 리스너 추가
     this.map.addListener('click', (event: any) => {
       if (event.latLng) {
         this.addPlace(event.latLng);
       }
     });
+  }
+
+  private clearMarkers(): void {
+    this.markers.forEach(marker => marker.setMap(null));
+    this.markers = [];
+  }
+
+  private displaySearchResults(places: any[]): void {
+    if (!places || places.length === 0) return;
+
+    const bounds = new window.google.maps.LatLngBounds();
+
+    places.forEach(place => {
+      if (!place.geometry || !place.geometry.location) return;
+
+      const marker = new window.google.maps.Marker({
+        map: this.map,
+        position: place.geometry.location,
+        title: place.name
+      });
+
+      this.markers.push(marker);
+
+      // 마커 클릭 이벤트
+      marker.addListener('click', () => {
+        this.selectPlace(place);
+      });
+
+      if (place.geometry.viewport) {
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+
+    this.map.fitBounds(bounds);
+  }
+
+  private selectPlace(place: any): void {
+    const selectedPlace: Place = {
+      name: place.name,
+      address: place.formatted_address,
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng()
+    };
+
+    this.selectedPlaces.push(selectedPlace);
+    this.addMarker(place.geometry.location);
   }
 
   private addPlace(latLng: any): void {
@@ -98,8 +163,10 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   removePlace(place: Place): void {
-    const index = this.selectedPlaces.findIndex(p => p.lat === place.lat && p.lng === place.lng);
-    if (index !== -1) {
+    const index = this.selectedPlaces.findIndex(p => 
+      p.lat === place.lat && p.lng === place.lng
+    );
+    if (index > -1) {
       this.selectedPlaces.splice(index, 1);
       this.markers[index].setMap(null);
       this.markers.splice(index, 1);
@@ -107,11 +174,15 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   onBack(): void {
-    this.router.navigate(['/history/search']);
+    this.router.navigate(['/history']);
   }
 
   onSave(): void {
-    // TODO: 선택한 장소들을 저장하고 검색 화면으로 돌아가기
-    this.router.navigate(['/history/search']);
+    // 선택한 장소들을 search 페이지로 전달
+    this.router.navigate(['/search'], {
+      queryParams: {
+        places: JSON.stringify(this.selectedPlaces)
+      }
+    });
   }
 }

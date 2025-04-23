@@ -20,15 +20,22 @@ export class AppComponent {
     '/splash',
     '/login',
     '/register',
-    '/history'
+    '/history',
+    '/history/*'  // history 하위의 모든 경로
   ];
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
-      if (event.constructor.name === 'NavigationEnd') {
+      if (event instanceof NavigationEnd) {
         // 현재 URL이 hideNavPages 목록에 있는지 확인
-        this.showNav = !this.hideNavPages.includes(this.router.url);
-
+        this.showNav = !this.hideNavPages.some(page => {
+          if (page.endsWith('/*')) {
+            // 와일드카드 패턴 처리
+            const basePath = page.slice(0, -1); // '*' 제거
+            return this.router.url.startsWith(basePath);
+          }
+          return this.router.url === page;
+        });
       }
     });
   }

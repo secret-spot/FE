@@ -4,6 +4,14 @@
     <h2>구글 맵에서 장소 선택</h2>
   </div>
   <div class="map-body">
+    <div class="search-box">
+      <input
+        id="search-input"
+        type="text"
+        placeholder="장소를 검색하세요"
+        class="search-input"
+      >
+    </div>
     <div id="map" class="google-map"></div>
     <div class="selected-places" *ngIf="selectedPlaces.length > 0">
       <h3>선택한 장소</h3>
