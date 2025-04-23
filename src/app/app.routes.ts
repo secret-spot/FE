@@ -7,6 +7,7 @@ import { ExploreComponent } from './pages/explore/explore.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { ChatbotComponent } from './pages/chatbot/chatbot.component';
 import { MypageComponent } from './pages/mypage/mypage.component';
+import { OAuthCallbackComponent } from './pages/auth/oauth-callback/oauth-callback.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'splash', pathMatch: 'full' },
@@ -18,4 +19,5 @@ export const routes: Routes = [
   { path: 'history', component: HistoryComponent },
   { path: 'chatbot', component: ChatbotComponent },
   { path: 'mypage', component: MypageComponent },
+  { path: 'oauth2/redirect', component: OAuthCallbackComponent },
 ];
