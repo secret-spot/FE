@@ -1,0 +1,175 @@
+.calendar-container {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  max-width: 600px;
+  margin: 20px auto;
+
+  .calendar-header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+
+    .back-btn {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 8px 16px;
+      background-color: transparent;
+      color: #666;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+      
+      &:hover {
+        background-color: #f5f5f5;
+        color: #333;
+      }
+    }
+
+    h2 {
+      color: #333;
+      margin: 0;
+    }
+  }
+
+  .selected-dates {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+
+    .date-range {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      .date-item {
+        .label {
+          font-weight: 500;
+          margin-right: 5px;
+        }
+
+        .date {
+          color: #007bff;
+        }
+      }
+    }
+
+    .clear-btn {
+      padding: 5px 10px;
+      background-color: #f0f0f0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #666;
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+    }
+  }
+
+  .calendar-body {
+    .calendar-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+
+      .month-btn {
+        padding: 5px 10px;
+        background-color: #f0f0f0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+
+        &:hover {
+          background-color: #e0e0e0;
+        }
+      }
+
+      h3 {
+        margin: 0;
+        color: #333;
+      }
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+
+      .weekday {
+        text-align: center;
+        font-weight: 500;
+        padding: 10px 0;
+        color: #666;
+      }
+
+      .day {
+        text-align: center;
+        padding: 10px 0;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #f0f0f0;
+        }
+
+        &.other-month {
+          color: #ccc;
+        }
+
+        &.selected {
+          background-color: #007bff;
+          color: white;
+        }
+
+        &.in-range {
+          background-color: #e6f2ff;
+        }
+
+        &.start-date {
+          background-color: #007bff;
+          color: white;
+        }
+
+        &.end-date {
+          background-color: #007bff;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .calendar-footer {
+    margin-top: 20px;
+    text-align: center;
+
+    .next-btn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<div class="summary-container">
+  <div class="summary-header">
+    <h2>{{summary.date | date:'yyyy년 MM월 dd일'}} 여행 요약</h2>
+  </div>
+
+  <div class="summary-content">
+    <div class="keywords-section">
+      <h3>여행 키워드</h3>
+      <div class="keyword-list">
+        <span class="keyword" *ngFor="let keyword of summary.keywords">{{keyword}}</span>
+      </div>
+    </div>
+
+    <div class="locations-section">
+      <h3>방문한 장소</h3>
+      <div class="location-list">
+        <span class="location" *ngFor="let location of summary.locations">{{location}}</span>
+      </div>
+    </div>
+
+    <div class="description-section">
+      <h3>여행 요약</h3>
+      <p>{{summary.description}}</p>
+    </div>
+  </div>
+  
+  <div class="summary-footer">
+    <button class="publish-btn" (click)="onPublish()">게시하기</button>
+  </div>
+</div> 
