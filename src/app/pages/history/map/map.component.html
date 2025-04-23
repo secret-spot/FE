@@ -20,6 +20,15 @@
           <div class="place-info">
             <h4>{{place.name}}</h4>
             <p>{{place.address}}</p>
+            <div class="place-rating" *ngIf="place.rating">
+              <div class="stars">
+                <span class="star" *ngFor="let star of [1,2,3,4,5]">
+                  <i class="fas" [ngClass]="{'fa-star': star <= place.rating, 'fa-star-half-alt': star - 0.5 <= place.rating && star > place.rating, 'far fa-star': star > place.rating}"></i>
+                </span>
+              </div>
+              <span class="rating-value">{{place.rating}}</span>
+              <span class="review-count">({{place.reviewCount}} 리뷰)</span>
+            </div>
           </div>
           <button class="remove-btn" (click)="removePlace(place)">삭제</button>
         </div>

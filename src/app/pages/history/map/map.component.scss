@@ -92,7 +92,7 @@
         .place-item {
           display: flex;
           justify-content: space-between;
-          align-items: center;
+          align-items: flex-start;
           padding: 10px;
           border: 1px solid #ddd;
           border-radius: 4px;
@@ -107,9 +107,37 @@
             }
 
             p {
-              margin: 0;
+              margin: 0 0 5px 0;
               color: #666;
               font-size: 12px;
+            }
+
+            .place-rating {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              margin-top: 5px;
+
+              .stars {
+                display: flex;
+                gap: 2px;
+
+                .star {
+                  color: #ffc107;
+                  font-size: 12px;
+                }
+              }
+
+              .rating-value {
+                color: #333;
+                font-size: 12px;
+                font-weight: bold;
+              }
+
+              .review-count {
+                color: #666;
+                font-size: 12px;
+              }
             }
           }
 

@@ -15,6 +15,9 @@ interface Place {
   address: string;
   lat: number;
   lng: number;
+  rating?: number;      // 별점
+  reviewCount?: number; // 리뷰 수
+  placeId: string;      // Google Place ID
 }
 
 @Component({
@@ -29,6 +32,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   markers: any[] = [];
   selectedPlaces: Place[] = [];
   searchBox: any = null;
+  placesService: any = null;
 
   constructor(private router: Router) {}
 
@@ -60,6 +64,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     };
 
     this.map = new window.google.maps.Map(document.getElementById('map') as HTMLElement, mapOptions);
+    this.placesService = new window.google.maps.places.PlacesService(this.map);
 
     // 검색 박스 초기화
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
@@ -122,15 +127,28 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   private selectPlace(place: any): void {
-    const selectedPlace: Place = {
-      name: place.name,
-      address: place.formatted_address,
-      lat: place.geometry.location.lat(),
-      lng: place.geometry.location.lng()
+    // 장소의 상세 정보를 가져옴
+    const request = {
+      placeId: place.place_id,
+      fields: ['name', 'formatted_address', 'geometry', 'rating', 'user_ratings_total']
     };
 
-    this.selectedPlaces.push(selectedPlace);
-    this.addMarker(place.geometry.location);
+    this.placesService.getDetails(request, (result: any, status: string) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        const selectedPlace: Place = {
+          name: result.name,
+          address: result.formatted_address,
+          lat: result.geometry.location.lat(),
+          lng: result.geometry.location.lng(),
+          rating: result.rating,
+          reviewCount: result.user_ratings_total,
+          placeId: result.place_id
+        };
+
+        this.selectedPlaces.push(selectedPlace);
+        this.addMarker(result.geometry.location);
+      }
+    });
   }
 
   private addPlace(latLng: any): void {
@@ -138,15 +156,42 @@ export class MapComponent implements OnInit, AfterViewInit {
     const geocoder = new window.google.maps.Geocoder();
     geocoder.geocode({ location: latLng }, (results: any, status: string) => {
       if (status === 'OK' && results && results[0]) {
-        const place: Place = {
-          name: results[0].formatted_address,
-          address: results[0].formatted_address,
-          lat: latLng.lat(),
-          lng: latLng.lng()
-        };
+        // 장소 ID가 있는 경우 상세 정보를 가져옴
+        if (results[0].place_id) {
+          const request = {
+            placeId: results[0].place_id,
+            fields: ['name', 'formatted_address', 'geometry', 'rating', 'user_ratings_total']
+          };
 
-        this.selectedPlaces.push(place);
-        this.addMarker(latLng);
+          this.placesService.getDetails(request, (placeResult: any, placeStatus: string) => {
+            if (placeStatus === window.google.maps.places.PlacesServiceStatus.OK) {
+              const place: Place = {
+                name: placeResult.name,
+                address: placeResult.formatted_address,
+                lat: placeResult.geometry.location.lat(),
+                lng: placeResult.geometry.location.lng(),
+                rating: placeResult.rating,
+                reviewCount: placeResult.user_ratings_total,
+                placeId: placeResult.place_id
+              };
+
+              this.selectedPlaces.push(place);
+              this.addMarker(placeResult.geometry.location);
+            }
+          });
+        } else {
+          // 장소 ID가 없는 경우 기본 정보만 사용
+          const place: Place = {
+            name: results[0].formatted_address,
+            address: results[0].formatted_address,
+            lat: latLng.lat(),
+            lng: latLng.lng(),
+            placeId: ''
+          };
+
+          this.selectedPlaces.push(place);
+          this.addMarker(latLng);
+        }
       }
     });
   }
@@ -179,7 +224,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   onSave(): void {
     // 선택한 장소들을 search 페이지로 전달
-    this.router.navigate(['/search'], {
+    this.router.navigate(['/history/search'], {
       queryParams: {
         places: JSON.stringify(this.selectedPlaces)
       }
