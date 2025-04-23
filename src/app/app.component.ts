@@ -22,7 +22,7 @@ export class AppComponent {
     '/register',
     '/history',
     '/history/*',
-    '/mypage/*' // history 하위의 모든 경로
+     // history 하위의 모든 경로
   ];
 
   constructor(private router: Router) {
