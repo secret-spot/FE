@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 // 구글 맵 타입 선언
 declare global {
@@ -31,9 +32,9 @@ export class MapComponent implements OnInit, AfterViewInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // 구글 맵 API 키를 동적으로 로드
+    // 구글 맵 API 키를 environment.ts에서 가져와서 동적으로 로드
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}&libraries=places`;
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
