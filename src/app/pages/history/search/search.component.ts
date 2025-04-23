@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
-interface SearchResult {
-  name: string;
-  address: string;
-}
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { PlaceService, Place } from '../../../services/place.service';
 
 @Component({
   selector: 'app-search',
@@ -15,24 +13,34 @@ interface SearchResult {
   standalone: true,
   imports: [CommonModule, FormsModule]
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   searchQuery: string = '';
-  searchResults: SearchResult[] = [];
-  selectedLocation: SearchResult | null = null;
+  selectedPlaces: Place[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private placeService: PlaceService
+  ) {}
+
+  ngOnInit(): void {
+    // PlaceService에서 선택된 장소들을 구독
+    this.placeService.selectedPlaces$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(places => {
+        this.selectedPlaces = places;
+        console.log('Selected Places:', places);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   onSearch(): void {
     // TODO: 실제 검색 API 연동
-    this.searchResults = [
-      { name: '여행지 1', address: '주소 1' },
-      { name: '여행지 2', address: '주소 2' },
-      { name: '여행지 3', address: '주소 3' }
-    ];
-  }
-
-  selectLocation(location: SearchResult): void {
-    this.selectedLocation = location;
+    this.searchQuery = '';
   }
 
   onMapClick(): void {
@@ -40,14 +48,10 @@ export class SearchComponent {
   }
 
   onNext(): void {
-    // if (this.selectedLocation) {
-    //   this.router.navigate(['/history/record']);
-    // }
     this.router.navigate(['/history/record']);
   }
   
   onBack(): void {
-    // 캘린더 페이지로 이동
     this.router.navigate(['/history']);
   }
 }
