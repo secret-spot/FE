@@ -83,6 +83,23 @@
 }
 
 .top-spotters-section {
+    .top-spotters-section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .ranking-button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            .arrow-right {  
+                width: 10px;
+                height:10px;
+            }
+        }
+        
+    }
 
   .spotters-grid {
     display: grid;

@@ -26,7 +26,13 @@
 
   <!-- 상위 spotter 섹션 -->
   <div class="top-spotters-section">
-    <h3>최근 1개월 내 상위 1% spotter</h3>
+    <div class="top-spotters-section-title">
+        <h3>최근 1개월 내 상위 1% spotter</h3>
+        <div class="ranking-button">
+        <p>전체보기</p>
+        <img src="assets/images/Arrow.svg" alt="arrow-right" class="arrow-right">
+        </div>
+    </div>
     <div class="spotters-grid">
       <div class="spotter-card" *ngFor="let spotter of topSpotters">
         <div class="profile-picture">
