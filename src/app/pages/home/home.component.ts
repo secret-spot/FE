@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +13,14 @@ export class HomeComponent implements OnInit {
   topSpotters: any[] = []; // 상위 spotter 데이터를 저장할 배열
   userNickname: string = '사용자'; // 사용자 닉네임
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
+    // 브라우저 환경에서만 localStorage 접근
+    if (isPlatformBrowser(this.platformId)) {
+      this.userNickname = localStorage.getItem('username') || '사용자';
+    }
+
     // 임의의 가이드 데이터 추가
     this.guides = [
       {
@@ -64,8 +69,5 @@ export class HomeComponent implements OnInit {
         profileImage: 'assets/images/people.svg'
       }
     ];
-
-    // 임의의 사용자 닉네임 설정
-    this.userNickname = '김서울';
   }
 }

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -6,8 +8,26 @@ import { Component } from '@angular/core';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  nickname: string = '';
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    // 브라우저 환경에서만 localStorage 접근
+    if (isPlatformBrowser(this.platformId)) {
+      this.nickname = localStorage.getItem('username') || '닉네임';
+    } else {
+      this.nickname = '닉네임';
+    }
+    
+  }
+
   goToHome() {
     window.location.href = `/home`;
   }
-}
+} 
+
