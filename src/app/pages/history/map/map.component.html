@@ -1,0 +1,41 @@
+<div class="map-container">
+  <div class="map-header">
+    <button class="back-btn" (click)="onBack()">뒤로가기</button>
+    <h2>구글 맵에서 장소 선택</h2>
+  </div>
+  <div class="map-body">
+    <div class="search-box">
+      <input
+        id="search-input"
+        type="text"
+        placeholder="장소를 검색하세요"
+        class="search-input"
+      >
+    </div>
+    <div id="map" class="google-map"></div>
+    <div class="selected-places" *ngIf="selectedPlaces.length > 0">
+      <h3>선택한 장소</h3>
+      <div class="place-list">
+        <div class="place-item" *ngFor="let place of selectedPlaces">
+          <div class="place-info">
+            <h4>{{place.name}}</h4>
+            <p>{{place.address}}</p>
+            <div class="place-rating" *ngIf="place.rating">
+              <div class="stars">
+                <span class="star" *ngFor="let star of [1,2,3,4,5]">
+                  <i class="fas" [ngClass]="{'fa-star': star <= place.rating, 'fa-star-half-alt': star - 0.5 <= place.rating && star > place.rating, 'far fa-star': star > place.rating}"></i>
+                </span>
+              </div>
+              <span class="rating-value">{{place.rating}}</span>
+              <span class="review-count">({{place.reviewCount}} 리뷰)</span>
+            </div>
+          </div>
+          <button class="remove-btn" (click)="removePlace(place)">삭제</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="map-footer">
+    <button class="save-btn" (click)="onSave()">저장하기</button>
+  </div>
+</div>

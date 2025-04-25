@@ -1,0 +1,36 @@
+<div class="search-container">
+  <div class="search-header">
+    <button class="back-btn" (click)="onBack()">뒤로가기</button>
+    <h2>여행지 검색</h2>
+  </div>
+  <div class="search-body">
+    <div class="search-input">
+      <input type="text" placeholder="여행지를 검색해보세요" [(ngModel)]="searchQuery">
+      <button class="search-btn" (click)="onMapClick()">검색</button>
+    </div>
+    <div class="selected-places" *ngIf="selectedPlaces.length > 0">
+      <h3>선택한 장소</h3>
+      <div class="place-list">
+        <div class="place-item" *ngFor="let place of selectedPlaces">
+          <div class="place-info">
+            <h4>{{place.name}}</h4>
+            <p>{{place.address}}</p>
+            <div class="place-rating" *ngIf="place.rating">
+              <div class="stars">
+                <span class="star" *ngFor="let star of [1,2,3,4,5]">
+                  <i class="fas" [ngClass]="{'fa-star': star <= place.rating, 'fa-star-half-alt': star - 0.5 <= place.rating && star > place.rating, 'far fa-star': star > place.rating}"></i>
+                </span>
+              </div>
+              <span class="rating-value">{{place.rating}}</span>
+              <span class="review-count">({{place.reviewCount}} 리뷰)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="search-footer">
+    <!-- <button class="map-btn" (click)="onMapClick()">구글 맵에서 선택</button> -->
+    <button class="next-btn" (click)="onNext()">다음</button>
+  </div>
+</div>

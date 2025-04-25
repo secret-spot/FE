@@ -1,0 +1,63 @@
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    img {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 4px;
+    }
+
+    &:nth-child(3) img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      color: #666;
+    }
+
+    &.active {
+      color: #666;
+    }
+  }
+}
+
+// Angular routerLinkActive 스타일 오버라이드
+:host ::ng-deep {
+  .active {
+    color: #666 !important;
+  }
+}
+
+// 전역 스타일 오버라이드
+::ng-deep {
+  .nav-bar a.active {
+    color: #666 !important;
+  }
+  
+  a.router-link-active {
+    color: #666 !important;
+  }
+}
