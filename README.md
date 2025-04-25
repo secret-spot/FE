@@ -2,6 +2,34 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
 
+## Environment Variables Setup
+
+Before running the application, you need to set up the environment variables:
+
+1. Copy the example environment file:
+   ```bash
+   cp src/environments/environment.example.ts src/environments/environment.ts
+   ```
+
+2. Edit the `environment.ts` file and replace the placeholder values with your actual API keys and configuration:
+   ```typescript
+   export const environment = {
+     production: false,
+     apiUrl: 'https://your-api-url.com/',
+     frontendUrl: 'http://localhost:4200',
+     googleMapsApiKey: 'your_google_maps_api_key_here' // Replace with your actual API key
+   };
+   ```
+
+3. For production, create a production environment file:
+   ```bash
+   cp src/environments/environment.example.ts src/environments/environment.prod.ts
+   ```
+
+4. Edit the `environment.prod.ts` file with your production configuration.
+
+**Note:** The environment files are ignored by Git to prevent sensitive information from being exposed. Make sure to keep your API keys and other sensitive information secure.
+
 ## Development server
 
 To start a local development server, run:

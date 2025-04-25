@@ -7,6 +7,13 @@ import { ExploreComponent } from './pages/explore/explore.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { ChatbotComponent } from './pages/chatbot/chatbot.component';
 import { MypageComponent } from './pages/mypage/mypage.component';
+import { CalendarComponent } from './pages/history/calendar/calendar.component';
+import { SearchComponent } from './pages/history/search/search.component';
+import { TravelRecordComponent } from './pages/history/travel-record/travel-record.component';
+import { MapComponent } from './pages/history/map/map.component';
+import { SummaryComponent } from './pages/history/summary/summary.component';
+import { LoadingComponent } from './pages/history/loading/loading.component';
+import { OAuthCallbackComponent } from './pages/auth/oauth-callback/oauth-callback.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'splash', pathMatch: 'full' },
@@ -15,7 +22,20 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'explore', component: ExploreComponent },
-  { path: 'history', component: HistoryComponent },
+  { 
+    path: 'history', 
+    component: HistoryComponent,
+    children: [
+      { path: '', component: CalendarComponent },
+      { path: 'search', component: SearchComponent },
+      { path: 'map', component: MapComponent },
+      { path: 'record', component: TravelRecordComponent },
+      { path: 'loading', component: LoadingComponent },
+      { path: 'summary', component: SummaryComponent }
+    ]
+  },
   { path: 'chatbot', component: ChatbotComponent },
   { path: 'mypage', component: MypageComponent },
+  { path: 'guide/:id', component: MypageComponent },
+  { path: 'oauth2/redirect', component: OAuthCallbackComponent },
 ];
