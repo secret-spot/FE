@@ -1,1 +1,72 @@
-<p>explore works!</p>
+<div class="explore-container">
+  <!-- 검색 헤더 -->
+  <div class="search-header">
+    <div class="search-input-container">
+      <input 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        placeholder="검색어를 입력하세요" 
+        class="search-input"
+        (keyup.enter)="onSearch()">
+      <button (click)="onSearch()" class="search-button">
+        <img src="assets/images/Search.svg" alt="Search" class="search-icon">
+      </button>
+    </div>
+  </div>
+
+  <!-- 기본 화면 (검색어 없을 때) -->
+  <div class="default-view" *ngIf="!isSearching">
+    <div class="welcome-message">
+      <div>🔥 숨겨진 Special Spot </div>
+    </div>
+    
+    <div class="guides-container">
+      <div class="guide-card" *ngFor="let guide of guides">
+        <div class="guide-image-container">
+        <div class="guide-image">
+          <img [src]="guide.imageUrl" [alt]="guide.title">
+        </div>
+        </div>
+        <div class="guide-content">
+          <h3 class="guide-title">{{ guide.title }}</h3>
+          <div class="guide-location">
+            <img src="assets/images/Location.svg" alt="Location" class="location-icon">
+            {{ guide.location }}
+          </div>
+          <div class="guide-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rating-value">{{ guide.rating }}</span>
+          </div>
+          <div class="guide-keywords">
+            <span class="keyword" *ngFor="let keyword of guide.keywords">#{{ keyword }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 검색 결과 화면 -->
+  <div class="search-results" *ngIf="isSearching">
+    <h2>"{{ searchQuery }}" 검색 결과</h2>
+    
+    <div class="results-container" *ngIf="searchResults.length > 0">
+      <div class="result-card" *ngFor="let result of searchResults">
+        <img [src]="result.imageUrl" [alt]="result.title" class="result-image">
+        <div class="result-content">
+          <h3>{{ result.title }}</h3>
+          <p class="location">
+            <img src="assets/images/Location.svg" alt="Location" class="location-icon">
+            {{ result.location }}
+          </p>
+          <p class="description">{{ result.description }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="no-results" *ngIf="searchResults.length === 0">
+      <p>"{{ searchQuery }}"에 대한 검색 결과가 없습니다.</p>
+      <p>다른 키워드로 검색해보세요.</p>
+    </div>
+  </div>
+</div> 
