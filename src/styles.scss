@@ -1,9 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
-// src/styles.scss
-
-// src/styles.scss
 @use 'styles/variables';
 @use 'styles/mixins';
 @use 'styles/layout';
 @use 'styles/buttons';
 @use 'styles/utilities';
+
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+:root {
+  --font-primary: 'Noto Sans KR', sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-bold);
+}
+
+p {
+  font-weight: var(--font-weight-regular);
+}

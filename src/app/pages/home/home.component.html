@@ -1,1 +1,43 @@
-<p>home works!</p>
+<div class="home-container">
+  <!-- 로고 섹션 -->
+  <div class="logo-section">
+    <img src="assets/images/S2_logo_ver2.svg" alt="Home Logo" class="home-logo">
+  </div>
+
+  <!-- 가이드 페이지 스크롤 섹션 -->
+  <div class="guides-section">
+    <h3>{{ userNickname }}님과 어울리는 맞춤형 가이드 엄선!</h3>
+    <div class="guides-scroll">
+      <div class="guide-card" *ngFor="let guide of guides">
+        <img [src]="guide.imageUrl" [alt]="guide.title" class="guide-image">
+        <div class="guide-content">
+          <h4>{{ guide.title }}</h4>
+          <div class="location-container">
+          <img src="assets/images/Location.svg" alt="location" class="location">
+          <p>{{ guide.description }}</p>
+          </div>
+          <div class="guide-keyword">
+            <span class="keyword" *ngFor="let keyword of guide.keywords">{{ keyword }}</span>
+          </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- 상위 spotter 섹션 -->
+  <div class="top-spotters-section">
+    <h3>최근 1개월 상위 1% spotter</h3>
+    <div class="spotters-grid">
+      <div class="spotter-card" *ngFor="let spotter of topSpotters">
+        <div class="profile-picture">
+          <img [src]="spotter.profileImage" [alt]="spotter.nickname">
+        </div>
+        <p class="nickname">{{ spotter.nickname }}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="empty"></div>
+</div>
+
