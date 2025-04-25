@@ -11,14 +11,14 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 export class HomeComponent implements OnInit {
   guides: any[] = []; // 가이드 데이터를 저장할 배열
   topSpotters: any[] = []; // 상위 spotter 데이터를 저장할 배열
-  userNickname: string = '사용자'; // 사용자 닉네임
+  userNickname: string = '닉네임'; // 사용자 닉네임
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
     // 브라우저 환경에서만 localStorage 접근
     if (isPlatformBrowser(this.platformId)) {
-      this.userNickname = localStorage.getItem('username') || '사용자';
+      this.userNickname = localStorage.getItem('username') || '닉네임';
     }
 
     // 임의의 가이드 데이터 추가
