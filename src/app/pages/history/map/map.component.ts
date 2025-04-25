@@ -1,11 +1,12 @@
 /// <reference types="google.maps" />
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
 import { PlaceService, Place } from '../../../services/place.service';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 
 declare global {
   interface Window {
@@ -20,9 +21,10 @@ declare global {
   standalone: true,
   imports: [CommonModule]
 })
-export class MapComponent implements OnInit, OnDestroy {
+export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
   private destroy$ = new Subject<void>();
-  private searchDebounceTime = 300; // API 호출 제한을 위한 디바운스 시간
+  private searchDebounceTime = 300;
+  private autocomplete: google.maps.places.Autocomplete | null = null;
 
   map!: google.maps.Map;
   markers: google.maps.Marker[] = [];
@@ -56,6 +58,78 @@ export class MapComponent implements OnInit, OnDestroy {
           this.updateMarkers();
         }
       });
+  }
+
+  ngAfterViewInit(): void {
+    // DOM이 완전히 로드된 후에 맵 초기화
+    setTimeout(() => {
+      this.initializeMap();
+    }, 500); // 시간을 더 늘려 DOM이 완전히 로드될 때까지 기다림
+  }
+
+  private initializeMap(): void {
+    try {
+      const mapElement = document.getElementById('map');
+      if (!mapElement) {
+        console.error('Map element not found');
+        return;
+      }
+
+      const mapOptions: google.maps.MapOptions = {
+        center: { lat: 37.5665, lng: 126.9780 }, // 서울 중심 좌표
+        zoom: 13,
+        mapTypeControl: true,
+        streetViewControl: true,
+        fullscreenControl: true
+      };
+
+      this.map = new google.maps.Map(mapElement, mapOptions);
+
+      // 검색 기능 초기화 - SearchBox 대신 Autocomplete 사용
+      this.initializeAutocomplete();
+    } catch (error) {
+      console.error('Error initializing map:', error);
+    }
+  }
+
+  private initializeAutocomplete(): void {
+    try {
+      const searchInput = document.getElementById('search-input') as HTMLInputElement;
+      if (!searchInput) {
+        console.error('Search input element not found');
+        return;
+      }
+
+      // Autocomplete 초기화
+      this.autocomplete = new google.maps.places.Autocomplete(searchInput, {
+        types: ['establishment', 'geocode'],
+        componentRestrictions: { country: 'kr' } // 한국으로 제한
+      });
+
+      // 장소 선택 이벤트 처리
+      this.autocomplete.addListener('place_changed', () => {
+        const place = this.autocomplete?.getPlace();
+        if (!place || !place.geometry?.location) {
+          console.log('No place details available');
+          return;
+        }
+
+        // 선택된 장소 정보 생성
+        const selectedPlace: Place = {
+          name: place.name || '',
+          address: place.formatted_address || '',
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng(),
+          placeId: place.place_id || '',
+          rating: place.rating,
+          reviewCount: place.user_ratings_total
+        };
+
+        this.selectPlace(selectedPlace);
+      });
+    } catch (error) {
+      console.error('Error initializing autocomplete:', error);
+    }
   }
 
   ngOnDestroy(): void {

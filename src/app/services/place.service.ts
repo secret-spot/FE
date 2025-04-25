@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 export interface Place {
   name: string;
@@ -21,18 +22,23 @@ export class PlaceService {
 
   // 장소 정보 캐시
   private placeCache = new Map<string, Place>();
+  private isBrowser: boolean;
 
-  constructor() {
-    // 로컬 스토리지에서 선택된 장소들을 복원
-    const savedPlaces = localStorage.getItem('selectedPlaces');
-    if (savedPlaces) {
-      this.selectedPlacesSubject.next(JSON.parse(savedPlaces));
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+    
+    if (this.isBrowser) {
+      // 로컬 스토리지에서 선택된 장소들을 복원
+      const savedPlaces = localStorage.getItem('selectedPlaces');
+      if (savedPlaces) {
+        this.selectedPlacesSubject.next(JSON.parse(savedPlaces));
+      }
+
+      // 장소 목록이 변경될 때마다 로컬 스토리지에 저장
+      this.selectedPlaces$.subscribe(places => {
+        localStorage.setItem('selectedPlaces', JSON.stringify(places));
+      });
     }
-
-    // 장소 목록이 변경될 때마다 로컬 스토리지에 저장
-    this.selectedPlaces$.subscribe(places => {
-      localStorage.setItem('selectedPlaces', JSON.stringify(places));
-    });
   }
 
   // 선택한 장소 목록 가져오기
