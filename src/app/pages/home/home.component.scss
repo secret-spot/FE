@@ -1,0 +1,168 @@
+.home-container {
+  padding: 0 20px 20px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.logo-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+
+  .home-logo {
+    width: 100px;
+    height: auto;
+  }
+}
+
+.empty{
+    height: 50px;
+}
+.guides-section {
+  margin-bottom: 20px;
+
+  .guides-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .guide-card {
+      width: 200px;
+      height: 250px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      padding: 0;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+
+      .guide-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .guide-content {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        width: calc(100% - 20px);
+        height: 50%;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 12px;
+
+        h5 {
+          font-size: 13px;
+          font-weight: var(--font-weight-bold);
+          color: black;
+          margin-bottom: 5px;
+        }
+
+        p {
+          font-size: 12px;
+          color: black;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+.top-spotters-section {
+    .top-spotters-section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .ranking-button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            .arrow-right {  
+                width: 10px;
+                height:10px;
+            }
+        }
+        
+    }
+
+  .spotters-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+    justify-items: center;
+
+    .spotter-card {
+      text-align: center;
+
+      .profile-picture {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-bottom: 10px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .nickname {
+        font-size: 14px;
+        font-weight: var(--font-weight-medium);
+        color: #666;
+      }
+    }
+  }
+}
+
+.location-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  .location-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .location-text {
+    font-size: 14px;
+    color: #666;
+  }
+}
+
+.guide-keyword {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  //margin-top: 10px;
+
+  .keyword {
+    background: #A0AFA2;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 9px;
+    color: white;
+    font-weight: var(--font-weight-medium);
+  }
+}
