@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://s2-5nwgikdioa-du.a.run.app",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+} 
