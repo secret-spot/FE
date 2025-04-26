@@ -1,5 +1,5 @@
 import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../services/api.service';
@@ -29,7 +29,7 @@ export class MyPageComponent implements OnInit {
   fetchUserProfile() {
     this.error = null;
     
-    this.apiService.get<any[]>('mypage/reviews').subscribe({
+    this.apiService.get<any[]>('mypage/scraps/card').subscribe({
       next: (data) => {
         this.userProfile = data;
         console.log(data);
