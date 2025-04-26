@@ -2,15 +2,7 @@ import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-
-interface Guide {
-  id: number;
-  title: string;
-  location: string;
-  rating: number;
-  keywords: string[];
-  imageUrl: string;
-}
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-explore',
@@ -23,12 +15,15 @@ export class ExploreComponent implements OnInit {
   searchQuery: string = '';
   searchResults: any[] = [];
   isSearching: boolean = false;
-  guides: Guide[] = [];
+  guides: any[] = [];
+  error: string | null = null;
+  showSearchResults: boolean = false;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
@@ -37,88 +32,61 @@ export class ExploreComponent implements OnInit {
       if (params['q']) {
         this.searchQuery = params['q'];
         this.performSearch();
+      } else {
+        this.fetchGuides();
       }
     });
-
-    // TODO: 백엔드에서 가이드 데이터 가져오기
-    this.fetchGuides();
   }
 
   fetchGuides() {
-    // 임시 데이터 (실제로는 API 호출로 대체)
-    this.guides = [
-      {
-        id: 1,
-        title: '서울 야경 명소',
-        location: '서울',
-        rating: 4.5,
-        keywords: ['야경', '로맨틱', '데이트'],
-        imageUrl: 'assets/images/beach.svg'
+    this.isSearching = true;
+    this.error = null;
+    this.showSearchResults = false;
+    
+    this.apiService.get<any[]>('guides/hidden').subscribe({
+      next: (data) => {
+        this.guides = data;
+        this.isSearching = false;
       },
-      {
-        id: 2,
-        title: '맛있는 카페 투어',
-        location: '서울',
-        rating: 4.8,
-        keywords: ['카페', '디저트', '브런치'],
-        imageUrl: 'assets/images/beach.svg'
-      },
-      {
-        id: 3,
-        title: '한옥 마을 탐방',
-        location: '경주',
-        rating: 4.3,
-        keywords: ['한옥', '전통', '문화'],
-        imageUrl: 'assets/images/beach.svg'
+      error: (err) => {
+        console.error('가이드 데이터를 가져오는 중 오류 발생:', err);
+        this.error = '가이드 데이터를 가져오는 중 오류가 발생했습니다.';
+        this.isSearching = false;
       }
-    ];
+    });
   }
 
   onSearch() {
-    // 검색 버튼 클릭 시 URL 변경 및 검색 수행
-    this.router.navigate(['/explore'], { 
-      queryParams: { q: this.searchQuery },
-      queryParamsHandling: 'merge'
-    });
-    this.performSearch();
+    if (this.searchQuery.trim()) {
+      this.router.navigate(['/explore'], { queryParams: { q: this.searchQuery } });
+    } else {
+      // 검색어가 없으면 기본 화면으로 이동
+      this.router.navigate(['/explore']);
+      this.showSearchResults = false;
+      this.fetchGuides();
+    }
   }
 
   performSearch() {
     if (!this.searchQuery.trim()) {
-      this.isSearching = false;
-      this.searchResults = [];
+      this.fetchGuides();
       return;
     }
 
     this.isSearching = true;
+    this.error = null;
+    this.showSearchResults = true;
     
-    // 임시 검색 결과 데이터 (실제로는 API 호출 등으로 대체)
-    this.searchResults = [
-      {
-        id: 1,
-        title: '서울 야경 명소',
-        description: '서울의 아름다운 야경을 감상할 수 있는 명소들을 소개합니다.',
-        imageUrl: 'assets/images/beach.svg',
-        location: '서울'
+    this.apiService.get<any[]>(`guides/search?q=${encodeURIComponent(this.searchQuery)}`).subscribe({
+      next: (data) => {
+        this.searchResults = data;
+        this.isSearching = false;
       },
-      {
-        id: 2,
-        title: '맛있는 카페 투어',
-        description: '서울의 숨은 카페들을 찾아보는 투어 가이드입니다.',
-        imageUrl: 'assets/images/beach.svg',
-        location: '서울'
-      },
-      {
-        id: 3,
-        title: '한옥 마을 탐방',
-        description: '전통 한옥의 아름다움을 느낄 수 있는 한옥 마을 투어입니다.',
-        imageUrl: 'assets/images/beach.svg',
-        location: '경주'
+      error: (err) => {
+        console.error('검색 중 오류 발생:', err);
+        this.error = '검색 중 오류가 발생했습니다.';
+        this.isSearching = false;
       }
-    ].filter(item => 
-      item.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      item.location.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+    });
   }
 } 
