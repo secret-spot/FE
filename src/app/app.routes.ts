@@ -6,7 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ExploreComponent } from './pages/explore/explore.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { ChatbotComponent } from './pages/chatbot/chatbot.component';
-import { MypageComponent } from './pages/mypage/mypage.component';
+import { MyPageComponent } from './pages/mypage/mypage.component';
 import { CalendarComponent } from './pages/history/calendar/calendar.component';
 import { SearchComponent } from './pages/history/search/search.component';
 import { TravelRecordComponent } from './pages/history/travel-record/travel-record.component';
@@ -35,7 +35,7 @@ export const routes: Routes = [
     ]
   },
   { path: 'chatbot', component: ChatbotComponent },
-  { path: 'mypage', component: MypageComponent },
-  { path: 'guide/:id', component: MypageComponent },
-  { path: 'oauth2/redirect', component: OAuthCallbackComponent },
+  { path: 'mypage', component: MyPageComponent },
+  { path: 'guide/:id', component: MyPageComponent },
+  { path: 'oauth2/redirect', component: OAuthCallbackComponent }
 ];
