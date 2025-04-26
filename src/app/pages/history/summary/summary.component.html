@@ -1,11 +1,14 @@
+<div class="history-header">
+  <button class="back-btn" (click)="onBack()">
+    <img src="assets/images/Arrow.svg" alt="back" class="arrow-left">
+  </button>
+  <h2>{{summary.date | date:'yyyy년 MM월 dd일'}} 여행 요약</h2>
+</div>
 <div class="summary-container">
-  <div class="summary-header">
-    <h2>{{summary.date | date:'yyyy년 MM월 dd일'}} 여행 요약</h2>
-  </div>
 
   <div class="summary-content">
     <div class="keywords-section">
-      <h3>여행 키워드</h3>
+      <h3>다녀오신 여행의 키워드를 정리했어요!</h3>
       <div class="keyword-list">
         <span class="keyword" *ngFor="let keyword of summary.keywords">{{keyword}}</span>
       </div>

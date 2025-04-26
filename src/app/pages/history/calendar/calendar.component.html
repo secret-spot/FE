@@ -1,21 +1,21 @@
-<div class="calendar-container">
-  <div class="calendar-header">
-    <button class="back-btn" (click)="onBack()">뒤로가기</button>
+
+  <div class="history-header">
+    <button class="back-btn" (click)="onBack()">
+      <img src="assets/images/Arrow.svg" alt="back" class="arrow-left">
+    </button>
     <h2>여행 날짜 선택</h2>
+    <button class="next-btn" (click)="onNext()" [disabled]="!startDate || !endDate">다음</button>
+
   </div>
-  
-  <div class="selected-dates" *ngIf="startDate || endDate">
+  <div class="calendar-container">
+    <div class="calendar-header"><h4>언제 다녀오셨나요?</h4></div>
+  <div class="selected-dates">
     <div class="date-range">
       <div class="date-item" *ngIf="startDate">
-        <span class="label">여행 시작일:</span>
-        <span class="date">{{startDate | date:'yyyy년 MM월 dd일'}}</span>
-      </div>
-      <div class="date-item" *ngIf="endDate">
-        <span class="label">여행 종료일:</span>
-        <span class="date">{{endDate | date:'yyyy년 MM월 dd일'}}</span>
+        <span class="date">{{startDate | date:'yyyy년 MM월 dd일'}} - {{endDate | date:'yyyy년 MM월 dd일'}}</span>
       </div>
     </div>
-    <button class="clear-btn" (click)="clearDates()" *ngIf="startDate && endDate">선택 초기화</button>
+    <!-- <button class="clear-btn" (click)="clearDates()" *ngIf="startDate && endDate">선택 초기화</button> -->
   </div>
   
   <div class="calendar-body">
@@ -40,8 +40,5 @@
       </div>
     </div>
   </div>
-  
-  <div class="calendar-footer">
-    <button class="next-btn" (click)="onNext()" [disabled]="!startDate || !endDate">다음</button>
-  </div>
+
 </div>

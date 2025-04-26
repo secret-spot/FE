@@ -1,39 +1,114 @@
+@import '../../../../styles/history';
+
 .search-container {
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
   background-color: white;
   max-width: 600px;
   margin: 20px auto;
+  height: calc(100vh - 100px);
+  overflow-y: auto;
 
-  .search-header {
-    text-align: center;
-    margin-bottom: 20px;
-    position: relative;
-
-    .back-btn {
-      position: absolute;
-      left: 0;
-      top: 0;
-      padding: 8px 16px;
-      background-color: transparent;
-      color: #666;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.3s;
-      
-      &:hover {
-        background-color: #f5f5f5;
-        color: #333;
-      }
-    }
-
-    h2 {
-      color: #333;
-      margin: 0;
-    }
+  .calendar-header {
+    margin-bottom: 10px;
   }
+
+  // 가이드 카드 스타일
+.guides-container {
+  flex: 1;
+  overflow-y: auto;
+//   padding-right: 10px;
+}
+
+.guide-card {
+  border: 1px solid #E8E9EB;
+  display: flex;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s;
+  margin-bottom: 15px;
+
+}
+
+.guide-image-container {
+    display: flex;
+    align-items: center;
+}
+
+.guide-image {
+  width: 100px;
+  height: 110px;
+  flex-shrink: 0;
+  margin: 10px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+}
+
+.guide-content {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.guide-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.guide-location {
+  display: flex;
+  align-items: center;
+  color: #666;
+  font-size: 12px;
+
+  .location-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }
+}
+
+.guide-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  .stars {
+    color: #FFD700;
+    font-size: 16px;
+  }
+
+  .rating-value {
+    color: #666;
+    font-size: 14px;
+  }
+}
+
+.guide-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 5px;
+
+  .keyword {
+    background-color: #A0AEA2;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    color: white;
+  }
+}
 
   .search-body {
     .search-input {
@@ -50,13 +125,13 @@
 
         &:focus {
           outline: none;
-          border-color: #007bff;
+          border-color: #6E7E79;
         }
       }
 
       .search-btn {
         padding: 10px 20px;
-        background-color: #007bff;
+        background-color: #6E7E79;
         color: white;
         border: none;
         border-radius: 4px;
@@ -68,6 +143,12 @@
           background-color: #0056b3;
         }
       }
+    }
+
+    .guides-container {
+      max-height: calc(100vh - 250px);
+      overflow-y: auto;
+      padding-right: 10px;
     }
 
     .search-results {
@@ -95,26 +176,6 @@
           color: #666;
           font-size: 14px;
         }
-      }
-    }
-  }
-
-  .search-footer {
-    display: flex;
-    justify-content: center;
-
-    .next-btn {
-      padding: 12px 24px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-
-      &:hover {
-        background-color: #0056b3;
       }
     }
   }

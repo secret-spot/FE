@@ -1,35 +1,9 @@
+@import '../../../../styles/history';
+
 .map-container {
   height: 100vh;
   display: flex;
   flex-direction: column;
-
-  .map-header {
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    .back-btn {
-      padding: 8px 15px;
-      background-color: #f8f9fa;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-
-      &:hover {
-        background-color: #e9ecef;
-      }
-    }
-
-    h2 {
-      margin: 0;
-      color: #333;
-      font-size: 18px;
-    }
-  }
 
   .map-body {
     flex: 1;

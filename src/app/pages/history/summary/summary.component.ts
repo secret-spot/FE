@@ -46,4 +46,8 @@ export class SummaryComponent implements OnInit {
     // 가이드 페이지로 이동
     this.router.navigate(['/guide', guideId]);
   }
+
+  onBack(): void {
+    this.router.navigate(['/history/record']);
+  }
 } 

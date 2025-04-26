@@ -1,0 +1,56 @@
+.history-header {
+  display: flex;
+  align-items: center;
+
+  background-color: white;
+  margin:11px;
+
+
+  .next-btn {
+    padding: 10px 20px;
+    background-color: #6E7E79;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+  .back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 15px;
+
+    .arrow-left {
+      width: 24px;
+      height: 24px;
+      transform: rotate(180deg);
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  h2 {
+    margin: 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+  }
+} 
