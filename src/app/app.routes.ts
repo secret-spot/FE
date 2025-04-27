@@ -14,7 +14,7 @@ import { MapComponent } from './pages/history/map/map.component';
 import { SummaryComponent } from './pages/history/summary/summary.component';
 import { LoadingComponent } from './pages/history/loading/loading.component';
 import { OAuthCallbackComponent } from './pages/auth/oauth-callback/oauth-callback.component';
-
+import { RankingComponent } from './pages/ranking/ranking.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'splash', pathMatch: 'full' },
   { path: 'splash', component: SplashComponent },
@@ -37,5 +37,6 @@ export const routes: Routes = [
   { path: 'chatbot', component: ChatbotComponent },
   { path: 'mypage', component: MyPageComponent },
   { path: 'guide/:id', component: MyPageComponent },
-  { path: 'oauth2/redirect', component: OAuthCallbackComponent }
+  { path: 'oauth2/redirect', component: OAuthCallbackComponent },
+  { path: 'ranking', component: RankingComponent }
 ];

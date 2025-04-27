@@ -1,0 +1,18 @@
+<div class="ranking-container">
+  <div class="ranking-header">
+    <h1>랭킹</h1>
+    <button class="back-button" (click)="navigateToHome()">홈으로</button>
+  </div>
+
+  <div class="ranking-content">
+    
+
+    <div class="ranking-list">
+      <div *ngFor="let item of rankings; let i = index" class="ranking-item">
+        <div class="rank">{{ i + 1 }}</div>
+        <div class="username">{{ item.username }}</div>
+        <div class="score">{{ item.score }}점</div>
+      </div>
+    </div>
+  </div>
+</div> 

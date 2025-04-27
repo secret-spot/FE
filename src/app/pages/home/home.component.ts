@@ -133,6 +133,10 @@ export class HomeComponent implements OnInit {
     this.fetchHomeData();
   }
 
+  navigateToRanking() {
+    this.router.navigate(['/ranking']);
+  }
+
   fetchHomeData() {
     this.isLoading = true;
     this.error = null;
