@@ -84,27 +84,36 @@ export class TravelRecordComponent implements OnInit {
   }
 
   onSubmit() {
-    // 선택된 파일들을 travelRecord.photos에 추가
-    this.travelRecord.photos = this.selectedFiles.map(file => file.preview);
+    // 선택된 파일들을 FormData에 추가
+    const formData = new FormData();
+    this.selectedFiles.forEach((file, index) => {
+      formData.append('images', file.file);
+    });
     
     // 임시 저장된 데이터 가져오기
     const tempRecord = this.travelRecordService.getTempRecord();
     
-    // 최종 여행 기록 데이터 생성
+    // 최종 여행 기록 데이터 생성 (images 제외)
     const finalRecord = {
       startDate: tempRecord.startDate ? tempRecord.startDate.split('T')[0] : this.selectedDate.toISOString().split('T')[0],
       endDate: tempRecord.endDate ? tempRecord.endDate.split('T')[0] : this.selectedDate.toISOString().split('T')[0],
       title: this.travelRecord.title,
       content: this.travelRecord.description,
-      images: this.travelRecord.photos,
       places: tempRecord.places || []
     };
 
+    // JSON 데이터를 FormData에 추가
+    formData.append('data', JSON.stringify(finalRecord));
+
     // API 호출 전 최종 상태 로깅
     console.log('Travel Record - Final State Before API Call:', finalRecord);
+    console.log('FormData contents:');
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
 
     // API 호출
-    this.travelRecordService.createTravelRecord(finalRecord).subscribe({
+    this.apiService.post('guides', formData).subscribe({
       next: (response) => {
         console.log('Travel Record - API Response:', response);
         // 로딩 페이지로 이동

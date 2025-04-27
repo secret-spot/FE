@@ -34,8 +34,9 @@ export class TravelRecordService {
   constructor(private apiService: ApiService) {}
 
   // 여행 기록 생성
-  createTravelRecord(record: TravelRecord): Observable<any> {
-    return this.apiService.post('guides', record);
+  createTravelRecord(formData: FormData): Observable<any> {
+    console.log('TravelRecordService - Creating Travel Record:', formData);
+    return this.apiService.post('guides', formData);
   }
 
   // 날짜 설정
