@@ -3,11 +3,6 @@ import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 
-interface RankingItem {
-  rank: number;
-  username: string;
-  score: number;
-}
 
 @Component({
   selector: 'app-ranking',
@@ -17,7 +12,7 @@ interface RankingItem {
   imports: [CommonModule, RouterModule]
 })
 export class RankingComponent implements OnInit {
-  rankings: RankingItem[] = [];
+  rankings: any[] = [];
   loading = false;
   error = '';
 
@@ -50,5 +45,9 @@ export class RankingComponent implements OnInit {
 
   navigateToHome(): void {
     this.router.navigate(['/']);
+  }
+  
+  onBack(): void {
+    this.router.navigate(['/home']);
   }
 } 

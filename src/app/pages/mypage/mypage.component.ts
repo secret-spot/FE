@@ -29,7 +29,7 @@ export class MyPageComponent implements OnInit {
   fetchUserProfile() {
     this.error = null;
     
-    this.apiService.get<any[]>('rankings').subscribe({
+    this.apiService.get<any[]>('mypage/profile').subscribe({
       next: (data) => {
         this.userProfile = data;
         console.log(data);
