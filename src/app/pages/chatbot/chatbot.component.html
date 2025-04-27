@@ -1,1 +1,47 @@
-<p>chatbot works!</p>
+<div class="chatbot-container">
+  <div class="chat-header">
+    <h1>여행 도우미</h1>
+  </div>
+  
+  <div class="chat-messages" #chatContainer>
+    <div *ngFor="let message of messages" 
+         [ngClass]="{'message-user': message.sender === 'user', 'message-bot': message.sender === 'bot'}"
+         class="message">
+      <div class="message-content">
+        <div class="message-avatar" *ngIf="message.sender === 'bot' && message.imageUrl">
+          <img src="assets/images/people.svg" alt="Bot Avatar">
+        </div>
+        <div class="message-bubble">
+          {{ message.text }}
+        </div>
+        <!-- <div class="message-avatar" *ngIf="message.sender === 'user'">
+          <img src="assets/images/user-avatar.png" alt="User Avatar">
+        </div> -->
+      </div>
+      <div class="message-time">
+        {{ message.timestamp | date:'shortTime' }}
+      </div>
+    </div>
+  </div>
+  
+  <div class="quick-replies-container">
+    <div class="quick-replies-scroll">
+      <div *ngFor="let reply of quickReplies" 
+           class="quick-reply-option"
+           (click)="selectQuickReply(reply)">
+        {{ reply.text }}
+      </div>
+    </div>
+  </div>
+  
+  <div class="chat-input-container">
+    <input type="text" 
+           [(ngModel)]="newMessage" 
+           (keyup.enter)="sendMessage()"
+           placeholder="메시지를 입력하세요..."
+           class="chat-input">
+    <button (click)="sendMessage()" class="send-button">
+      <span>전송</span>
+    </button>
+  </div>
+</div>
