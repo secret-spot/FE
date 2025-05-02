@@ -13,6 +13,7 @@ import { ApiService } from '../../services/api.service';
 })
 export class MyPageComponent implements OnInit {
   userProfile: any = null;
+  userKeywords: any=null;
   error: string | null = null;
 
   constructor(
@@ -29,10 +30,11 @@ export class MyPageComponent implements OnInit {
   fetchUserProfile() {
     this.error = null;
     
-    this.apiService.get<any[]>('rankings/home').subscribe({
+    this.apiService.get<any>('mypage/profile').subscribe({
       next: (data) => {
         this.userProfile = data;
         console.log(data);
+        this.userKeywords = data.keyword;
       },
       error: (err) => {
         console.error('프로필 데이터를 가져오는 중 오류 발생:', err);

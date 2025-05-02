@@ -4,5 +4,13 @@
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
+  },
+  "/chatbot": {
+    "target": "https://secret-spot-456800.du.r.appspot.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/chatbot": "/api/v1/chatbot"
+    }
   }
 } 

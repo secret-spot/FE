@@ -12,10 +12,11 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  guides: any[] = []; // 가이드 데이터를 저장할 배열
+  recommandedGuides: any[] = []; // 가이드 데이터를 저장할 배열
   topSpotters: any[] = []; // 상위 spotter 데이터를 저장할 배열
   popularSpots: any[] = []; // 인기 장소 데이터를 저장할 배열
   recentReviews: any[] = []; // 최근 리뷰 데이터를 저장할 배열
+  recommendedRegions: any[] = []; // 추천 지역 데이터를 저장할 배열
   userNickname: string = '닉네임'; // 사용자 닉네임
   error: string | null = null;
   isLoading: boolean = true;
@@ -144,13 +145,15 @@ export class HomeComponent implements OnInit {
     // 4개의 API 요청을 동시에 실행
     forkJoin({
       guides: this.apiService.get<any>('home'),
-      topSpotters: this.apiService.get<any>('rankings/home'),
+      topSpotters: this.apiService.get<any>('rankings/home')
     }).subscribe({
       next: (data) => {
         console.log(data);
-        this.guides = data.guides.recommandedGuide;
+        console.log(data.guides.recommande);
+        this.recommandedGuides = data.guides.recommendedGuide;
         this.popularSpots = data.guides.latestGuide;
         this.topSpotters = data.topSpotters;
+        this.recommendedRegions = data.guides.recommendedRegion;
         this.isLoading = false;
       },
       error: (err) => {
@@ -158,7 +161,7 @@ export class HomeComponent implements OnInit {
         this.error = '데이터를 가져오는 중 오류가 발생했습니다. 가짜 데이터를 사용합니다.';
         
         // 가짜 데이터 사용
-        this.guides = this.mockData.guides;
+        this.recommandedGuides = this.mockData.guides;
         this.topSpotters = this.mockData.topSpotters;
         this.popularSpots = this.mockData.popularSpots;
         this.recentReviews = this.mockData.recentReviews;

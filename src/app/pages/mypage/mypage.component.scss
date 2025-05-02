@@ -37,8 +37,8 @@
     display: flex;
     justify-content: center;
     flex-shrink: 0;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     overflow: hidden;
     
@@ -46,6 +46,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 50%;
     }
   }
 }
@@ -93,5 +94,22 @@
     height: 50px;
     background-color: #F7F7F9;
     margin: 0;
+  }
+}
+
+
+.guide-keyword {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+
+  .keyword {
+    background: #A0AFA2;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    font-weight: var(--font-weight-medium);
   }
 }
