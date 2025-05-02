@@ -22,6 +22,22 @@
         {{ message.timestamp | date:'shortTime' }}
       </div>
     </div>
+    
+    <!-- 로딩 표시 -->
+    <div *ngIf="isLoading" class="message message-bot">
+      <div class="message-content">
+        <div class="message-avatar">
+          <img src="assets/images/people.svg" alt="Bot Avatar">
+        </div>
+        <div class="message-bubble">
+          <div class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   
   <div class="quick-replies-container">
@@ -39,8 +55,11 @@
            [(ngModel)]="newMessage" 
            (keyup.enter)="sendMessage()"
            placeholder="메시지를 입력하세요..."
-           class="chat-input">
-    <button (click)="sendMessage()" class="send-button">
+           class="chat-input"
+           [disabled]="isLoading">
+    <button (click)="sendMessage()" 
+            class="send-button"
+            [disabled]="isLoading">
       <span>전송</span>
     </button>
   </div>

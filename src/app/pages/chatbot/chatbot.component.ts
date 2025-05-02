@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 interface Message {
   text: string;
@@ -26,6 +27,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   
   messages: Message[] = [];
   newMessage: string = '';
+  isLoading: boolean = false;
   quickReplies: QuickReply[] = [
     { id: 1, text: '여행 계획을 어떻게 세우면 좋을까요?' },
     { id: 2, text: '인기 있는 관광지 추천해주세요' },
@@ -33,7 +35,9 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
     { id: 4, text: '교통편은 어떻게 이용하면 좋을까요?' }
   ];
   
-  constructor() { }
+  private apiUrl = '/chatbot';
+  
+  constructor(private http: HttpClient) { }
   
   ngOnInit(): void {
     // 초기 메시지 추가
@@ -66,17 +70,41 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
     });
     
     // 입력 필드 초기화
+    const userMessage = this.newMessage;
     this.newMessage = '';
+    this.isLoading = true;
     
-    // 봇 응답 시뮬레이션 (실제로는 API 호출 등으로 대체)
-    setTimeout(() => {
-      this.messages.push({
-        text: '죄송합니다. 아직 해당 질문에 대한 답변을 준비 중입니다. 다른 질문을 해주세요.',
-        sender: 'bot',
-        timestamp: new Date(),
-        imageUrl: 'assets/images/bot-avatar.png'
-      });
-    }, 1000);
+    // HTTP 요청 직접 처리
+    this.http.post(this.apiUrl, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        // prompt: userMessage
+        prompt: "안녕"
+      }
+    }).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.messages.push({
+          text: response.body.response || '죄송합니다. 답변을 생성하는 중에 문제가 발생했습니다.',
+          sender: 'bot',
+          timestamp: new Date(),
+          imageUrl: 'assets/images/bot-avatar.png'
+        });
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.log(error);
+        this.messages.push({
+          text: '죄송합니다. 서버와의 통신 중 문제가 발생했습니다.',
+          sender: 'bot',
+          timestamp: new Date(),
+          imageUrl: 'assets/images/bot-avatar.png'
+        });
+        this.isLoading = false;
+      }
+    });
   }
   
   selectQuickReply(reply: QuickReply): void {
@@ -87,14 +115,35 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
       timestamp: new Date()
     });
     
-    // 봇 응답 시뮬레이션 (실제로는 API 호출 등으로 대체)
-    setTimeout(() => {
-      this.messages.push({
-        text: '죄송합니다. 아직 해당 질문에 대한 답변을 준비 중입니다. 다른 질문을 해주세요.',
-        sender: 'bot',
-        timestamp: new Date(),
-        imageUrl: 'assets/images/bot-avatar.png'
-      });
-    }, 1000);
+    this.isLoading = true;
+    
+    // HTTP 요청 직접 처리
+    this.http.post(this.apiUrl, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        prompt: reply.text
+      }
+    }).subscribe({
+      next: (response: any) => {
+        this.messages.push({
+          text: response.body.response || '죄송합니다. 답변을 생성하는 중에 문제가 발생했습니다.',
+          sender: 'bot',
+          timestamp: new Date(),
+          imageUrl: 'assets/images/bot-avatar.png'
+        });
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.messages.push({
+          text: '죄송합니다. 서버와의 통신 중 문제가 발생했습니다.',
+          sender: 'bot',
+          timestamp: new Date(),
+          imageUrl: 'assets/images/bot-avatar.png'
+        });
+        this.isLoading = false;
+      }
+    });
   }
 }
