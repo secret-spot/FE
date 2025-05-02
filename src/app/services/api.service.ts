@@ -34,6 +34,7 @@ export class ApiService {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     });
+    
 
     // 서버 사이드에서는 인증 헤더를 추가하지 않음
     if (this.isBrowser) {

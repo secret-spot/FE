@@ -16,7 +16,7 @@
       >
     </div>
     <div id="map" class="google-map"></div>
-    <div class="selected-places" *ngIf="selectedPlaces.length > 0">
+    <!-- <div class="selected-places" *ngIf="selectedPlaces.length > 0">
       <h3>선택한 장소</h3>
       <div class="place-list">
         <div class="place-item" *ngFor="let place of selectedPlaces">
@@ -36,9 +36,9 @@
           <button class="remove-btn" (click)="removePlace(place)">삭제</button>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="map-footer">
-    <button class="save-btn" (click)="onSave()">저장하기</button>
+    <button class="submit-btn" (click)="onSave()">저장하기</button>
   </div>
 </div>

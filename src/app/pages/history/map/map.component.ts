@@ -7,7 +7,6 @@ import { takeUntil, debounceTime } from 'rxjs/operators';
 import { PlaceService, Place } from '../../../services/place.service';
 import { TravelRecordService } from '../../../services/travel-record.service';
 import { CommonModule } from '@angular/common';
-import { environment } from '../../../../environments/environment';
 
 declare global {
   interface Window {
@@ -157,8 +156,14 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // API 호출 제한을 위한 디바운스 적용
     setTimeout(() => {
-      this.placeService.addPlace(place);
-      this.placeService.cachePlace(place);
+      const placeData = this.autocomplete?.getPlace();
+      const photo = placeData?.photos?.[0];
+      const imageUrl=photo?.getUrl({maxWidth:400});
+      const enrichedPlace: Place = {
+        ...place,
+        imageUrl:imageUrl};
+      this.placeService.addPlace(enrichedPlace);
+      this.placeService.cachePlace(enrichedPlace);
       
       // 장소 선택 후 현재 상태 로깅
       console.log('Map - After Place Selection:', this.travelRecordService.getTempRecord());

@@ -12,8 +12,10 @@
     <div class="calendar-header"><h4>어디를 다녀오셨나요?</h4></div>
   <div class="search-body">
     <div class="search-input">
-      <input type="text" placeholder="여행지를 검색해보세요" [(ngModel)]="searchQuery">
-      <button class="search-btn" (click)="onMapClick()">검색</button>
+      <button class="search-btn" (click)="onMapClick()">
+        <div>여행 장소 선택</div>
+        <img src="assets/images/find.svg" alt="find" class="find">
+      </button>
     </div>
 
     <div class="guides-container">
@@ -21,8 +23,10 @@
         <div class="guide-image-container">
         <div class="guide-image">
           <img 
-            [src]="'/assets/images/beach.svg'" 
-            [alt]="'Default Title'"
+          [src]="place.imageUrl || 'assets/images/beach.svg'"
+          width="200"
+          loading="lazy"
+          (error)="place.imageUrl = 'assets/images/beach.svg'"
           >
         </div>
         </div>

@@ -47,7 +47,6 @@ export class ExploreComponent implements OnInit {
       next: (data) => {
         this.guides = data;
         this.isSearching = false;
-        console.log(this.guides);
       },
       error: (err) => {
         console.error('가이드 데이터를 가져오는 중 오류 발생:', err);
@@ -78,7 +77,8 @@ export class ExploreComponent implements OnInit {
     this.error = null;
     this.showSearchResults = true;
     
-    this.apiService.get<any[]>(`guides/search?q=${encodeURIComponent(this.searchQuery)}`).subscribe({
+    this.apiService.get<any[]>(`search/guides?query=${encodeURIComponent(this.searchQuery)}`).subscribe({
+      
       next: (data) => {
         this.searchResults = data;
         this.isSearching = false;
