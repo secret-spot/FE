@@ -1,0 +1,24 @@
+<div class="guide-page">
+    <img class="cover-image" src="assets/images/beach.svg" alt="여행지 사진" />
+  
+    <div class="info-card">
+      <h2>대전 노잼도시 아님</h2>
+      <p>닉네임 | 2025.03.02 - 2025.04.03 (일정 1일 연속)</p>
+      <p>대한민국, 대전 | ⭐ 4.8 (5회평가)</p>
+      <div class="tags">
+        <span *ngFor="let tag of tags">{{ tag }}</span>
+      </div>
+      
+      <nav class="tab-nav">
+        <span [class.active]="activeTab === 'guide'" (click)="activeTab = 'guide'">가이드</span>
+        <span [class.active]="activeTab === 'qna'" (click)="activeTab = 'qna'">Q&A</span>
+        <span [class.active]="activeTab === 'review'" (click)="activeTab = 'review'">리뷰</span>
+      </nav>
+    </div>
+<!--   
+    <ng-container [ngSwitch]="activeTab">
+      <app-guide-tab *ngSwitchCase="'guide'"></app-guide-tab>
+      <app-qna-tab *ngSwitchCase="'qna'"></app-qna-tab>
+      <app-review-tab *ngSwitchCase="'review'"></app-review-tab>
+    </ng-container> -->
+  </div>

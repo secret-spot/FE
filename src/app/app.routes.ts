@@ -15,6 +15,7 @@ import { SummaryComponent } from './pages/history/summary/summary.component';
 import { LoadingComponent } from './pages/history/loading/loading.component';
 import { OAuthCallbackComponent } from './pages/auth/oauth-callback/oauth-callback.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
+import { PostComponent } from './pages/post/post.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'splash', pathMatch: 'full' },
   { path: 'splash', component: SplashComponent },
@@ -38,5 +39,6 @@ export const routes: Routes = [
   { path: 'mypage', component: MyPageComponent },
   { path: 'guide/:id', component: MyPageComponent },
   { path: 'oauth2/redirect', component: OAuthCallbackComponent },
-  { path: 'ranking', component: RankingComponent }
+  { path: 'ranking', component: RankingComponent },
+  { path: 'post', component: PostComponent }
 ];

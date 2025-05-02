@@ -1,0 +1,48 @@
+.guide-page {
+    font-family: 'Arial', sans-serif;
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    /* border-radius: 20px; */
+    overflow: hidden;
+
+  }
+  
+  .cover-image {
+    width: 100%;
+    height: 30vh;
+    /* border-bottom: 1px solid #ddd; */
+  }
+ 
+  .info-card {
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  }
+  
+  .tags span {
+    background: #eee;
+    border-radius: 20px;
+    padding: 4px 10px;
+    margin-right: 6px;
+    font-size: 0.9rem;
+  }
+  
+  .tab-nav {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .tab-nav span {
+    padding: 10px 0;
+    cursor: pointer;
+  }
+  
+  .tab-nav .active {
+    border-bottom: 3px solid #f66;
+    font-weight: bold;
+    color: #f66;
+  }
