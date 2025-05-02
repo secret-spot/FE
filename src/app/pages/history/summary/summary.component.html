@@ -15,19 +15,16 @@
     </div>
 
     <div class="locations-section">
-      <h3>방문한 장소</h3>
+      <h3>게시글은 이 여행지의 가이드로 분류할게요!</h3>
       <div class="location-list">
         <span class="location" *ngFor="let location of summary.locations">{{location}}</span>
       </div>
     </div>
 
-    <div class="description-section">
-      <h3>여행 요약</h3>
-      <p>{{summary.description}}</p>
-    </div>
+
   </div>
   
   <div class="summary-footer">
-    <button class="publish-btn" (click)="onPublish()">게시하기</button>
+    <button class="submit-btn" (click)="onPublish()">게시하기</button>
   </div>
 </div> 

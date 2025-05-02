@@ -5,11 +5,11 @@
   margin: 0 auto;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 
   .summary-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     
     h2 {
       color: #333;
@@ -22,7 +22,7 @@
     .keywords-section,
     .locations-section,
     .description-section {
-      margin-bottom: 30px;
+      margin-bottom: 70px;
 
       h3 {
         color: #666;
@@ -61,18 +61,19 @@
     justify-content: center;
     margin-top: 30px;
     
-    .publish-btn {
-      padding: 12px 24px;
-      background-color: #4CAF50;
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #6E7E79;
       color: white;
       border: none;
       border-radius: 4px;
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s;
-      
+
       &:hover {
-        background-color: #45a049;
+        background-color: #A0AEA2;
       }
     }
   }

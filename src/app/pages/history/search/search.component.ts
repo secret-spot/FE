@@ -77,4 +77,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   onBack(): void {
     this.router.navigate(['/history']);
   }
+
+  removePlace(place: Place): void {
+    this.placeService.removePlace(place);
+  }
 }
