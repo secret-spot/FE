@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
+import { GuideTabComponent } from './guide-tab/guide-tab.component';
+import { QnaTabComponent } from './qna-tab/qna-tab.component';
+import { ReviewTabComponent } from './review-tab/review-tab.component'
 
 @Component({
   selector: 'app-guide-page',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, GuideTabComponent, QnaTabComponent, ReviewTabComponent]
 })
 export class PostComponent implements OnInit{
   activeTab = 'guide';

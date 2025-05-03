@@ -34,10 +34,10 @@
         <span [class.active]="activeTab === 'review'" (click)="activeTab = 'review'">리뷰</span>
       </nav>
     </div>
-<!--   
-    <ng-container [ngSwitch]="activeTab">
-      <app-guide-tab *ngSwitchCase="'guide'"></app-guide-tab>
-      <app-qna-tab *ngSwitchCase="'qna'"></app-qna-tab>
-      <app-review-tab *ngSwitchCase="'review'"></app-review-tab>
-    </ng-container> -->
+  
+      <ng-container [ngSwitch]="activeTab">
+        <app-guide-tab *ngSwitchCase="'guide'"></app-guide-tab>
+        <app-qna-tab *ngSwitchCase="'qna'"></app-qna-tab>
+        <app-review-tab *ngSwitchCase="'review'"></app-review-tab>
+      </ng-container>
   </div>
