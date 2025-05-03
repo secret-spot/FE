@@ -169,4 +169,8 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  navigateToGuide(id: number) {
+    this.router.navigate(['/post', id]);
+  }
 }

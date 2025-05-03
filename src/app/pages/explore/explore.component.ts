@@ -18,6 +18,9 @@ export class ExploreComponent implements OnInit {
   guides: any[] = [];
   error: string | null = null;
   showSearchResults: boolean = false;
+  isRegion: boolean = false;
+  etiquette: string='';
+  recommends: any[] = [];
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -77,11 +80,15 @@ export class ExploreComponent implements OnInit {
     this.error = null;
     this.showSearchResults = true;
     
-    this.apiService.get<any[]>(`search/guides?query=${encodeURIComponent(this.searchQuery)}`).subscribe({
+    this.apiService.get<any>(`search/guides?query=${encodeURIComponent(this.searchQuery)}`).subscribe({
       
       next: (data) => {
-        this.searchResults = data;
+        console.log(data);
+        this.guides = data.guides;
         this.isSearching = false;
+        this.isRegion = data.isRegion;
+        this.etiquette = data.etiquette;
+        this.recommends=data.recommendations;
       },
       error: (err) => {
         console.error('검색 중 오류 발생:', err);
@@ -89,5 +96,9 @@ export class ExploreComponent implements OnInit {
         this.isSearching = false;
       }
     });
+  }
+
+  navigateToGuide(id: number) {
+    this.router.navigate(['/post', id]);
   }
 } 

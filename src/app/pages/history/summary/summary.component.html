@@ -2,7 +2,7 @@
   <button class="back-btn" (click)="onBack()">
     <img src="assets/images/Arrow.svg" alt="back" class="arrow-left">
   </button>
-  <h2>{{summary.date | date:'yyyy년 MM월 dd일'}} 여행 요약</h2>
+  <h2>{{summary.startDate | date:'yyyy-MM-dd'}} ~ {{summary.endDate | date:'yyyy-MM-dd'}} 여행 요약</h2>
 </div>
 <div class="summary-container">
 
@@ -17,7 +17,7 @@
     <div class="locations-section">
       <h3>게시글은 이 여행지의 가이드로 분류할게요!</h3>
       <div class="location-list">
-        <span class="location" *ngFor="let location of summary.locations">{{location}}</span>
+        <span class="location" *ngFor="let location of summary.regions">{{location}}</span>
       </div>
     </div>
 

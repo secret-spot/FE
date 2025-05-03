@@ -8,7 +8,7 @@
   <div class="guides-section">
     <h3>{{ userNickname }}님과 어울리는 맞춤형 가이드 엄선!</h3>
     <div class="guides-scroll">
-      <div class="guide-card" *ngFor="let recommandedGuide of recommandedGuides">
+      <div class="guide-card" *ngFor="let recommandedGuide of recommandedGuides" (click)="navigateToGuide(recommandedGuide.id)">
         <img [src]="recommandedGuide.thumbnailUrl" [alt]="recommandedGuide.title" class="guide-image">
         <div class="guide-content">
           <h5>{{ recommandedGuide.title }}</h5>
@@ -47,7 +47,7 @@
   <div class="guides-section">
     <h3>방금 올라온 따끈따끈한 가이드</h3>
     <div class="guides-scroll">
-      <div class="guide-card" *ngFor="let spot of popularSpots">
+      <div class="guide-card" *ngFor="let spot of popularSpots" (click)="navigateToGuide(spot.id)">
         <img [src]="spot.thumbnailUrl" [alt]="spot.name" class="guide-image">
         <div class="guide-content">
           <h5>{{ spot.title }}</h5>

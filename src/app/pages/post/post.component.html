@@ -1,12 +1,31 @@
 <div class="guide-page">
-    <img class="cover-image" src="assets/images/beach.svg" alt="여행지 사진" />
+    <!-- <img class="cover-image" [src]="images[0]" alt="여행지 사진" /> -->
+    <div
+  class="cover-image-with-button"
+  [ngStyle]="{ 'background-image': 'url(' + images[0] + ')' }">
+  <div class="back-button"><img src="assets/images/Vector.svg" alt="뒤로가기"(click)="onBack()"/></div>
+    </div>
   
     <div class="info-card">
-      <h2>대전 노잼도시 아님</h2>
-      <p>닉네임 | 2025.03.02 - 2025.04.03 (일정 1일 연속)</p>
-      <p>대한민국, 대전 | ⭐ 4.8 (5회평가)</p>
+      <div class="title-container">
+        <h2>{{title}}</h2>
+      </div>
+      <div class="nickname">
+        <img src="assets/images/people.svg" alt="프로필 이미지" />
+        <p>{{nickname}}</p>
+      </div>
+      <div class="date">
+        <img src="assets/images/calendar-tick.svg" alt="날짜 이미지" />
+      <p> {{startDate}} - {{endDate}} ({{tripDuration}}일간 여행)</p>
+      </div>
+      <div class="place-rating">
+        <img src="assets/images/ci_location.svg" alt="위치 이미지" />
+        <span *ngFor="let region of regions">{{region}}</span>
+        <img src="assets/images/Star.svg" alt="별 이미지" />
+        <p>{{reviewRating}}</p>
+      </div>
       <div class="tags">
-        <span *ngFor="let tag of tags">{{ tag }}</span>
+        <span *ngFor="let keyword of keywords">{{ keyword }}</span>
       </div>
       
       <nav class="tab-nav">

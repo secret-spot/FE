@@ -14,14 +14,34 @@
     </div>
   </div>
 
-  <!-- 기본 화면 (검색어 없을 때) -->
-  <div class="default-view" *ngIf="!isSearching && !error && !showSearchResults">
+ 
+  <!-- 기본 화면 -->
+  <div class="default-view" *ngIf="!isSearching && !error">
+    <div class="region" *ngIf="showSearchResults&&isRegion">
+      <div class="region-message">
+        <div class="etiquette-text">{{etiquette}}</div>
+      </div>
+      <div class="region-recommand">
+        <div>📍'{{ searchQuery }}'와 비슷한 다른 소도시 추천</div>
+        <div class="guides-scroll">
+          <div class="recommand-card" *ngFor="let recommend of recommends"> 
+            <div class="recommand-card-text">
+              <div class="region">{{recommend.region}}</div>
+              <div class="review">{{recommend.review}}</div>
+            </div>
+            </div>
+          </div>
+      </div>
+    </div>
     <div class="welcome-message">
-      <div>🔥 숨겨진 Special Spot </div>
+      <div *ngIf="!showSearchResults">🔥 숨겨진 Special Spot </div>
+      <div *ngIf="showSearchResults&&!isRegion">📍'{{ searchQuery }}'와 관련된 가이드 </div>
+      <div *ngIf="showSearchResults&&isRegion">📍'{{ searchQuery }}'을 여행했던 사람들의 가이드 </div>
+
     </div>
     
     <div class="guides-container">
-      <div class="guide-card" *ngFor="let guide of guides">
+      <div class="guide-card" *ngFor="let guide of guides" (click)="navigateToGuide(guide.id)">
         <div class="guide-image-container">
         <div class="guide-image">
           <img 
@@ -49,29 +69,7 @@
     
   </div>
 
-  <!-- 검색 결과 화면 -->
-  <div class="search-results" *ngIf="!isSearching && !error && showSearchResults">
-    <h2>📍'{{ searchQuery }}'와 관련된 가이드 </h2>
-    
-    <div class="results-container" *ngIf="searchResults.length > 0">
-      <div class="result-card" *ngFor="let result of searchResults">
-        <img [src]="result.imageUrl" [alt]="result.title" class="result-image">
-        <div class="result-content">
-          <h3>{{ result.title }}</h3>
-          <p class="location">
-            <img src="assets/images/Location.svg" alt="Location" class="location-icon">
-            {{ result.location }}
-          </p>
-          <p class="description">{{ result.description }}</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="no-results" *ngIf="searchResults.length === 0">
-      <p>"{{ searchQuery }}"에 대한 검색 결과가 없습니다.</p>
-      <p>다른 키워드로 검색해보세요.</p>
-    </div>
-  </div>
+
 
   <!-- 로딩 중 화면 -->
   <div class="loading" *ngIf="isSearching">
