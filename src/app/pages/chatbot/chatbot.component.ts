@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 interface Message {
   text: string;
@@ -75,19 +75,14 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
     this.isLoading = true;
     
     // HTTP 요청 직접 처리
-    this.http.post(this.apiUrl, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: {
-        // prompt: userMessage
-        prompt: "안녕"
-      }
-    }).subscribe({
+    this.http.post(this.apiUrl, 
+      { prompt: userMessage }
+    ).subscribe({
       next: (response: any) => {
-        console.log(response);
+        console.log(response.content);
+        const content = response.content;
         this.messages.push({
-          text: response.body.response || '죄송합니다. 답변을 생성하는 중에 문제가 발생했습니다.',
+          text: content || '죄송합니다. 답변을 생성하는 중에 문제가 발생했습니다.',
           sender: 'bot',
           timestamp: new Date(),
           imageUrl: 'assets/images/bot-avatar.png'
@@ -119,16 +114,13 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
     
     // HTTP 요청 직접 처리
     this.http.post(this.apiUrl, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: {
         prompt: reply.text
       }
-    }).subscribe({
+    ).subscribe({
       next: (response: any) => {
+        const content = response.content;
         this.messages.push({
-          text: response.body.response || '죄송합니다. 답변을 생성하는 중에 문제가 발생했습니다.',
+          text: content|| '죄송합니다. 답변을 생성하는 중에 문제가 발생했습니다.',
           sender: 'bot',
           timestamp: new Date(),
           imageUrl: 'assets/images/bot-avatar.png'
