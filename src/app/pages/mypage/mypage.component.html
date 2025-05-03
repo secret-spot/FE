@@ -23,14 +23,14 @@
   <div class="profile-content-bottom">
     <div class="stat-item">
       <div class="stat-value">랭킹</div>
-      <div class="stat-label">{{ userProfile?.ranking }}</div>
+      <div class="stat-label">{{ userProfile?.ranking.ranking }}</div>
     </div>
     <div class="profile-content-line">
    
       </div>
     <div class="stat-item">
       <div class="stat-value">여행 기록 수</div>
-      <div class="stat-label">20</div>
+      <div class="stat-label">{{ userProfile?.guideNum }}</div>
     </div>
     <div class="profile-content-line">
   
@@ -38,7 +38,7 @@
     <div class="stat-item">
       <div class="stat-value">리뷰 수</div>
       <!-- <div class="stat-label">{{ userProfile.userReviews.length }}</div> -->
-      <div class="stat-label">3</div>
+      <div class="stat-label">{{ userProfile?.reviewNum }}</div>
     </div>
   </div>
 

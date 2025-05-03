@@ -116,12 +116,13 @@ export class TravelRecordComponent implements OnInit {
     this.apiService.post('guides', formData).subscribe({
       next: (response) => {
         console.log('Travel Record - API Response:', response);
+        const guideId=response;
         // 로딩 페이지로 이동
-        this.router.navigate(['/history/loading']);
+        this.router.navigate(['/history/loading/' + guideId]);
         
         // 3초 후 요약 페이지로 이동
         setTimeout(() => {
-          this.router.navigate(['/history/summary']);
+          this.router.navigate(['/history/summary/'+guideId]);
         }, 3000);
       },
       error: (error) => {

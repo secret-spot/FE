@@ -31,14 +31,14 @@ export const routes: Routes = [
       { path: 'search', component: SearchComponent },
       { path: 'map', component: MapComponent },
       { path: 'record', component: TravelRecordComponent },
-      { path: 'loading', component: LoadingComponent },
-      { path: 'summary', component: SummaryComponent }
+      { path: 'loading/:id', component: LoadingComponent },
+      { path: 'summary/:id', component: SummaryComponent }
     ]
   },
   { path: 'chatbot', component: ChatbotComponent },
   { path: 'mypage', component: MyPageComponent },
-  { path: 'guide/:id', component: MyPageComponent },
+  { path: 'guide', component: MyPageComponent },
   { path: 'oauth2/redirect', component: OAuthCallbackComponent },
   { path: 'ranking', component: RankingComponent },
-  { path: 'post', component: PostComponent }
+  { path: 'post/:id', component: PostComponent }
 ];
