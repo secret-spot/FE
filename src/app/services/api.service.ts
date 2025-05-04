@@ -9,8 +9,8 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = environment.apiUrl;
-  private baseUrl = environment.baseUrl;
+  private apiUrl = "https://s2-5nwgikdioa-du.a.run.app/api/";
+  private baseUrl = "https://s2-5nwgikdioa-du.a.run.app/api/";
   private isBrowser: boolean;
 
   constructor(

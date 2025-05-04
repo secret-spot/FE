@@ -35,7 +35,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
     { id: 4, text: '교통편은 어떻게 이용하면 좋을까요?' }
   ];
   
-  private apiUrl = '/chatbot';
+  private apiUrl = "https://secret-spot-456800.du.r.appspot.com/api/v1/chatbot";
   
   constructor(private http: HttpClient) { }
   

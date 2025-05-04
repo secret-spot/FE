@@ -29,7 +29,7 @@ export class RankingComponent implements OnInit {
     this.loading = true;
     this.error = '';
     
-    this.apiService.get('/rankings').subscribe({
+    this.apiService.get('rankings').subscribe({
       next: (response: any) => {
         console.log(response);
         this.rankings = response;
