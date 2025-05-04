@@ -42,4 +42,12 @@
     </div>
   </div>
 
+  <app-guide-list
+  [title]="userProfile?.name + '님이 작성한 가이드'"
+  [guides]="userGuides"
+  (clickGuide)="navigateToGuide($event)"
+></app-guide-list>
+
+
+
 </div>
