@@ -1,29 +1,49 @@
-<div class="travel-record-container">
-  <div class="record-header">
-    <button class="back-btn" (click)="onBack()">뒤로가기</button>
+
+  <div class="history-header">
+    <button class="back-btn" (click)="onBack()">
+      <img src="assets/images/Arrow.svg" alt="back" class="arrow-left">
+    </button>
     <h2>여행 기록 작성</h2>
-    <p class="selected-date">선택된 날짜: {{selectedDate | date:'yyyy년 MM월 dd일'}}</p>
   </div>
+  <div class="travel-record-container">
+  <p class="selected-date">여행기간: {{travelRecord.startDate | date:'yyyy년 MM월 dd일'}} - {{travelRecord.endDate | date:'yyyy년 MM월 dd일'}}</p>
 
   <form (ngSubmit)="onSubmit()" class="record-form">
     <div class="form-group">
       <label for="title">제목</label>
-      <input type="text" id="title" [(ngModel)]="travelRecord.title" name="title" required>
+      <input class="input" type="text" id="title" [(ngModel)]="travelRecord.title" name="title" required>
     </div>
 
-    <div class="form-group">
-      <label for="location">위치</label>
-      <input type="text" id="location" [(ngModel)]="travelRecord.location" name="location" required>
-    </div>
 
     <div class="form-group">
       <label for="description">여행 기록</label>
-      <textarea id="description" [(ngModel)]="travelRecord.description" name="description" rows="5" required></textarea>
+      <textarea class="input" id="description" [(ngModel)]="travelRecord.description" name="description" rows="5" required></textarea>
     </div>
 
     <div class="form-group">
       <label>사진 첨부</label>
-      <input type="file" multiple accept="image/*" (change)="onFileSelected($event)">
+      <div class="file-upload-container">
+        <div class="file-upload-box" (click)="fileInput.click()">
+          <i class="fas fa-plus"></i>
+          <span>이미지 추가</span>
+        </div>
+        <input 
+          #fileInput
+          type="file" 
+          accept="image/*" 
+          multiple 
+          (change)="onFileSelected($event)"
+          style="display: none">
+        
+        <div class="selected-files" *ngIf="selectedFiles.length > 0">
+          <div class="file-preview" *ngFor="let file of selectedFiles; let i = index">
+            <img [src]="file.preview" alt="Preview">
+            <button class="remove-file" (click)="removeFile(i)">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <button type="submit" class="submit-btn">저장하기</button>

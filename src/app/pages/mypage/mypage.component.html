@@ -1,1 +1,53 @@
-<p>mypage works!</p>
+<div class="mypage-container">
+  <div class="profile-header">
+    <h1>Profile</h1>
+  </div>
+  
+  <div class="profile-content">
+    <!-- 프로필 내용이 들어갈 영역 -->
+     <div class="profile-content-left">
+        <img class="profile-image" src="{{ userProfile?.profile_image }}" alt="profile">
+        <h3 class="profile-content-left-text">{{ userProfile?.name }}</h3>
+     </div>
+     <div class="profile-content-line">
+ 
+     </div>
+     <div class="profile-content-right">
+        <div class="profile-content-right-info">여행 키워드</div>
+        <div class="guide-keyword">
+            <span class="keyword" *ngFor="let keyword of userKeywords">{{ keyword }}</span>
+        </div>
+     </div>
+  </div>
+
+  <div class="profile-content-bottom">
+    <div class="stat-item">
+      <div class="stat-value">랭킹</div>
+      <div class="stat-label">{{ userProfile?.ranking.ranking }}</div>
+    </div>
+    <div class="profile-content-line">
+   
+      </div>
+    <div class="stat-item">
+      <div class="stat-value">여행 기록 수</div>
+      <div class="stat-label">{{ userProfile?.guideNum }}</div>
+    </div>
+    <div class="profile-content-line">
+  
+      </div>
+    <div class="stat-item">
+      <div class="stat-value">리뷰 수</div>
+      <!-- <div class="stat-label">{{ userProfile.userReviews.length }}</div> -->
+      <div class="stat-label">{{ userProfile?.reviewNum }}</div>
+    </div>
+  </div>
+
+  <app-guide-list
+  [title]="userProfile?.name + '님이 작성한 가이드'"
+  [guides]="userGuides"
+  (clickGuide)="navigateToGuide($event)"
+></app-guide-list>
+
+
+
+</div>

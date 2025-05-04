@@ -1,0 +1,35 @@
+<div>
+    <div class="content-container">
+        <div class="title">본문</div>
+        <div class="content">{{content}}</div>
+   
+    <div class="guide-list-container">
+        <div class="title">작성자 님이 다녀온 세부 장소</div>
+        <div class="guides-container">
+            <div class="guide-card" *ngFor="let place of places">
+              <div class="guide-image-container">
+                <div class="guide-image">
+                  <img 
+                    [src]="place.imageUrl || 'assets/images/beach.svg'"
+                    width="200"
+                    loading="lazy"
+                    (error)="place.imageUrl = 'assets/images/beach.svg'"
+                  >
+                </div>
+              </div>
+              <div class="guide-content">
+                <h3 class="guide-title">{{ place.name }}</h3>
+                <div class="guide-location">
+                  <img src="assets/images/Location.svg" alt="Location" class="location-icon">
+                  {{ place.address }}
+                </div>
+                <div class="guide-rating">
+                  <span class="stars">★</span>
+                  <span class="rating-value">{{ place.rating | number:'1.1-1' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    </div>  
+</div>

@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { TravelRecordService } from '../../../services/travel-record.service';
 
 interface CalendarDay {
   date: Date;
@@ -26,7 +27,10 @@ export class CalendarComponent {
   startDate: Date | null = null;
   endDate: Date | null = null;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private travelRecordService: TravelRecordService
+  ) {
     this.generateCalendarDays();
   }
 
@@ -154,6 +158,13 @@ export class CalendarComponent {
 
   onNext(): void {
     if (this.startDate && this.endDate) {
+      // TravelRecordService에 날짜 정보 저장
+      this.travelRecordService.setDates(
+        this.startDate.toISOString(),
+        this.endDate.toISOString()
+      );
+      
+      // 검색 페이지로 이동
       this.router.navigate(['/history/search']);
     }
   }

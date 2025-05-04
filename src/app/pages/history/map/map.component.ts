@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
 import { PlaceService, Place } from '../../../services/place.service';
+import { TravelRecordService } from '../../../services/travel-record.service';
 import { CommonModule } from '@angular/common';
-import { environment } from '../../../../environments/environment';
 
 declare global {
   interface Window {
@@ -33,7 +33,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private router: Router,
-    private placeService: PlaceService
+    private placeService: PlaceService,
+    private travelRecordService: TravelRecordService
   ) {
     // Google Maps API가 로드되었는지 확인
     if (typeof window.google !== 'undefined') {
@@ -49,6 +50,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
+    // 현재 여행 기록 상태 로깅
+    console.log('Map - Current Travel Record State:', this.travelRecordService.getTempRecord());
+
     // PlaceService에서 선택된 장소들을 구독
     this.placeService.selectedPlaces$
       .pipe(takeUntil(this.destroy$))
@@ -61,10 +65,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // DOM이 완전히 로드된 후에 맵 초기화
-    setTimeout(() => {
+    if (this.isGoogleMapsLoaded) {
       this.initializeMap();
-    }, 500); // 시간을 더 늘려 DOM이 완전히 로드될 때까지 기다림
+    }
   }
 
   private initializeMap(): void {
@@ -153,13 +156,25 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // API 호출 제한을 위한 디바운스 적용
     setTimeout(() => {
-      this.placeService.addPlace(place);
-      this.placeService.cachePlace(place);
+      const placeData = this.autocomplete?.getPlace();
+      const photo = placeData?.photos?.[0];
+      const imageUrl=photo?.getUrl({maxWidth:400});
+      const enrichedPlace: Place = {
+        ...place,
+        imageUrl:imageUrl};
+      this.placeService.addPlace(enrichedPlace);
+      this.placeService.cachePlace(enrichedPlace);
+      
+      // 장소 선택 후 현재 상태 로깅
+      console.log('Map - After Place Selection:', this.travelRecordService.getTempRecord());
     }, this.searchDebounceTime);
   }
 
   removePlace(place: Place): void {
     this.placeService.removePlace(place);
+    
+    // 장소 제거 후 현재 상태 로깅
+    console.log('Map - After Place Removal:', this.travelRecordService.getTempRecord());
   }
 
   updateMarkers(): void {

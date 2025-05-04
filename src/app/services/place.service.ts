@@ -10,6 +10,7 @@ export interface Place {
   rating?: number;      // 별점
   reviewCount?: number; // 리뷰 수
   placeId: string;      // Google Place ID
+  imageUrl?: string;
 }
 
 @Injectable({

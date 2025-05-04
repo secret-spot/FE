@@ -5,83 +5,45 @@
   </div>
 
   <!-- 가이드 페이지 스크롤 섹션 -->
-  <div class="guides-section">
-    <h3>{{ userNickname }}님과 어울리는 맞춤형 가이드 엄선!</h3>
-    <div class="guides-scroll">
-      <div class="guide-card" *ngFor="let guide of guides">
-        <img [src]="guide.imageUrl" [alt]="guide.title" class="guide-image">
-        <div class="guide-content">
-          <h5>{{ guide.title }}</h5>
-          <div class="location-container">
-          <img src="assets/images/Location.svg" alt="location" class="location">
-          <p>{{ guide.description }}</p>
-          </div>
-          <div class="guide-keyword">
-            <span class="keyword" *ngFor="let keyword of guide.keywords">{{ keyword }}</span>
-          </div>
-      </div>
-    </div>
-  </div>
-  </div>
+  <app-guide-list
+  [title]="userNickname + '님과 어울리는 맞춤형 가이드 엄선!'"
+  [guides]="recommandedGuides"
+  (clickGuide)="navigateToGuide($event)"
+></app-guide-list>
 
   <!-- 상위 spotter 섹션 -->
   <div class="top-spotters-section">
     <div class="top-spotters-section-title">
-        <h3>최근 1개월 내 상위 1% spotter</h3>
-        <div class="ranking-button">
+      <h3>최근 1개월 내 상위 1% spotter</h3>
+      <div class="ranking-button" (click)="navigateToRanking()">
         <p>전체보기</p>
         <img src="assets/images/Arrow.svg" alt="arrow-right" class="arrow-right">
-        </div>
+      </div>
     </div>
     <div class="spotters-grid">
       <div class="spotter-card" *ngFor="let spotter of topSpotters">
         <div class="profile-picture">
-          <img [src]="spotter.profileImage" [alt]="spotter.nickname">
+          <img [src]="spotter.profileImageUrl" [alt]="spotter.nickname">
         </div>
         <p class="nickname">{{ spotter.nickname }}</p>
       </div>
     </div>
   </div>
 
-  <div class="guides-section">
-    <h3>최근 n개월 상위 1% Spotter</h3>
-    <div class="guides-scroll">
-      <div class="guide-card" *ngFor="let guide of guides">
-        <img [src]="guide.imageUrl" [alt]="guide.title" class="guide-image">
-        <div class="guide-content">
-          <h5>{{ guide.title }}</h5>
-          <div class="location-container">
-          <img src="assets/images/Location.svg" alt="location" class="location">
-          <p>{{ guide.description }}</p>
-          </div>
-          <div class="guide-keyword">
-            <span class="keyword" *ngFor="let keyword of guide.keywords">{{ keyword }}</span>
-          </div>
-      </div>
-    </div>
-  </div>
-  </div>
+  <app-guide-list
+  [title]="'방금 올라온 따끈따끈한 가이드'"
+  [guides]="popularSpots"
+  (clickGuide)="navigateToGuide($event)"
+></app-guide-list>
 
-  <div class="guides-section">
-    <h3>{{ userNickname }}님이 다녀온 ‘강릉’과 비슷한 여행지</h3>
-    <div class="guides-scroll">
-      <div class="guide-card" *ngFor="let guide of guides">
-        <img [src]="guide.imageUrl" [alt]="guide.title" class="guide-image">
-        <div class="guide-content">
-          <h5>{{ guide.title }}</h5>
-          <div class="location-container">
-          <img src="assets/images/Location.svg" alt="location" class="location">
-          <p>{{ guide.description }}</p>
-          </div>
-          <div class="guide-keyword">
-            <span class="keyword" *ngFor="let keyword of guide.keywords">{{ keyword }}</span>
-          </div>
-      </div>
-    </div>
-  </div>
-  </div>
+
+<app-guide-list
+  [title]="userNickname + '님이 다녀온 곳과 비슷한 여행지'"
+  [guides]="recommendedRegions"
+  (clickGuide)="navigateToGuide($event)"
+></app-guide-list>
+
 
   <div class="empty"></div>
-
 </div>
 

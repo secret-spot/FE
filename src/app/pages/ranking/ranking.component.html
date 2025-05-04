@@ -1,0 +1,48 @@
+<div class="ranking-header">
+  <img src="assets/images/S2_logo.svg" alt="ranking-header">
+</div>
+<div class="history-header">
+  <button class="back-btn" (click)="onBack()">
+    <img src="assets/images/Arrow.svg" alt="back" class="arrow-left">
+  </button>
+  <h2>랭킹</h2>
+  <button class="next-btn">랭킹 기준</button>
+</div>
+<div class="ranking-container">
+
+
+  <div class="ranking-content">
+    
+    <div class="guides-container">
+      <div class="guide-card" *ngFor="let guide of rankings">
+        <div class="guide-image-container">
+        <div class="guide-image">
+          <img 
+            [src]="guide.profileImageUrl || '/assets/images/beach.svg'" 
+            [alt]="'Default Title'"
+          >
+        </div>
+        </div>
+        <div class="guide-content">
+          <h3 class="guide-title">{{ guide.nickname }}</h3>
+          <div class="guide-location">
+            여행 키워드
+          </div>
+          
+          <div class="guide-keywords">
+            <span class="keyword" *ngFor="let keyword of guide.keywords">{{ keyword }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+
+
+    
+  </div>
+
+
+
+</div> 

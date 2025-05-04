@@ -24,6 +24,6 @@ export class SplashComponent implements OnInit {
   }
 
   signInWithGoogle() {
-    window.location.href = `${environment.apiUrl}/oauth2/authorization/google`;
+    window.location.href = `https://s2-5nwgikdioa-du.a.run.app/oauth2/authorization/google`;
   }
 } 

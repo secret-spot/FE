@@ -22,6 +22,7 @@ export class AppComponent {
     '/register',
     '/history',
     '/history/*',
+    '/post/*',
      // history 하위의 모든 경로
   ];
 
