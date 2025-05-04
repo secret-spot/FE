@@ -25,7 +25,8 @@ export class PostComponent implements OnInit{
   images: string[] = [];
   nickname: string = '사용자';
   regions: string[] = [];
-
+  places: any[] = [];
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -49,6 +50,8 @@ export class PostComponent implements OnInit{
         this.reviewRating = data.reviewRating;
         this.images = data.images;
         this.regions = data.regions.map((region: any) => region.region);
+        this.places = data.places;
+
 
         const start = new Date(this.startDate + 'T00:00:00');
         const end = new Date(this.endDate + 'T00:00:00');

@@ -4,7 +4,8 @@
     margin: 0 auto;
     background: white;
     /* border-radius: 20px; */
-    overflow: hidden;
+    overflow-y: auto;
+    height:100vh;
 
   }
   

@@ -36,7 +36,7 @@
     </div>
   
       <ng-container [ngSwitch]="activeTab">
-        <app-guide-tab *ngSwitchCase="'guide'"></app-guide-tab>
+        <app-guide-tab *ngSwitchCase="'guide'" [content]="content" [places]="places"></app-guide-tab>
         <app-qna-tab *ngSwitchCase="'qna'"></app-qna-tab>
         <app-review-tab *ngSwitchCase="'review'"></app-review-tab>
       </ng-container>
