@@ -3,11 +3,12 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { forkJoin } from 'rxjs';
+import { GuideListComponent } from '../../components/guide-list/guide-list.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, GuideListComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

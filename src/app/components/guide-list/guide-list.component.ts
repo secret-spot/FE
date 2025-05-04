@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-guide-list',
-  imports: [],
   templateUrl: './guide-list.component.html',
-  styleUrl: './guide-list.component.scss'
+  styleUrls: ['./guide-list.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class GuideListComponent {
+  @Input() title: string = '';
+  @Input() guides: any[] = [];
 
+  @Output() clickGuide = new EventEmitter<number>();
+
+  onClickGuide(id: number) {
+    this.clickGuide.emit(id);
+  }
 }
+

@@ -1,0 +1,19 @@
+<div class="guides-section">
+    <h3>{{ title }}</h3>
+    <div class="guides-scroll">
+      <div class="guide-card" *ngFor="let guide of guides" (click)="onClickGuide(guide.id)">
+        <img [src]="guide.thumbnailUrl || guide.imageUrl" [alt]="guide.title || guide.name" class="guide-image">
+        <div class="guide-content">
+          <h5>{{ guide.title || guide.region }}</h5>
+          <div class="location-container">
+            <img src="assets/images/Location.svg" alt="location" class="location">
+            <p>{{ guide.regions || guide.country }}</p>
+          </div>
+          <div class="guide-keyword">
+            <span class="keyword" *ngFor="let keyword of guide.keywords">{{ keyword }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

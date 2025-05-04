@@ -5,24 +5,11 @@
   </div>
 
   <!-- 가이드 페이지 스크롤 섹션 -->
-  <div class="guides-section">
-    <h3>{{ userNickname }}님과 어울리는 맞춤형 가이드 엄선!</h3>
-    <div class="guides-scroll">
-      <div class="guide-card" *ngFor="let recommandedGuide of recommandedGuides" (click)="navigateToGuide(recommandedGuide.id)">
-        <img [src]="recommandedGuide.thumbnailUrl" [alt]="recommandedGuide.title" class="guide-image">
-        <div class="guide-content">
-          <h5>{{ recommandedGuide.title }}</h5>
-          <div class="location-container">
-            <img src="assets/images/Location.svg" alt="location" class="location">
-            <p>{{ recommandedGuide.regions }}</p>
-          </div>
-          <div class="guide-keyword">
-            <span class="keyword" *ngFor="let keyword of recommandedGuide.keywords">{{ keyword }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-guide-list
+  [title]="userNickname + '님과 어울리는 맞춤형 가이드 엄선!'"
+  [guides]="recommandedGuides"
+  (clickGuide)="navigateToGuide($event)"
+></app-guide-list>
 
   <!-- 상위 spotter 섹션 -->
   <div class="top-spotters-section">
@@ -43,45 +30,19 @@
     </div>
   </div>
 
-  <!-- 인기 장소 섹션 -->
-  <div class="guides-section">
-    <h3>방금 올라온 따끈따끈한 가이드</h3>
-    <div class="guides-scroll">
-      <div class="guide-card" *ngFor="let spot of popularSpots" (click)="navigateToGuide(spot.id)">
-        <img [src]="spot.thumbnailUrl" [alt]="spot.name" class="guide-image">
-        <div class="guide-content">
-          <h5>{{ spot.title }}</h5>
-          <div class="location-container">
-            <img src="assets/images/Location.svg" alt="location" class="location">
-            <p>{{ spot.regions }}</p>
-          </div>
-          <div class="guide-keyword">
-            <span class="keyword" *ngFor="let keyword of spot.keywords">{{ keyword }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-guide-list
+  [title]="'방금 올라온 따끈따끈한 가이드'"
+  [guides]="popularSpots"
+  (clickGuide)="navigateToGuide($event)"
+></app-guide-list>
 
-  <!--비슷한 여행지 -->
-  <div class="guides-section">
-    <h3>{{ userNickname }}님이 다녀온 곳과 비슷한 여행지</h3>
-    <div class="guides-scroll">
-      <div class="guide-card" *ngFor="let spot of recommendedRegions">
-        <img [src]="spot.imageUrl" [alt]="spot.name" class="guide-image">
-        <div class="guide-content">
-          <h5>{{ spot.region }}</h5>
-          <div class="location-container">
-            <img src="assets/images/Location.svg" alt="location" class="location">
-            <p>{{ spot.country }}</p>
-          </div>
-          <div class="guide-keyword">
-            <span class="keyword" *ngFor="let keyword of spot.keywords">{{ keyword }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+<app-guide-list
+  [title]="userNickname + '님이 다녀온 곳과 비슷한 여행지'"
+  [guides]="recommendedRegions"
+  (clickGuide)="navigateToGuide($event)"
+></app-guide-list>
+
 
   <div class="empty"></div>
 </div>
