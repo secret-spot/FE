@@ -11,8 +11,8 @@
   
   .cover-image-with-button {
     /* background-image: url('your-image-url.jpg'); Angular에서는 바인딩 필요 */
-    background-size: 150%;
-    background-position: center;
+    background-size: 100%;
+    /* background-position: */
     width: 100%;
     height: 40vh;
     position: relative;
@@ -131,6 +131,7 @@
     height: 100%;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
   }
 
   .slider-indicators {

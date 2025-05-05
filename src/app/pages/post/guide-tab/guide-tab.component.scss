@@ -17,7 +17,12 @@
     padding-bottom: 10px;
 }
 
-
+.guide-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
 
   // 가이드 카드 스타일
   .guides-container {
