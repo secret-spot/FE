@@ -9,8 +9,9 @@ interface Review {
   id: number;
   nickname: string;
   rating: number;
-  comment: string;
+  content: string;
   createdAt: string;
+  profileImageUrl: string;
 }
 
 @Component({
@@ -25,7 +26,7 @@ export class ReviewTabComponent implements OnInit {
   
   reviews: Review[] = [];
   myReview: Review | null = null;
-  reviewSummary: string = '요약할 리뷰 수가 충분하지 않습니다.';
+  summaryReview: string = '요약할 리뷰 수가 충분하지 않습니다.';
   id: number | null = null;
   myReviewStatus: string = '';
 
@@ -50,7 +51,7 @@ export class ReviewTabComponent implements OnInit {
       console.log(res);
       this.reviews = res.reviews;
       this.myReview = res.myReview;
-      this.reviewSummary = res.summary;
+      this.summaryReview = res.summaryReview;
       this.myReviewStatus = res.myReviewStatus;
     });
   }

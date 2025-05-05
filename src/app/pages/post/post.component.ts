@@ -5,13 +5,14 @@ import { CommonModule } from '@angular/common';
 import { GuideTabComponent } from './guide-tab/guide-tab.component';
 import { QnaTabComponent } from './qna-tab/qna-tab.component';
 import { ReviewTabComponent } from './review-tab/review-tab.component'
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-guide-page',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
   standalone: true,
-  imports: [CommonModule, GuideTabComponent, QnaTabComponent, ReviewTabComponent]
+  imports: [CommonModule, RouterModule, GuideTabComponent, QnaTabComponent, ReviewTabComponent]
 })
 export class PostComponent implements OnInit{
   activeTab = 'guide';
@@ -28,6 +29,9 @@ export class PostComponent implements OnInit{
   regions: string[] = [];
   places: any[] = [];
   isMyGuide: boolean = false;
+  currentImageIndex: number = 0;
+  touchStartX: number = 0;
+  touchEndX: number = 0;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -75,5 +79,31 @@ export class PostComponent implements OnInit{
     this.router.navigate(['/home']);
   }
   
-  
+  setCurrentImage(index: number): void {
+    this.currentImageIndex = index;
+  }
+
+  onTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.touches[0].clientX;
+  }
+
+  onTouchEnd(event: TouchEvent): void {
+    this.touchEndX = event.changedTouches[0].clientX;
+    this.handleSwipe();
+  }
+
+  handleSwipe(): void {
+    const swipeThreshold = 50;
+    const diff = this.touchStartX - this.touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0 && this.currentImageIndex < this.images.length - 1) {
+        // Swipe left
+        this.currentImageIndex++;
+      } else if (diff < 0 && this.currentImageIndex > 0) {
+        // Swipe right
+        this.currentImageIndex--;
+      }
+    }
+  }
 }

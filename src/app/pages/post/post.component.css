@@ -11,11 +11,19 @@
   
   .cover-image-with-button {
     /* background-image: url('your-image-url.jpg'); Angular에서는 바인딩 필요 */
-    background-size: cover;
+    background-size: 150%;
     background-position: center;
     width: 100%;
-    height: 30vh;
+    height: 40vh;
     position: relative;
+    z-index: 1;
+    margin-top: -0.1vh;
+    overflow: hidden;
+    margin-bottom: -15px;
+
+    .slide{
+      background-size: 100%;
+    }
   }
   
   .back-button {
@@ -28,8 +36,10 @@
     cursor: pointer;
 
     img{
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 50%;
+
+      width: 20px;
+      height: 20px;
+      rotate: 180deg;
     }
   }
 
@@ -72,9 +82,14 @@
   }
  
   .info-card {
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    border-radius: 20px 20px 0 0;
     padding: 20px;
     border-radius: 20px;
-
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: -15px;
   }
   
   .tags span {
@@ -102,4 +117,42 @@
     border-bottom: 3px solid #f66;
     font-weight: bold;
     color: #f66;
+  }
+
+  .image-slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .slide {
+    min-width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .slider-indicators {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 3;
+  }
+
+  .slider-indicators span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .slider-indicators span.active {
+    background-color: white;
+    transform: scale(1.2);
   }

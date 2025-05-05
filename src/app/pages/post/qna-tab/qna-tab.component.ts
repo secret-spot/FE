@@ -11,6 +11,7 @@ interface Question {
   createdAt: string;
   answer?: string;
   answeredAt?: string;
+  questionerProfileImageUrl?: string;
 }
 
 @Component({

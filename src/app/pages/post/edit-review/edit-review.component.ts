@@ -60,7 +60,7 @@ export class EditReviewComponent implements OnInit {
 
     this.apiService.post<any>(`guides/${this.id}/reviews`, {
       rating: this.rating,
-      comment: this.comment
+      content: this.comment
     }).subscribe({
       next: () => {
         this.router.navigate([`/post/${this.id}`]);

@@ -82,12 +82,45 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  align-items: center;
+    img{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
 
+    .stars {
+
+        gap: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      
+        .star {
+          font-size: 20px;
+          margin-right: 2px;
+          cursor: default;
+      
+          &.star-filled {
+            color: #FFD700;
+          }
+      
+          &.star-empty {
+            color: #E8E9EB;
+          }
+        }
+      }
   .reviewer-name {
     font-weight: 600;
     color: #333;
   }
 
+  .reviewer-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
   .review-date {
     color: #666;
     font-size: 14px;
@@ -95,7 +128,7 @@
 }
 
 .stars {
-  margin-bottom: 10px;
+
   gap: 10px;
   display: flex;
   align-items: center;

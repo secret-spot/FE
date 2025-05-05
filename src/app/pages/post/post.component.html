@@ -1,9 +1,21 @@
 <div class="guide-page">
     <!-- <img class="cover-image" [src]="images[0]" alt="여행지 사진" /> -->
-    <div
-  class="cover-image-with-button"
-  [ngStyle]="{ 'background-image': 'url(' + images[0] + ')' }">
-  <div class="back-button"><img src="assets/images/Vector.svg" alt="뒤로가기"(click)="onBack()"/></div>
+    <div class="cover-image-with-button">
+      <div class="image-slider" 
+           [style.transform]="'translateX(-' + (currentImageIndex * 100) + '%)'"
+           (touchstart)="onTouchStart($event)"
+           (touchend)="onTouchEnd($event)">
+        <div class="slide" *ngFor="let image of images" [style.background-image]="'url(' + image + ')'"></div>
+      </div>
+      <div class="back-button">
+        <img src="assets/images/Arrow.svg" alt="뒤로가기" (click)="onBack()"/>
+      </div>
+      <div class="slider-indicators">
+        <span *ngFor="let image of images; let i = index" 
+              [class.active]="i === currentImageIndex"
+              (click)="setCurrentImage(i)">
+        </span>
+      </div>
     </div>
   
     <div class="info-card">

@@ -1,17 +1,23 @@
 <div class="qna-container">
+    <div class="qna-header">질문</div>
   <!-- Question List -->
   <div class="questions-list">
-    <div class="question-item" *ngFor="let question of questions" 
-         [class.selected]="selectedQuestion?.id === question.id"
-         (click)="selectQuestion(question)">
+      <div class="question-item" *ngFor="let question of questions" 
+           [class.selected]="selectedQuestion?.id === question.id"
+           >
       <div class="question-header">
-        <span class="author">{{ question.author }}</span>
-        <span class="date">{{ question.createdAt }}</span>
-      </div>
-      <div class="question-content">
+        <div class="user-content">
+        <img src={{question.questionerProfileImageUrl}} class="user-icon">
         <p>{{ question.question }}</p>
+        </div>
+        <div class="question-content">
+            <div class="answer-btn" (click)="selectQuestion(question)"><div>답변하기</div></div>
+          </div>
+        <!-- <span class="date">{{ question.createdAt | date:'MM-dd' }}</span> -->
       </div>
-      <div class="answer-section" *ngIf="question.answer">
+
+
+      <div class=" answer-section" *ngIf="question.answer">
         <div class="answer-header">
           <span class="answer-label">답변</span>
           <span class="answer-date">{{ question.answeredAt }}</span>
@@ -35,11 +41,7 @@
   </div>
 
   <!-- Answer Input (for guide owners) -->
-  <div class="answer-input" *ngIf="isMyGuide && selectedQuestion">
-    <div class="selected-question">
-      <h4>선택된 질문</h4>
-      <p>{{ selectedQuestion.question }}</p>
-    </div>
+  <div class="answer-input" *ngIf="isMyGuide">
     <textarea 
       [(ngModel)]="answerText" 
       placeholder="답변을 입력하세요..."
@@ -47,8 +49,9 @@
       class="answer-textarea">
     </textarea>
     <div class="answer-buttons">
-      <button class="cancel-btn" (click)="cancelAnswer()">취소</button>
+      <button class="cancel-btn" (click)="cancelAnswer()">X</button>
       <img src="assets/images/Frame.svg" class="submit-btn" (click)="submitAnswer()">
     </div>
   </div>
+  <div class="footer"></div>
 </div>
