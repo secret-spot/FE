@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   userNickname: string = '닉네임'; // 사용자 닉네임
   error: string | null = null;
   isLoading: boolean = true;
+  userName: string = '';
 
   // 가짜 데이터 (API 요청 실패 시 사용)
   mockData = {
@@ -146,7 +147,8 @@ export class HomeComponent implements OnInit {
     // 4개의 API 요청을 동시에 실행
     forkJoin({
       guides: this.apiService.get<any>('home'),
-      topSpotters: this.apiService.get<any>('rankings/home')
+      topSpotters: this.apiService.get<any>('rankings/home'),
+      username: this.apiService.get<any>('users/username')
     }).subscribe({
       next: (data) => {
         console.log(data);
@@ -156,6 +158,7 @@ export class HomeComponent implements OnInit {
         this.topSpotters = data.topSpotters;
         this.recommendedRegions = data.guides.recommendedRegion;
         this.isLoading = false;
+        this.userName = data.username.userName;
       },
       error: (err) => {
         console.error('홈 데이터를 가져오는 중 오류 발생:', err);

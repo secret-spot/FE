@@ -15,6 +15,7 @@ export class RankingComponent implements OnInit {
   rankings: any[] = [];
   loading = false;
   error = '';
+  showModal = false;
 
   constructor(
     private router: Router,
@@ -49,5 +50,9 @@ export class RankingComponent implements OnInit {
   
   onBack(): void {
     this.router.navigate(['/home']);
+  }
+
+  toggleModal(): void {
+    this.showModal = !this.showModal;
   }
 } 

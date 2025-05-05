@@ -6,7 +6,7 @@
 
   <!-- 가이드 페이지 스크롤 섹션 -->
   <app-guide-list
-  [title]="userNickname + '님과 어울리는 맞춤형 가이드 엄선!'"
+  [title]="userName + '님과 어울리는 맞춤형 가이드 엄선!'"
   [guides]="recommandedGuides"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>
@@ -22,6 +22,7 @@
     </div>
     <div class="spotters-grid">
       <div class="spotter-card" *ngFor="let spotter of topSpotters">
+        <div class="rank-number">{{ spotter.rank }}</div>
         <div class="profile-picture">
           <img [src]="spotter.profileImageUrl" [alt]="spotter.nickname">
         </div>
@@ -38,7 +39,7 @@
 
 
 <app-guide-list
-  [title]="userNickname + '님이 다녀온 곳과 비슷한 여행지'"
+  [title]="userName + '님이 다녀온 곳과 비슷한 여행지'"
   [guides]="recommendedRegions"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>
