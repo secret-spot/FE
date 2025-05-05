@@ -21,6 +21,22 @@
     height: 50px;
 }
 
+.rank-number{
+  position: absolute;
+  top: -5px;
+  left: -5px;  
+  width: 25px;
+height: 25px;
+flex-shrink: 0;
+color: white;
+background-color: #A0AEA2;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+
+
+}
 
 .top-spotters-section {
     .top-spotters-section-title {
@@ -50,6 +66,7 @@
 
     .spotter-card {
       text-align: center;
+      position: relative;
 
       .profile-picture {
         width: 70px;

@@ -23,7 +23,8 @@ export class PostComponent implements OnInit{
   keywords: string[] = [];
   reviewRating: number = 0;
   images: string[] = [];
-  nickname: string = '사용자';
+  userName: string = '';
+  userImage: string = '';
   regions: string[] = [];
   places: any[] = [];
   
@@ -51,6 +52,8 @@ export class PostComponent implements OnInit{
         this.images = data.images;
         this.regions = data.regions.map((region: any) => region.region);
         this.places = data.places;
+        this.userName = data.userName;
+        this.userImage = data.userImage;
 
 
         const start = new Date(this.startDate + 'T00:00:00');
