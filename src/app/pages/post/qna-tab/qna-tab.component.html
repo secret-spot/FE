@@ -1,1 +1,54 @@
-<p>qna-tab works!</p>
+<div class="qna-container">
+  <!-- Question List -->
+  <div class="questions-list">
+    <div class="question-item" *ngFor="let question of questions" 
+         [class.selected]="selectedQuestion?.id === question.id"
+         (click)="selectQuestion(question)">
+      <div class="question-header">
+        <span class="author">{{ question.author }}</span>
+        <span class="date">{{ question.createdAt }}</span>
+      </div>
+      <div class="question-content">
+        <p>{{ question.question }}</p>
+      </div>
+      <div class="answer-section" *ngIf="question.answer">
+        <div class="answer-header">
+          <span class="answer-label">답변</span>
+          <span class="answer-date">{{ question.answeredAt }}</span>
+        </div>
+        <div class="answer-content">
+          <p>{{ question.answer }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Question Input (for non-guide owners) -->
+  <div class="question-input" *ngIf="!isMyGuide">
+    <textarea 
+      [(ngModel)]="newQuestion" 
+      placeholder="질문을 입력하세요..."
+      rows="3"
+      class="question-textarea">
+    </textarea>
+    <img src="assets/images/Frame.svg" class="submit-btn" (click)="submitQuestion()">
+  </div>
+
+  <!-- Answer Input (for guide owners) -->
+  <div class="answer-input" *ngIf="isMyGuide && selectedQuestion">
+    <div class="selected-question">
+      <h4>선택된 질문</h4>
+      <p>{{ selectedQuestion.question }}</p>
+    </div>
+    <textarea 
+      [(ngModel)]="answerText" 
+      placeholder="답변을 입력하세요..."
+      rows="3"
+      class="answer-textarea">
+    </textarea>
+    <div class="answer-buttons">
+      <button class="cancel-btn" (click)="cancelAnswer()">취소</button>
+      <img src="assets/images/Frame.svg" class="submit-btn" (click)="submitAnswer()">
+    </div>
+  </div>
+</div>

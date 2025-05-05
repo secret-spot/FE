@@ -27,7 +27,7 @@ export class PostComponent implements OnInit{
   userImage: string = '';
   regions: string[] = [];
   places: any[] = [];
-  
+  isMyGuide: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -54,6 +54,7 @@ export class PostComponent implements OnInit{
         this.places = data.places;
         this.userName = data.userName;
         this.userImage = data.userImage;
+        this.isMyGuide = data.isMyGuide;
 
 
         const start = new Date(this.startDate + 'T00:00:00');

@@ -1,0 +1,33 @@
+<div class="edit-review-container">
+  <div class="header">
+    <button class="back-btn" (click)="onBack()">
+      <img src="assets/images/Arrow.svg" alt="back" class="arrow-left">
+    </button>
+    <h2>리뷰 작성하기</h2>
+    <button class="submit-btn" (click)="submitReview()">확인</button>
+  </div>
+
+  <div class="review-form">
+    <div class="rating-section">
+      <h3>나의 별점</h3>
+      <div class="stars">
+        <span *ngFor="let star of [1,2,3,4,5]" 
+              [class]="getStarClass(star)"
+              class="star"
+              (click)="setRating(star)"
+              (mouseenter)="setHoveredRating(star)"
+              (mouseleave)="clearHoveredRating()">★</span>
+      </div>
+    </div>
+
+    <div class="comment-section">
+      <h3>코멘트</h3>
+      <textarea 
+        [(ngModel)]="comment" 
+        placeholder="리뷰를 작성해주세요..."
+        rows="5"
+        class="comment-textarea">
+      </textarea>
+    </div>
+  </div>
+</div> 

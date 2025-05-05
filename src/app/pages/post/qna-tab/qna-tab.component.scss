@@ -1,0 +1,152 @@
+.qna-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.questions-list {
+  margin-bottom: 20px;
+}
+
+.question-item {
+  background: white;
+  border: 1px solid #E8E9EB;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &.selected {
+    border-color: #6E7E79;
+    background-color: #f8f9fa;
+  }
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+
+  .author {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .date {
+    color: #666;
+  }
+}
+
+.question-content {
+  p {
+    margin: 0;
+    color: #333;
+    line-height: 1.5;
+  }
+}
+
+.answer-section {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #E8E9EB;
+}
+
+.answer-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+
+  .answer-label {
+    font-weight: 600;
+    color: #6E7E79;
+  }
+
+  .answer-date {
+    color: #666;
+  }
+}
+
+.answer-content {
+  p {
+    margin: 0;
+    color: #666;
+    line-height: 1.5;
+  }
+}
+
+.question-input, .answer-input {
+  background: white;
+  border: 1px solid #E8E9EB;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selected-question {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #E8E9EB;
+
+  h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 16px;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+  }
+}
+
+.question-textarea, .answer-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #E8E9EB;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+  height:46px;
+
+  &:focus {
+    outline: none;
+    border-color: #6E7E79;
+  }
+}
+
+.answer-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.submit-btn, .cancel-btn {
+  padding: 8px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+
+
+.cancel-btn {
+  background-color: #f0f0f0;
+  color: #666;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+}
