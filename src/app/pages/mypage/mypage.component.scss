@@ -2,6 +2,8 @@
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  overflow-y: auto;
+  height: 100vh;
 }
 
 .profile-header {
@@ -113,4 +115,8 @@
     color: white;
     font-weight: var(--font-weight-medium);
   }
+}
+
+.footer{
+  height: 100px;
 }

@@ -1,19 +1,25 @@
 <div class="guides-section">
     <h3>{{ title }}</h3>
-    <div class="guides-scroll">
-      <div class="guide-card" *ngFor="let guide of guides" (click)="onClickGuide(guide.id)">
-        <img [src]="guide.thumbnailUrl || guide.imageUrl" [alt]="guide.title || guide.name" class="guide-image">
+    <div class="guides-scroll" *ngIf="guides && guides.length > 0">
+      <div class="guide-card" *ngFor="let guide of guides" (click)="onClickGuide(guide.id || guide.guideId)">
+        <img [src]="guide.thumbnailUrl || guide.imageUrl || guide.guideThumbnailUrl" [alt]="guide.title || guide.name" class="guide-image">
         <div class="guide-content">
-          <h5>{{ guide.title || guide.region }}</h5>
+          <h5>{{ guide.title || guide.region || guide.guideTitle }}</h5>
           <div class="location-container">
             <img src="assets/images/Location.svg" alt="location" class="location">
-            <p>{{ guide.regions || guide.country }}</p>
+            <p>{{ guide.regions || guide.country || guide.guideRegion }}</p>
           </div>
-          <div class="guide-keyword">
+          <div class="guide-keyword" *ngIf="!guide.myReviewRating">
             <span class="keyword" *ngFor="let keyword of guide.keywords">{{ keyword }}</span>
+          </div>
+          <div class="star-rating" *ngIf="guide.myReviewRating">
+            <span class="star" *ngFor="let star of [1,2,3,4,5]" [class.filled]="star <= guide.myReviewRating">★</span>
           </div>
         </div>
       </div>
+    </div>
+    <div class="empty-message" *ngIf="!guides || guides.length === 0">
+      아직 가이드가 없습니다.
     </div>
   </div>
   

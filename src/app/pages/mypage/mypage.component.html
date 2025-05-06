@@ -48,6 +48,18 @@
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>
 
+<app-guide-list
+  [title]="userProfile?.name + '님이 스크랩한 가이드'"
+  [guides]="userScraps"
+  (clickGuide)="navigateToGuide($event)"
+></app-guide-list>
 
+<app-guide-list
+  [title]="userProfile?.name + '님이 작성한 리뷰'"
+  [guides]="userReviews"
+  (clickGuide)="navigateToGuide($event)"
+></app-guide-list>
+
+<div class="footer"></div>
 
 </div>

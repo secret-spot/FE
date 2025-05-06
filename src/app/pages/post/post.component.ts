@@ -15,6 +15,8 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule, GuideTabComponent, QnaTabComponent, ReviewTabComponent]
 })
 export class PostComponent implements OnInit{
+  id: string = '';
+  isScraped: boolean = false;
   activeTab = 'guide';
   tripDuration: number = 0;
   title: string = '';
@@ -40,10 +42,12 @@ export class PostComponent implements OnInit{
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
+
     if (!id) {
       console.error('ID가 존재하지 않습니다.');
       return;
     }
+    this.id = id;
     this.apiService.get<any>(`guides/${id}`).subscribe({
       next: (data) => {
         console.log(data);
@@ -59,7 +63,7 @@ export class PostComponent implements OnInit{
         this.userName = data.userName;
         this.userImage = data.userImage;
         this.isMyGuide = data.isMyGuide;
-
+        this.isScraped = data.isScraped;
 
         const start = new Date(this.startDate + 'T00:00:00');
         const end = new Date(this.endDate + 'T00:00:00');
@@ -106,4 +110,29 @@ export class PostComponent implements OnInit{
       }
     }
   }
+
+  onScrapFalse(){
+    this.apiService.delete<any>(`guides/${this.id}/scrap`).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.isScraped = false;
+      },
+      error: (err) => {
+        console.error('스크랩 중 오류 발생:', err);
+      }
+    });
+  }
+
+  onScrapTrue(){
+    this.apiService.post<any>(`guides/${this.id}/scrap`, {}).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.isScraped = true;
+      },
+      error: (err) => {
+        console.error('스크랩 중 오류 발생:', err);
+      }
+    });
+  }
+
 }

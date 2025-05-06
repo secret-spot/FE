@@ -17,17 +17,18 @@
  
   <!-- 기본 화면 -->
   <div class="default-view" *ngIf="!isSearching && !error">
-    <div class="region" *ngIf="showSearchResults&&isRegion">
+    <div class="region" *ngIf="showSearchResults&&(isRegion||isPlace)">
       <div class="region-message">
         <div class="etiquette-text">{{etiquette}}</div>
       </div>
       <div class="region-recommand">
-        <div>📍'{{ searchQuery }}'와 비슷한 다른 소도시 추천</div>
+        <div *ngIf="isRegion">📍'{{ searchQuery }}'와 비슷한 다른 소도시 추천</div>
+        <div *ngIf="isPlace">📍'{{ searchQuery }}'와 비슷한 다른 장소 추천</div>
         <div class="guides-scroll">
-          <div class="recommand-card" *ngFor="let recommend of recommends"> 
+          <div class="recommand-card" *ngFor="let recommend of recommendedRegions || recommendedPlaces"> 
             <div class="recommand-card-text">
-              <div class="region">{{recommend.region}}</div>
-              <div class="review">{{recommend.review}}</div>
+              <div class="region">{{recommend.region || recommend.name}}</div>
+              <div class="review">{{recommend.review || recommend.address}}</div>
             </div>
             </div>
           </div>
@@ -35,8 +36,8 @@
     </div>
     <div class="welcome-message">
       <div *ngIf="!showSearchResults">🔥 숨겨진 Special Spot </div>
-      <div *ngIf="showSearchResults&&!isRegion">📍'{{ searchQuery }}'와 관련된 가이드 </div>
-      <div *ngIf="showSearchResults&&isRegion">📍'{{ searchQuery }}'을 여행했던 사람들의 가이드 </div>
+      <div *ngIf="showSearchResults&&!isRegion&&!isPlace">📍'{{ searchQuery }}'와 관련된 가이드 </div>
+      <div *ngIf="showSearchResults&&(isRegion||isPlace)">📍'{{ searchQuery }}'을 여행했던 사람들의 가이드 </div>
 
     </div>
     

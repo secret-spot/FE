@@ -92,3 +92,28 @@
       color: #666;
     }
   }
+
+  .star-rating {
+    display: flex;
+    gap: 8px;
+    margin-top: 5px;
+    align-items: center;  
+    justify-content: center;
+
+    .star {
+      color: #ddd;
+      font-size: 25px;
+
+      &.filled {
+        color: #ffd700;
+      }
+    }
+  }
+
+  .empty-message {
+    // text-align: center;
+    // padding: 20px;
+    color: #666;
+    font-size: 14px;
+    margin-top: 20px;
+  }

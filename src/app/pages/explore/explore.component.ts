@@ -19,8 +19,10 @@ export class ExploreComponent implements OnInit {
   error: string | null = null;
   showSearchResults: boolean = false;
   isRegion: boolean = false;
+  isPlace: boolean = false;
   etiquette: string='';
-  recommends: any[] = [];
+  recommendedPlaces: any[] = [];
+  recommendedRegions: any[] = [];
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -88,7 +90,10 @@ export class ExploreComponent implements OnInit {
         this.isSearching = false;
         this.isRegion = data.isRegion;
         this.etiquette = data.etiquette;
-        this.recommends=data.recommendations;
+        this.recommendedPlaces=data.recommendedPlaces;
+        this.recommendedRegions=data.recommendedRegions;
+
+        this.isPlace=data.isPlace;
       },
       error: (err) => {
         console.error('검색 중 오류 발생:', err);
