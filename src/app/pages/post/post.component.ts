@@ -112,7 +112,7 @@ export class PostComponent implements OnInit{
   }
 
   onScrapFalse(){
-    this.apiService.delete<any>(`guides/${this.id}/scrap`).subscribe({
+    this.apiService.delete<any>(`guides/${this.id}/scraps`).subscribe({
       next: (data) => {
         console.log(data);
         this.isScraped = false;
@@ -124,7 +124,7 @@ export class PostComponent implements OnInit{
   }
 
   onScrapTrue(){
-    this.apiService.post<any>(`guides/${this.id}/scrap`, {}).subscribe({
+    this.apiService.post<any>(`guides/${this.id}/scraps`, {}).subscribe({
       next: (data) => {
         console.log(data);
         this.isScraped = true;

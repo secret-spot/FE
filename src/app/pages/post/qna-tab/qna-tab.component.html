@@ -10,7 +10,7 @@
         <img src={{question.questionerProfileImageUrl}} class="user-icon">
         <p>{{ question.question }}</p>
         </div>
-        <div class="question-content">
+        <div *ngIf="isMyGuide" class="question-content">
             <div class="answer-btn" (click)="selectQuestion(question)"><div>답변하기</div></div>
           </div>
         <!-- <span class="date">{{ question.createdAt | date:'MM-dd' }}</span> -->

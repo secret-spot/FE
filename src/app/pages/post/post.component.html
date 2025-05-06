@@ -11,7 +11,7 @@
       <div class="back-button">
         <img src="assets/images/Arrow.svg" alt="뒤로가기" (click)="onBack()"/>
       </div>
-      <div class="scrap-button">
+      <div *ngIf="!isMyGuide" class="scrap-button">
         <img *ngIf="isScraped" src="assets/images/Bookmark.svg" alt="스크랩" (click)="onScrapFalse()"/>
         <img *ngIf="!isScraped" src="assets/images/Bookmark_false.svg" alt="스크랩" (click)="onScrapTrue()"/>
       </div>
