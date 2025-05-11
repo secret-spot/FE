@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -21,35 +21,18 @@ interface Question {
   standalone: true,
   imports: [CommonModule, FormsModule]
 })
-export class QnaTabComponent implements OnInit {
+export class QnaTabComponent {
   @Input() isMyGuide: boolean = false;
+  @Input() questions: any[] = [];
 
-
-  questions: Question[] = [];
   newQuestion: string = '';
   selectedQuestion: Question | null = null;
   answerText: string = '';
   id: number | null = null;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
-
-  ngOnInit(): void {
-    // TODO: Load questions from API
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {
     const id = this.route.snapshot.paramMap.get('id');
     this.id = parseInt(id || '0');
-    if (!id) {
-      console.error('ID가 존재하지 않습니다.');
-      return;
-    }
-    this.loadQuestions();
-  }
-
-  loadQuestions(): void {
-    // Mock data for testing
-    this.apiService.get<any>(`guides/${this.id}/qnas`).subscribe((res) => {
-      console.log(res);
-      this.questions = res;
-    });
   }
 
   submitQuestion(): void {

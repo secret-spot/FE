@@ -11,7 +11,7 @@ import { SearchComponent } from './search/search.component';
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, CalendarComponent, TravelRecordComponent, SearchComponent]
+  imports: [CommonModule, FormsModule, RouterModule]
 })
 export class HistoryComponent {
   selectedDate: Date = new Date();

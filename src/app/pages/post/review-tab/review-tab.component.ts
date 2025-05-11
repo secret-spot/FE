@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,14 +21,12 @@ interface Review {
   standalone: true,
   imports: [CommonModule, FormsModule]
 })
-export class ReviewTabComponent implements OnInit {
+export class ReviewTabComponent {
   @Input() isMyGuide: boolean = false;
-  
-  reviews: Review[] = [];
-  myReview: Review | null = null;
-  summaryReview: string = '요약할 리뷰 수가 충분하지 않습니다.';
-  id: number | null = null;
-  myReviewStatus: string = '';
+  @Input() reviews: any[] = [];
+  @Input() myReview: any = null;
+  @Input() summaryReview: string = '요약할 리뷰 수가 충분하지 않습니다.';
+  @Input() myReviewStatus: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -36,28 +34,9 @@ export class ReviewTabComponent implements OnInit {
     private apiService: ApiService
   ) {}
 
-  ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.id = parseInt(id || '0');
-    if (!id) {
-      console.error('ID가 존재하지 않습니다.');
-      return;
-    }
-    this.loadReviews();
-  }
-
-  loadReviews(): void {
-    this.apiService.get<any>(`guides/${this.id}/reviews`).subscribe((res) => {
-      console.log(res);
-      this.reviews = res.reviews;
-      this.myReview = res.myReview;
-      this.summaryReview = res.summaryReview;
-      this.myReviewStatus = res.myReviewStatus;
-    });
-  }
-
   navigateToEditReview(): void {
-    this.router.navigate([`/post/${this.id}/review`]);
+    const id = this.route.snapshot.paramMap.get('id');
+    this.router.navigate([`/post/${id}/review`]);
   }
 
   getStarClass(rating: number, starNumber: number): string {

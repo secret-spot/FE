@@ -20,7 +20,7 @@ declare global {
   standalone: true,
   imports: [CommonModule, RouterModule, GuideTabComponent, QnaTabComponent, ReviewTabComponent]
 })
-export class PostComponent implements OnInit{
+export class PostComponent implements OnInit {
   id: string = '';
   isScraped: boolean = false;
   activeTab = 'guide';
@@ -42,6 +42,14 @@ export class PostComponent implements OnInit{
   touchEndX: number = 0;
   private placesService: google.maps.places.PlacesService | null = null;
 
+  // Q&A 데이터
+  questions: any[] = [];
+  // 리뷰 데이터
+  reviews: any[] = [];
+  myReview: any = null;
+  summaryReview: string = '요약할 리뷰 수가 충분하지 않습니다.';
+  myReviewStatus: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -61,6 +69,8 @@ export class PostComponent implements OnInit{
       return;
     }
     this.id = id;
+    
+    // 가이드 기본 정보 가져오기
     this.apiService.get<any>(`guides/${id}`).subscribe({
       next: (data) => {
         console.log(data);
@@ -85,9 +95,39 @@ export class PostComponent implements OnInit{
 
         // 장소 이미지 URL 가져오기
         this.loadPlacesImages();
+
+        // Q&A 데이터 가져오기
+        this.loadQuestions();
+        // 리뷰 데이터 가져오기
+        this.loadReviews();
       },
       error: (err) => {
         console.error('여행 기록 요약 중 오류 발생:', err);
+      }
+    });
+  }
+
+  private loadQuestions() {
+    this.apiService.get<any>(`guides/${this.id}/qnas`).subscribe({
+      next: (data) => {
+        this.questions = data;
+      },
+      error: (err) => {
+        console.error('Q&A 데이터 로딩 중 오류 발생:', err);
+      }
+    });
+  }
+
+  private loadReviews() {
+    this.apiService.get<any>(`guides/${this.id}/reviews`).subscribe({
+      next: (data) => {
+        this.reviews = data.reviews;
+        this.myReview = data.myReview;
+        this.summaryReview = data.summaryReview;
+        this.myReviewStatus = data.myReviewStatus;
+      },
+      error: (err) => {
+        console.error('리뷰 데이터 로딩 중 오류 발생:', err);
       }
     });
   }
