@@ -7,6 +7,12 @@ import { QnaTabComponent } from './qna-tab/qna-tab.component';
 import { ReviewTabComponent } from './review-tab/review-tab.component'
 import { RouterModule } from '@angular/router';
 
+declare global {
+  interface Window {
+    google: typeof google;
+  }
+}
+
 @Component({
   selector: 'app-guide-page',
   templateUrl: './post.component.html',
@@ -34,11 +40,18 @@ export class PostComponent implements OnInit{
   currentImageIndex: number = 0;
   touchStartX: number = 0;
   touchEndX: number = 0;
+  private placesService: google.maps.places.PlacesService | null = null;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService
-  ) {}
+  ) {
+    if (typeof window.google !== 'undefined') {
+      const map = new google.maps.Map(document.createElement('div'));
+      this.placesService = new google.maps.places.PlacesService(map);
+    }
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -68,13 +81,31 @@ export class PostComponent implements OnInit{
         const start = new Date(this.startDate + 'T00:00:00');
         const end = new Date(this.endDate + 'T00:00:00');
         const diffTime = end.getTime() - start.getTime();
-        this.tripDuration = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; 
+        this.tripDuration = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
 
-        
-     
+        // 장소 이미지 URL 가져오기
+        this.loadPlacesImages();
       },
       error: (err) => {
         console.error('여행 기록 요약 중 오류 발생:', err);
+      }
+    });
+  }
+
+  private loadPlacesImages() {
+    this.places.forEach(place => {
+      if (place.googlePlaceId && !place.imageUrl) {
+        const request: google.maps.places.PlaceDetailsRequest = {
+          placeId: place.googlePlaceId,
+          fields: ['photos']
+        };
+
+        this.placesService?.getDetails(request, (result, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK && result?.photos?.[0]) {
+            const photo = result.photos[0];
+            place.imageUrl = photo.getUrl({ maxWidth: 400 });
+          }
+        });
       }
     });
   }

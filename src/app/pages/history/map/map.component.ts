@@ -151,6 +151,8 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
     const cachedPlace = this.placeService.getCachedPlace(place.placeId);
     if (cachedPlace) {
       this.placeService.addPlace(cachedPlace);
+      // 지도 중심을 선택된 위치로 이동
+      this.map.panTo({ lat: cachedPlace.lat, lng: cachedPlace.lng });
       return;
     }
 
@@ -164,6 +166,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
         imageUrl:imageUrl};
       this.placeService.addPlace(enrichedPlace);
       this.placeService.cachePlace(enrichedPlace);
+      
+      // 지도 중심을 선택된 위치로 이동
+      this.map.panTo({ lat: place.lat, lng: place.lng });
       
       // 장소 선택 후 현재 상태 로깅
       console.log('Map - After Place Selection:', this.travelRecordService.getTempRecord());

@@ -85,15 +85,27 @@
 }
 
 .answer-section {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #E8E9EB;
+  margin-top: 8px;
+  padding-left: 20px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  &::before {
+    content: 'ㄴ';
+    position: absolute;
+    left: 0;
+    color: #6E7E79;
+    font-size: 16px;
+    font-weight: bold;
+  }
 }
 
 .answer-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-size: 14px;
 
   .answer-label {

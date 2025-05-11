@@ -1,13 +1,15 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Place } from '../../../services/place.service';
 
 @Component({
   selector: 'app-guide-tab',
-  imports: [CommonModule],
   templateUrl: './guide-tab.component.html',
-  styleUrl: './guide-tab.component.scss'
+  styleUrls: ['./guide-tab.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class GuideTabComponent {
-  @Input() content: string = '';
-  @Input() places: any[] = [];
+  @Input() content: string = ''
+  @Input() places: Place[] = [];
 }
