@@ -28,7 +28,9 @@
           <div class="recommand-card" *ngFor="let recommend of recommendedRegions || recommendedPlaces"> 
             <div class="recommand-card-text">
               <div class="region">{{recommend.region || recommend.name}}</div>
+              <div class="review-container">
               <div class="review">{{recommend.review || recommend.address}}</div>
+              </div>
             </div>
             </div>
           </div>

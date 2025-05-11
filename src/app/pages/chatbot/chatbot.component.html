@@ -1,6 +1,12 @@
 <div class="chatbot-container">
   <div class="chat-header">
-    <h1>여행 도우미</h1>
+    <div class="header-content">
+      <div class="logo-container">
+        <!-- <img src="assets/images/spotty-logo.svg" alt="Spotty Logo" class="logo"> -->
+        <h1>Spotty</h1>
+      </div>
+      <p class="subtitle">당신의 여행 파트너</p>
+    </div>
   </div>
   
   <div class="chat-messages" #chatContainer>
@@ -9,7 +15,7 @@
          class="message">
       <div class="message-content">
         <div class="message-avatar" *ngIf="message.sender === 'bot' && message.imageUrl">
-          <img src="assets/images/people.svg" alt="Bot Avatar">
+          <img src="assets/images/chatbot.png" alt="Bot Avatar">
         </div>
         <div class="message-bubble">
           {{ message.text }}
@@ -27,7 +33,7 @@
     <div *ngIf="isLoading" class="message message-bot">
       <div class="message-content">
         <div class="message-avatar">
-          <img src="assets/images/people.svg" alt="Bot Avatar">
+          <img src="assets/images/chatbot.png" alt="Bot Avatar">
         </div>
         <div class="message-bubble">
           <div class="typing-indicator">

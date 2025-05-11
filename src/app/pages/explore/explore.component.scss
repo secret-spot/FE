@@ -45,6 +45,9 @@
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
 
     .recommand-card-text {
       display: flex;
@@ -53,6 +56,16 @@
       justify-content: center;
       padding: 10px;
       margin-bottom:0px;
+    }
+
+    .review-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height:50%;
+      margin:0px;
     }
 
     .region {

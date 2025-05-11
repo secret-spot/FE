@@ -29,10 +29,10 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   newMessage: string = '';
   isLoading: boolean = false;
   quickReplies: QuickReply[] = [
-    { id: 1, text: '여행 계획을 어떻게 세우면 좋을까요?' },
-    { id: 2, text: '인기 있는 관광지 추천해주세요' },
-    { id: 3, text: '맛집 추천해주세요' },
-    { id: 4, text: '교통편은 어떻게 이용하면 좋을까요?' }
+    { id: 1, text: '여행 준비물 뭐가 필요할까요?' },
+    { id: 2, text: '예산을 얼마정도로 잡을까요?' },
+    { id: 3, text: '교통편 알아볼래요' },
+    { id: 4, text: '언제 가야 사람이 북적이지 않을까요?' }
   ];
   
   private apiUrl = "https://basic-radius-459414-h8.du.r.appspot.com/api/v1/chatbot";
@@ -42,7 +42,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     // 초기 메시지 추가
     this.messages.push({
-      text: '안녕하세요! 여행에 관한 질문이 있으시면 아래 선택지에서 선택하거나 직접 입력해주세요.',
+      text: '반가워요! Spotty입니다.\n마음에 드는 가이드를 골랐나요?\n그럼 이제 교통편, 일정, 준비물 중 뭐부터 챙겨볼까요?',
       sender: 'bot',
       timestamp: new Date(),
       imageUrl: 'assets/images/bot-avatar.png'
