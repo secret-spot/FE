@@ -40,7 +40,7 @@
         <img src="assets/images/ci_location.svg" alt="위치 이미지" />
         <span *ngFor="let region of regions">{{region}}</span>
         <img src="assets/images/Star.svg" alt="별 이미지" />
-        <p>{{reviewRating}}</p>
+        <p>{{ reviewRating == 0 || reviewRating == 0.0 ? "-" : reviewRating }}</p>
       </div>
       <div class="tags">
         <span *ngFor="let keyword of keywords">{{ keyword }}</span>

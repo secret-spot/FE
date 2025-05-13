@@ -43,19 +43,19 @@
   </div>
 
   <app-guide-list
-  [title]="userProfile?.name + '님이 작성한 가이드'"
+  [title]="'travler님이 작성한 가이드'"
   [guides]="userGuides"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>
 
 <app-guide-list
-  [title]="userProfile?.name + '님이 스크랩한 가이드'"
+  [title]="'travler님이 스크랩한 가이드'"
   [guides]="userScraps"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>
 
 <app-guide-list
-  [title]="userProfile?.name + '님이 작성한 리뷰'"
+  [title]="'travler님이 작성한 리뷰'"
   [guides]="userReviews"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>

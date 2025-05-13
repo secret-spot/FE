@@ -40,6 +40,7 @@ export class MyPageComponent implements OnInit {
       this.apiService.get<any>('mypage/scraps/card')
     ]).subscribe({
       next: ([profile, scraps]) => {
+        console.log(profile);
         this.userProfile = profile;
         this.userKeywords = profile.keyword;
         this.userGuides = profile.userGuides;
