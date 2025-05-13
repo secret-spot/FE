@@ -11,7 +11,7 @@ import { ApiService } from '../../../services/api.service';
   imports: [CommonModule]
 })
 export class LoadingComponent implements OnInit{
-  message = '여행 기록을 분석하고 있습니다...';
+  message = 'Analyzing your travel history...';
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -22,20 +22,20 @@ export class LoadingComponent implements OnInit{
     const data = {};
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) {
-      console.error('ID가 존재하지 않습니다.');
+      console.error('ID does not exist.');
       return;
     }
   
     this.apiService.post<any>(`guides/${id}/analyze`,data).subscribe({
       next: (data) => {
-        console.log('분석 결과:', data);
+        console.log('Analysis result:', data);
         // 분석 완료 후 이동
         setTimeout(() => {
           this.router.navigate(['/history/summary/'+id]);
         }, 3000);
       },
       error: (err) => {
-        console.error('여행 기록 분석 중 오류 발생:', err);
+        console.error('Error occurred while analyzing travel history:', err);
       }
     });
   }

@@ -9,11 +9,11 @@
       </div>
       <div class="button-container">
       <div class="back-button">
-        <img src="assets/images/Arrow.svg" alt="뒤로가기" (click)="onBack()"/>
+        <img src="assets/images/Arrow.svg" alt="Back" (click)="onBack()"/>
       </div>
       <div *ngIf="!isMyGuide" class="scrap-button">
-        <img *ngIf="isScraped" src="assets/images/Bookmark.svg" alt="스크랩" (click)="onScrapFalse()"/>
-        <img *ngIf="!isScraped" src="assets/images/Bookmark_false.svg" alt="스크랩" (click)="onScrapTrue()"/>
+        <img *ngIf="isScraped" src="assets/images/Bookmark.svg" alt="Scrap" (click)="onScrapFalse()"/>
+        <img *ngIf="!isScraped" src="assets/images/Bookmark_false.svg" alt="Scrap" (click)="onScrapTrue()"/>
       </div>
       </div>
       <div class="slider-indicators">
@@ -29,17 +29,17 @@
         <h2>{{title}}</h2>
       </div>
       <div class="nickname">
-        <img [src]="userImage" alt="프로필 이미지" />
+        <img [src]="userImage" alt="Profile Image" />
         <p>{{userName}}</p>
       </div>
       <div class="date">
-        <img src="assets/images/calendar-tick.svg" alt="날짜 이미지" />
-      <p> {{startDate}} - {{endDate}} ({{tripDuration}}일간 여행)</p>
+        <img src="assets/images/calendar-tick.svg" alt="Date Image" />
+      <p> {{startDate}} - {{endDate}} ({{tripDuration}} days trip)</p>
       </div>
       <div class="place-rating">
-        <img src="assets/images/ci_location.svg" alt="위치 이미지" />
+        <img src="assets/images/ci_location.svg" alt="Location Image" />
         <span *ngFor="let region of regions">{{region}}</span>
-        <img src="assets/images/Star.svg" alt="별 이미지" />
+        <img src="assets/images/Star.svg" alt="Star Image" />
         <p>{{ reviewRating == 0 || reviewRating == 0.0 ? "-" : reviewRating }}</p>
       </div>
       <div class="tags">
@@ -47,9 +47,9 @@
       </div>
       
       <nav class="tab-nav">
-        <span [class.active]="activeTab === 'guide'" (click)="activeTab = 'guide'">가이드</span>
+        <span [class.active]="activeTab === 'guide'" (click)="activeTab = 'guide'">Guide</span>
         <span [class.active]="activeTab === 'qna'" (click)="activeTab = 'qna'">Q&A</span>
-        <span [class.active]="activeTab === 'review'" (click)="activeTab = 'review'">리뷰</span>
+        <span [class.active]="activeTab === 'review'" (click)="activeTab = 'review'">Review</span>
       </nav>
     </div>
   

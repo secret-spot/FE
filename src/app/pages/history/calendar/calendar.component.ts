@@ -18,7 +18,7 @@ interface CalendarDay {
 export class CalendarComponent {
   @Output() dateSelected = new EventEmitter<{startDate: Date, endDate: Date}>();
   
-  weekDays = ['일', '월', '화', '수', '목', '금', '토'];
+  weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
   currentDate = new Date();
   currentYear = this.currentDate.getFullYear();
   currentMonth = this.currentDate.getMonth();

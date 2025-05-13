@@ -65,7 +65,7 @@ export class PostComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
 
     if (!id) {
-      console.error('ID가 존재하지 않습니다.');
+      console.error('ID does not exist.');
       return;
     }
     this.id = id;
@@ -102,7 +102,7 @@ export class PostComponent implements OnInit {
         this.loadReviews();
       },
       error: (err) => {
-        console.error('여행 기록 요약 중 오류 발생:', err);
+        console.error('Error occurred while summarizing travel record:', err);
       }
     });
   }
@@ -113,7 +113,7 @@ export class PostComponent implements OnInit {
         this.questions = data;
       },
       error: (err) => {
-        console.error('Q&A 데이터 로딩 중 오류 발생:', err);
+        console.error('Error occurred while loading Q&A data:', err);
       }
     });
   }
@@ -127,7 +127,7 @@ export class PostComponent implements OnInit {
         this.myReviewStatus = data.myReviewStatus;
       },
       error: (err) => {
-        console.error('리뷰 데이터 로딩 중 오류 발생:', err);
+        console.error('Error occurred while loading review data:', err);
       }
     });
   }
@@ -189,7 +189,7 @@ export class PostComponent implements OnInit {
         this.isScraped = false;
       },
       error: (err) => {
-        console.error('스크랩 중 오류 발생:', err);
+        console.error('Error occurred while scraping:', err);
       }
     });
   }
@@ -201,7 +201,7 @@ export class PostComponent implements OnInit {
         this.isScraped = true;
       },
       error: (err) => {
-        console.error('스크랩 중 오류 발생:', err);
+        console.error('Error occurred while scraping:', err);
       }
     });
   }

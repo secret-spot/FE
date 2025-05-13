@@ -5,8 +5,8 @@
   <button class="back-btn" (click)="onBack()">
     <img src="assets/images/Arrow.svg" alt="back" class="arrow-left">
   </button>
-  <h2>랭킹</h2>
-  <button class="next-btn" (click)="toggleModal()">랭킹 기준</button>
+  <h2>Ranking</h2>
+  <button class="next-btn" (click)="toggleModal()">Ranking Criteria</button>
 </div>
 <div class="ranking-container">
 
@@ -27,11 +27,11 @@
         <div class="guide-content">
           <h3 class="guide-title" *ngIf="i !==0">{{ guide.nickname }}</h3>
           <div class="rank-number-container" *ngIf="i ===0">
-          <h3 class="guide-title" >내 순위</h3>
-          <h3 class="guide-rank">{{ guide.rank }}등</h3>
+          <h3 class="guide-title" >My Rank</h3>
+          <h3 class="guide-rank">{{ guide.rank }}th</h3>
           </div>
           <div class="guide-location">
-            여행 키워드
+            Travel Keywords
           </div>
           
           <div class="guide-keywords">
@@ -56,32 +56,32 @@
 <div class="modal-overlay" *ngIf="showModal" (click)="toggleModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="modal-header">
-      <h3>랭킹 산정 기준</h3>
+      <h3>Ranking Calculation Criteria</h3>
       <button class="close-btn" (click)="toggleModal()">×</button>
     </div>
     <div class="modal-body">
-      <p>랭킹은 다음과 같은 기준으로 산정됩니다:</p>
+      <p>Ranking is calculated based on the following criteria:</p>
       <ul>
         
-        <li>업데이트 주기: 매주 월요일</li>
-        <li>기본 점수</li>
+        <li>Update period: every Monday</li>
+        <li>Basic score</li>
         <ul>
-          <li>가이드 1개당 +1점</li>
-          <li>리뷰 1개당 +1점</li>
+          <li>1 guide +1 point</li>
+          <li>1 review +1 point</li>
         </ul>
-        <li>희소성 점수 (가이드 내 세부 장소 기준)</li>
+        <li>Scarcity score (based on the number of places in the guide)</li>
         <ul>
-          <li>리뷰 수 0~99개: +3점</li>
-          <li>리뷰 수 100~199개: +2점</li>
-          <li>리뷰 수 200~299개: +1점</li>
+          <li>0~99 reviews: +3 points</li>
+          <li>100~199 reviews: +2 points</li>
+          <li>200~299 reviews: +1 point</li>
           <li>리뷰 수 300개 이상: +0점</li>
         </ul>
-        <li>가이드 평점 가점</li>
+        <li>Guide rating score</li>
         <ul>  
-          <li>별점 4.0 이상 시 가이드당 +1점</li>
-          <li>평점 변동 시 가점도 반영됨</li>
+          <li>4.0 or higher: +1 point per guide</li>
+          <li>Rating changes are also reflected</li>
         </ul>
-        <li>주의사항: 삭제된 콘텐츠는 점수에서 제외됩니다.</li>
+        <li>Note: Deleted content is excluded from the score.</li>
       </ul>
     </div>
   </div>

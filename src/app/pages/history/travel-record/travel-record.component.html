@@ -3,26 +3,26 @@
     <button class="back-btn" (click)="onBack()">
       <img src="assets/images/Arrow.svg" alt="back" class="arrow-left">
     </button>
-    <h2>여행 기록 작성</h2>
+    <h2>Write your travel record</h2>
   </div>
   <div class="travel-record-container">
-  <p class="selected-date">여행기간: {{travelRecord.startDate | date:'yyyy년 MM월 dd일'}} - {{travelRecord.endDate | date:'yyyy년 MM월 dd일'}}</p>
+  <p class="selected-date">Travel period: {{travelRecord.startDate | date:'yyyy년 MM월 dd일'}} - {{travelRecord.endDate | date:'yyyy년 MM월 dd일'}}</p>
 
   <form (ngSubmit)="onSubmit()" class="record-form">
     <div class="form-group">
-      <label for="title">제목</label>
+      <label for="title">Title</label>
       <input class="input" type="text" id="title" [(ngModel)]="travelRecord.title" name="title" required>
     </div>
 
 
     <div class="form-group">
-      <label for="description">여행 기록</label>
+      <label for="description">Travel record</label>
       <textarea class="input" id="description" [(ngModel)]="travelRecord.description" name="description" rows="5" required
-        placeholder="어디서, 누구와, 어떤 활동을 했나요?"></textarea>
+        placeholder="Where, who, what activities did you do?"></textarea>
     </div>
 
     <div class="form-group">
-      <label>사진 첨부</label>
+      <label>Add photos</label>
       <div class="file-upload-container">
         <div class="file-upload-box" (click)="fileInput.click()">
           <i class="fas fa-plus"></i>
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <button type="submit" class="submit-btn">저장하기</button>
+    <button type="submit" class="submit-btn">Save</button>
   </form>
   <div class="footer"></div>
 </div>

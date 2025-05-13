@@ -29,10 +29,10 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   newMessage: string = '';
   isLoading: boolean = false;
   quickReplies: QuickReply[] = [
-    { id: 1, text: '여행 준비물 뭐가 필요할까요?' },
-    { id: 2, text: '예산을 얼마정도로 잡을까요?' },
-    { id: 3, text: '교통편 알아볼래요' },
-    { id: 4, text: '언제 가야 사람이 북적이지 않을까요?' }
+    { id: 1, text: 'What travel items do I need?' },
+    { id: 2, text: 'How much budget should I plan?' },
+    { id: 3, text: 'Tell me about transportation' },
+    { id: 4, text: 'When is the best time to avoid crowds?' }
   ];
   
   private apiUrl = "https://basic-radius-459414-h8.du.r.appspot.com/api/v1/chatbot";
@@ -42,7 +42,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     // 초기 메시지 추가
     this.messages.push({
-      text: '반가워요! Spotty입니다.\n마음에 드는 가이드를 골랐나요?\n그럼 이제 교통편, 일정, 준비물 중 뭐부터 챙겨볼까요?',
+      text: 'Hello! I\'m Spotty.\nHave you found a guide you like?\nShall we start planning transportation, schedule, or travel items?',
       sender: 'bot',
       timestamp: new Date(),
       imageUrl: 'assets/images/bot-avatar.png'
@@ -82,7 +82,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
         console.log(response.content);
         const content = response.content;
         this.messages.push({
-          text: content || '죄송합니다. 답변을 생성하는 중에 문제가 발생했습니다.',
+          text: content || 'Sorry, there was an error generating the answer.',
           sender: 'bot',
           timestamp: new Date(),
           imageUrl: 'assets/images/bot-avatar.png'
@@ -92,7 +92,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
       error: (error) => {
         console.log(error);
         this.messages.push({
-          text: '죄송합니다. 서버와의 통신 중 문제가 발생했습니다.',
+          text: 'Sorry, there was an error communicating with the server.',
           sender: 'bot',
           timestamp: new Date(),
           imageUrl: 'assets/images/bot-avatar.png'
@@ -120,7 +120,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
       next: (response: any) => {
         const content = response.content;
         this.messages.push({
-          text: content|| '죄송합니다. 답변을 생성하는 중에 문제가 발생했습니다.',
+          text: content|| 'Sorry, there was an error generating the answer.',
           sender: 'bot',
           timestamp: new Date(),
           imageUrl: 'assets/images/bot-avatar.png'
@@ -129,7 +129,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
       },
       error: (error) => {
         this.messages.push({
-          text: '죄송합니다. 서버와의 통신 중 문제가 발생했습니다.',
+          text: 'Sorry, there was an error communicating with the server.',
           sender: 'bot',
           timestamp: new Date(),
           imageUrl: 'assets/images/bot-avatar.png'

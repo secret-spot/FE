@@ -21,11 +21,11 @@ export class ApiService {
   }
 
   private getFullUrl(endpoint: string): string {
-    // 서버 사이드에서는 전체 URL을 사용
+    // Use full URL on server side
     if (!this.isBrowser) {
       return `${this.baseUrl}${endpoint}`;
     }
-    // 클라이언트 사이드에서는 proxy 설정을 사용
+    // Use proxy settings on client side
     return `${this.apiUrl}${endpoint}`;
   }
 
@@ -36,7 +36,7 @@ export class ApiService {
     });
     
 
-    // 서버 사이드에서는 인증 헤더를 추가하지 않음
+    // Don't add auth header on server side
     if (this.isBrowser) {
       const accessToken = localStorage.getItem('accessToken');
       if (accessToken) {
@@ -52,7 +52,7 @@ export class ApiService {
     return throwError(() => error);
   }
 
-  // 서버 사이드에서는 API 요청을 건너뛰고 빈 배열을 반환하는 메서드
+  // Skip API request and return empty array on server side
   private skipOnServer<T>(data: T): Observable<T> {
     if (!this.isBrowser) {
       return of(data);
@@ -61,7 +61,7 @@ export class ApiService {
   }
 
   get<T>(endpoint: string, defaultValue: T = [] as any): Observable<T> {
-    // 서버 사이드에서는 API 요청을 건너뛰고 기본값을 반환
+    // Skip API request and return default value on server side
     if (!this.isBrowser) {
       return of(defaultValue);
     }
@@ -75,7 +75,7 @@ export class ApiService {
   }
 
   post<T>(endpoint: string, data: any, defaultValue: T = {} as T): Observable<T> {
-    // 서버 사이드에서는 API 요청을 건너뛰고 기본값을 반환
+    // Skip API request and return default value on server side
     if (!this.isBrowser) {
       return of(defaultValue);
     }
@@ -196,7 +196,7 @@ export class ApiService {
   // }
 
   put<T>(endpoint: string, data: any, defaultValue: T = {} as T): Observable<T> {
-    // 서버 사이드에서는 API 요청을 건너뛰고 기본값을 반환
+    // Skip API request and return default value on server side
     if (!this.isBrowser) {
       return of(defaultValue);
     }
@@ -209,7 +209,7 @@ export class ApiService {
   }
 
   delete<T>(endpoint: string, defaultValue: T = {} as T): Observable<T> {
-    // 서버 사이드에서는 API 요청을 건너뛰고 기본값을 반환
+    // Skip API request and return default value on server side
     if (!this.isBrowser) {
       return of(defaultValue);
     }
@@ -222,7 +222,7 @@ export class ApiService {
   }
 
   patch<T>(endpoint: string, data: any, defaultValue: T = {} as T): Observable<T> {
-    // 서버 사이드에서는 API 요청을 건너뛰고 기본값을 반환
+    // Skip API request and return default value on server side
     if (!this.isBrowser) {
       return of(defaultValue);
     }

@@ -5,7 +5,7 @@
       <input 
         type="text" 
         [(ngModel)]="tempSearchQuery" 
-        placeholder="궁금한 지역, 장소, 키워드를 검색해보세요" 
+        placeholder="Search for regions, places, or keywords" 
         class="search-input"
         (keyup.enter)="onSearch()">
       <button (click)="onSearch()" class="search-button">
@@ -22,8 +22,8 @@
         <div class="etiquette-text">{{etiquette}}</div>
       </div>
       <div class="region-recommand">
-        <div *ngIf="isRegion">📍'{{ searchQuery }}'와 비슷한 다른 소도시 추천</div>
-        <div *ngIf="isPlace">📍'{{ searchQuery }}'와 비슷한 다른 장소 추천</div>
+        <div *ngIf="isRegion">📍Similar small cities to '{{ searchQuery }}'</div>
+        <div *ngIf="isPlace">📍Similar places to '{{ searchQuery }}'</div>
         <div class="guides-scroll">
           <div class="recommand-card" *ngFor="let recommend of recommendedRegions || recommendedPlaces"> 
             <div class="recommand-card-text">
@@ -37,9 +37,9 @@
       </div>
     </div>
     <div class="welcome-message">
-      <div *ngIf="!showSearchResults">🔥 숨겨진 Special Spot </div>
-      <div *ngIf="showSearchResults&&!isRegion&&!isPlace">📍'{{ searchQuery }}'와 관련된 가이드 </div>
-      <div *ngIf="showSearchResults&&(isRegion||isPlace)">📍'{{ searchQuery }}'을 여행했던 사람들의 가이드 </div>
+      <div *ngIf="!showSearchResults">🔥 Hidden Special Spots</div>
+      <div *ngIf="showSearchResults&&!isRegion&&!isPlace">📍Guides related to '{{ searchQuery }}'</div>
+      <div *ngIf="showSearchResults&&(isRegion||isPlace)">📍Guides from people who traveled to '{{ searchQuery }}'</div>
 
     </div>
     

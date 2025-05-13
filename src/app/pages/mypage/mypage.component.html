@@ -13,7 +13,7 @@
  
      </div>
      <div class="profile-content-right">
-        <div class="profile-content-right-info">여행 키워드</div>
+        <div class="profile-content-right-info">Travel Keywords</div>
         <div class="guide-keyword">
             <span class="keyword" *ngFor="let keyword of userKeywords">{{ keyword }}</span>
         </div>
@@ -22,40 +22,40 @@
 
   <div class="profile-content-bottom">
     <div class="stat-item">
-      <div class="stat-value">랭킹</div>
+      <div class="stat-value">Ranking</div>
       <div class="stat-label">{{ userProfile?.ranking.ranking }}</div>
     </div>
     <div class="profile-content-line">
    
       </div>
     <div class="stat-item">
-      <div class="stat-value">여행 기록 수</div>
+      <div class="stat-value">Number of Travel Records</div>
       <div class="stat-label">{{ userProfile?.guideNum }}</div>
     </div>
     <div class="profile-content-line">
   
       </div>
     <div class="stat-item">
-      <div class="stat-value">리뷰 수</div>
+      <div class="stat-value">Number of Reviews</div>
       <!-- <div class="stat-label">{{ userProfile.userReviews.length }}</div> -->
       <div class="stat-label">{{ userProfile?.reviewNum }}</div>
     </div>
   </div>
 
   <app-guide-list
-  [title]="'travler님이 작성한 가이드'"
+  [title]="'Guides written by travler'"
   [guides]="userGuides"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>
 
 <app-guide-list
-  [title]="'travler님이 스크랩한 가이드'"
+  [title]="'Guides scraped by travler'"
   [guides]="userScraps"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>
 
 <app-guide-list
-  [title]="'travler님이 작성한 리뷰'"
+  [title]="'Reviews written by travler'"
   [guides]="userReviews"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>

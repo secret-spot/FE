@@ -71,7 +71,7 @@ export class AuthService {
         this.router.navigate(['/login']);
       } else {
         console.log('/home 페이지로 리다이렉트 (username 없음)');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/login']);
       }
     } else {
       console.error('토큰이 URL에 없습니다.');

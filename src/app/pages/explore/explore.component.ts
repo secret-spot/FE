@@ -56,8 +56,8 @@ export class ExploreComponent implements OnInit {
         this.isSearching = false;
       },
       error: (err) => {
-        console.error('가이드 데이터를 가져오는 중 오류 발생:', err);
-        this.error = '가이드 데이터를 가져오는 중 오류가 발생했습니다.';
+        console.error('Error occurred while fetching guide data:', err);
+        this.error = 'An error occurred while fetching guide data.';
         this.isSearching = false;
       }
     });
@@ -97,8 +97,8 @@ export class ExploreComponent implements OnInit {
         this.isPlace=data.isPlace;
       },
       error: (err) => {
-        console.error('검색 중 오류 발생:', err);
-        this.error = '검색 중 오류가 발생했습니다.';
+        console.error('Error occurred during search:', err);
+        this.error = 'An error occurred during search.';
         this.isSearching = false;
       }
     });

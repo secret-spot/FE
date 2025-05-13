@@ -6,7 +6,7 @@
 
   <!-- 가이드 페이지 스크롤 섹션 -->
   <app-guide-list
-  [title]="userName + '님과 어울리는 맞춤형 가이드 엄선!'"
+  [title]="'A selection of guides that match ' + userName + '!'"
   [guides]="recommandedGuides"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>
@@ -14,9 +14,9 @@
   <!-- 상위 spotter 섹션 -->
   <div class="top-spotters-section">
     <div class="top-spotters-section-title">
-      <h3>최근 1개월 내 상위 1% spotter</h3>
+      <h3>Top 1% spotter in the past month</h3>
       <div class="ranking-button" (click)="navigateToRanking()">
-        <p>전체보기</p>
+        <p>View all</p>
         <img src="assets/images/Arrow.svg" alt="arrow-right" class="arrow-right">
       </div>
     </div>
@@ -32,14 +32,14 @@
   </div>
 
   <app-guide-list
-  [title]="'방금 올라온 따끈따끈한 가이드'"
+  [title]="'Recently uploaded hot guides'"
   [guides]="popularSpots"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>
 
 
 <app-guide-list
-  [title]="userName + '님이 다녀온 곳과 비슷한 여행지'"
+  [title]="'A selection of places that match ' + userName + '!'"
   [guides]="recommendedRegions"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>

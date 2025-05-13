@@ -2,12 +2,12 @@
   <!-- My Review Section -->
   <div class="my-review-section" *ngIf="myReviewStatus !== 'WRITER'">
     <div class="section-header">
-      <h3 *ngIf="myReviewStatus === 'WRITTEN'">내 리뷰</h3>
-      <h3 *ngIf="myReviewStatus === 'NOT_WRITTEN'">가이드평을 남겨주세요.</h3>
+      <h3 *ngIf="myReviewStatus === 'WRITTEN'">My Review</h3>
+      <h3 *ngIf="myReviewStatus === 'NOT_WRITTEN'">Please leave a review for this guide.</h3>
       <img src="assets/images/pen.svg" class="edit-btn" (click)="navigateToEditReview()">
     </div>
     <div class="my-review-content">
-        <p class="review-comment">{{ myReview?.content ||'아직 가이드평이 없습니다.' }}</p>
+        <p class="review-comment">{{ myReview?.content || 'No review yet.' }}</p>
       <div class="stars">
         <span *ngFor="let star of [1,2,3,4,5]" 
               [class]="getStarClass(myReview?.rating || 0, star)"
@@ -19,13 +19,14 @@
 
   <!-- Review Summary Section -->
   <div class="review-summary-section">
-    <h3>리뷰 요약</h3>
-    <p class="summary-text">{{ summaryReview|| '리뷰 수가 충분하지 않습니다.' }}</p>
+    <h3>Review Summary</h3>
+
+    <p class="summary-text">{{ summaryReview || 'Not enough reviews.' }}</p>
   </div>
 
   <!-- Reviews List Section -->
   <div class="reviews-section">
-    <h3>리뷰</h3>
+    <h3>Reviews</h3>
     <div class="reviews-list">
       <div class="review-card" *ngFor="let review of reviews">
         <div class="review-header">

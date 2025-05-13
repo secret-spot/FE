@@ -51,8 +51,8 @@ export class MyPageComponent implements OnInit {
         console.log(this.userReviews);
       },
       error: (err) => {
-        console.error('프로필 데이터를 가져오는 중 오류 발생:', err);
-        this.error = '프로필 데이터를 가져오는 중 오류가 발생했습니다.';
+        console.error('Error occurred while fetching profile data:', err);
+        this.error = 'An error occurred while fetching profile data.';
       }
     });
     }

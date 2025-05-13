@@ -1,5 +1,5 @@
 <div class="qna-container">
-    <div class="qna-header">질문</div>
+    <div class="qna-header">Questions</div>
   <!-- Question List -->
   <div class="questions-list">
       <div class="question-item" *ngFor="let question of questions" 
@@ -11,7 +11,7 @@
         <p>{{ question.question }}</p>
         </div>
         <div *ngIf="isMyGuide" class="question-content">
-            <div class="answer-btn" (click)="selectQuestion(question)"><div>답변하기</div></div>
+            <div class="answer-btn" (click)="selectQuestion(question)"><div>Answer</div></div>
           </div>
         <!-- <span class="date">{{ question.createdAt | date:'MM-dd' }}</span> -->
       </div>
@@ -33,7 +33,7 @@
   <div class="question-input" *ngIf="!isMyGuide">
     <textarea 
       [(ngModel)]="newQuestion" 
-      placeholder="질문을 입력하세요..."
+      placeholder="Enter your question..."
       rows="3"
       class="question-textarea">
     </textarea>
@@ -44,7 +44,7 @@
   <div class="answer-input" *ngIf="isMyGuide">
     <textarea 
       [(ngModel)]="answerText" 
-      placeholder="답변을 입력하세요..."
+      placeholder="Enter your answer..."
       rows="3"
       class="answer-textarea">
     </textarea>
