@@ -35,30 +35,25 @@ S2 is a service designed to solve the increasingly discussed problem of overtour
 
 ---
 ## 📌Key Features
-### 1️⃣ Keyword Extraction Feature 📍
-+ **Description:** Automatically extracts relevant keywords from the user's post.
-+ **Key Categories:**
-  + **Companion Type:** Solo, Family, Friends, Couple
-  + **Travel Style:** Art, Extreme, Photography, Food, Healing, History, Shopping, Experience
-  + **Region:** Any mentioned region
+## 📚 1. Personalized Feed
+- Provides a curated list of guides and travel destinations based on user preferences.
 
-### 2️⃣ Local Etiquette Display Feature 😊
-+ **Description:** When a user searches for a specific region, the system provides local etiquette guidelines tailored to that area.
-+ **Highlights:**
-  + Utilizes Gemini to generate region-specific etiquette suggestions.
-  + Future updates may involve building a dedicated etiquette dataset per region for even more accurate and localized results.
+## 🔍 2. Explore
+- Delivers tailored information based on user search input:
+  - Region Search: Shows guides, local etiquette, and nearby small towns.
+  - Place Search: Shows guides, local etiquette, and similar regions.
+  - Keyword Search: Shows guides
 
-### 3️⃣ Small City Recommendation Feature 🗺️
-+ **Description:** Recommends lesser-known small cities near the user’s selected location to help avoid overcrowded destinations.
-+ **Highlights:**
-  + Powered by Gemini to identify nearby under-the-radar cities.
-  + Can be enhanced in the future to base recommendations on accumulated user-generated posts and data.
+## 📝 3. Guide
+- Guide Creation: Users can upload places, travel stories, and photos; system returns personalized keywords.
+- Guide Viewing:
+  - View detailed travel information
+  - Ask questions to the guide writer (Q&A)
+  - Read summarized reviews and write reviews
 
-### 4️⃣ Chatbot Feature 🤖
-+ **Description:** An AI-powered companion that assists users like a real travel buddy.
-+ **Highlights:**
-  + Provides friendly and personalized travel support, just like a friend on the journey.
-  + When asked for travel recommendations, it suggests hidden gems rather than typical tourist spots.
+## 🤖 4. Chatbot
+- Real-time travel support via Gemini-based chatbot
+- Users can click one of four preset questions or ask freely
 ---
 ## 📂Folder
 ```
