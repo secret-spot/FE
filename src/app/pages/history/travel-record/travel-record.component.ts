@@ -38,10 +38,10 @@ export class TravelRecordComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // 현재 여행 기록 상태 로깅
+    // log current travel record state
     console.log('Travel Record - Current State:', this.travelRecordService.getTempRecord());
 
-    // 임시 저장된 데이터 가져오기
+    // get temporary saved data
     const tempRecord = this.travelRecordService.getTempRecord();
     if (tempRecord.title) {
       this.travelRecord.title = tempRecord.title;
@@ -75,7 +75,7 @@ export class TravelRecordComponent implements OnInit {
         reader.readAsDataURL(file);
       }
       
-      // 입력 필드 초기화
+      // reset input field
       input.value = '';
     }
   }
@@ -88,16 +88,16 @@ export class TravelRecordComponent implements OnInit {
     if (this.isSubmitting) return;
     this.isSubmitting = true;
     
-    // 선택된 파일들을 FormData에 추가
+    // add selected files to FormData
     const formData = new FormData();
     this.selectedFiles.forEach((file, index) => {
       formData.append('images', file.file);
     });
     
-    // 임시 저장된 데이터 가져오기
+    // get temporary saved data
     const tempRecord = this.travelRecordService.getTempRecord();
     
-    // 최종 여행 기록 데이터 생성 (images 제외)
+    // create final travel record data (excluding images)
     const finalRecord = {
       startDate: tempRecord.startDate ? tempRecord.startDate.split('T')[0] : this.selectedDate.toISOString().split('T')[0],
       endDate: tempRecord.endDate ? tempRecord.endDate.split('T')[0] : this.selectedDate.toISOString().split('T')[0],
@@ -106,34 +106,34 @@ export class TravelRecordComponent implements OnInit {
       places: tempRecord.places || []
     };
 
-    // JSON 데이터를 FormData에 추가
+    // add JSON data to FormData
     formData.append('data', JSON.stringify(finalRecord));
 
-    // API 호출 전 최종 상태 로깅
+    // log final state before API call
     console.log('Travel Record - Final State Before API Call:', finalRecord);
     console.log('FormData contents:');
     for (const [key, value] of formData.entries()) {
       console.log(`${key}:`, value);
     }
 
-    // API 호출
+    // call API
     this.apiService.post('guides', formData).subscribe({
       next: (response) => {
         console.log('Travel Record - API Response:', response);
         const guideId=response;
-        // 로딩 페이지로 이동
+        // navigate to loading page
         this.router.navigate(['/history/loading/' + guideId]);
       },
       error: (error) => {
         console.error('Travel Record - API Error:', error);
         this.isSubmitting = false;
-        // TODO: 에러 처리 (예: 사용자에게 알림 표시)
+        // TODO: handle error (e.g. show notification to user)
       }
     });
   }
   
   onBack() {
-    // 이전 페이지로 이동 (검색 페이지)
+    // navigate to previous page (search page)
     this.router.navigate(['/history/search']);
   }
 }

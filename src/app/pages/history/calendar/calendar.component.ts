@@ -37,7 +37,7 @@ export class CalendarComponent {
   generateCalendarDays(): void {
     this.calendarDays = [];
     
-    // 이전 달의 마지막 날짜들
+    // last days of previous month
     const firstDay = new Date(this.currentYear, this.currentMonth, 1);
     const firstDayOfWeek = firstDay.getDay();
     
@@ -53,7 +53,7 @@ export class CalendarComponent {
       }
     }
     
-    // 현재 달의 날짜들
+    // current month's days
     const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0);
     const lastDate = lastDay.getDate();
     
@@ -64,7 +64,7 @@ export class CalendarComponent {
       });
     }
     
-    // 다음 달의 시작 날짜들
+    // start days of next month
     const lastDayOfWeek = lastDay.getDay();
     if (lastDayOfWeek < 6) {
       for (let i = 1; i <= 6 - lastDayOfWeek; i++) {
@@ -98,20 +98,20 @@ export class CalendarComponent {
 
   selectDate(date: Date): void {
     if (!this.startDate || (this.startDate && this.endDate)) {
-      // 새로운 날짜 범위 시작
+      // new date range start
       this.startDate = new Date(date);
       this.endDate = null;
     } else {
-      // 종료 날짜 선택
+      // end date selected
       if (date < this.startDate) {
-        // 시작 날짜보다 이전 날짜를 선택한 경우
+        // select previous date than start date
         this.endDate = this.startDate;
         this.startDate = new Date(date);
       } else {
         this.endDate = new Date(date);
       }
       
-      // 날짜 선택 이벤트 발생
+      // date selected event
       this.dateSelected.emit({
         startDate: this.startDate,
         endDate: this.endDate
@@ -158,19 +158,19 @@ export class CalendarComponent {
 
   onNext(): void {
     if (this.startDate && this.endDate) {
-      // TravelRecordService에 날짜 정보 저장
+      // save date information to TravelRecordService
       this.travelRecordService.setDates(
         this.startDate.toISOString(),
         this.endDate.toISOString()
       );
       
-      // 검색 페이지로 이동
+      // navigate to search page
       this.router.navigate(['/history/search']);
     }
   }
   
   onBack(): void {
-    // 홈 페이지로 이동
+    // navigate to home page
     this.router.navigate(['/home']);
   }
 }

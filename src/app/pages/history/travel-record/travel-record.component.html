@@ -6,7 +6,7 @@
     <h2>Write your travel record</h2>
   </div>
   <div class="travel-record-container">
-  <p class="selected-date">Travel period: {{travelRecord.startDate | date:'yyyy년 MM월 dd일'}} - {{travelRecord.endDate | date:'yyyy년 MM월 dd일'}}</p>
+  <p class="selected-date">Travel period: {{travelRecord.startDate | date:'yyyy-MM-dd'}} - {{travelRecord.endDate | date:'yyyy-MM-dd'}}</p>
 
   <form (ngSubmit)="onSubmit()" class="record-form">
     <div class="form-group">

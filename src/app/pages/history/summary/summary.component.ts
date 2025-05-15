@@ -34,10 +34,10 @@ export class SummaryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // TODO: 실제 데이터는 서비스에서 가져와야 함
+    // TODO: connect actual data from service
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) {
-      console.error('ID가 존재하지 않습니다.');
+      console.error('ID does not exist.');
       return;
     }
     this.apiService.get<any>(`guides/${id}`).subscribe({
@@ -50,21 +50,21 @@ export class SummaryComponent implements OnInit {
         console.log(this.summary.regions)
       },
       error: (err) => {
-        console.error('여행 기록 요약 중 오류 발생:', err);
+        console.error('Error occurred while summarizing travel record:', err);
       }
     });
 
   }
   
   onPublish() {
-    // TODO: 실제로는 여행 기록을 게시하는 API를 호출하고 응답으로 받은 ID를 사용해야 함
+    // TODO: call API to publish travel record and use the received ID
 
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) {
-      console.error('ID가 존재하지 않습니다.');
+      console.error('ID does not exist.');
       return;
     }
-    // 가이드 페이지로 이동
+    // navigate to guide page
     this.router.navigate(['/post', id]);
   }
 

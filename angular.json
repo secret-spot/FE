@@ -40,7 +40,7 @@
             "optimization": false,
             "namedChunks": true,
             "aot": true,
-            "subresourceIntegrity": true,
+            "subresourceIntegrity": false,
             "preserveSymlinks": true,
             "fileReplacements": [],
             "allowedCommonJsDependencies": [
@@ -83,7 +83,8 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "subresourceIntegrity": false
             }
           },
           "defaultConfiguration": "production"

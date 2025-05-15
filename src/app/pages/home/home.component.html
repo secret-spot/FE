@@ -1,17 +1,17 @@
 <div class="home-container">
-  <!-- 로고 섹션 -->
+  <!-- logo section -->
   <div class="logo-section">
     <img src="assets/images/S2_logo_ver2.svg" alt="Home Logo" class="home-logo">
   </div>
 
-  <!-- 가이드 페이지 스크롤 섹션 -->
+  <!-- guide page scroll section -->
   <app-guide-list
   [title]="'A selection of guides that match ' + userName + '!'"
   [guides]="recommandedGuides"
   (clickGuide)="navigateToGuide($event)"
 ></app-guide-list>
 
-  <!-- 상위 spotter 섹션 -->
+  <!-- top spotter section -->
   <div class="top-spotters-section">
     <div class="top-spotters-section-title">
       <h3>Top 1% spotter in the past month</h3>

@@ -37,7 +37,7 @@ export class RankingComponent implements OnInit {
         this.loading = false;
       },
       error: (err: Error) => {
-        this.error = '랭킹을 불러오는데 실패했습니다.';
+        this.error = 'Failed to load rankings.';
         this.loading = false;
         console.error('Error loading rankings:', err);
       }

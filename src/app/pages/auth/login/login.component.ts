@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // 브라우저 환경에서만 localStorage 접근
+    // only access localStorage in browser environment
     this.apiService.get<any>('users/username').subscribe((data) => {
       this.nickname = data.userName;
     });

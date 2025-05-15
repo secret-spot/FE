@@ -3,13 +3,13 @@
     <button class="back-btn" (click)="onBack()">
       <img src="assets/images/Arrow.svg" alt="back" class="arrow-left">
     </button>
-    <h2>리뷰 작성하기</h2>
-    <button class="submit-btn" (click)="submitReview()">확인</button>
+    <h2>Write a review</h2>
+    <button class="submit-btn" (click)="submitReview()">Submit</button>
   </div>
 
   <div class="review-form">
     <div class="rating-section">
-      <h3>나의 별점</h3>
+      <h3>My rating</h3>
       <div class="stars">
         <span *ngFor="let star of [1,2,3,4,5]" 
               [class]="getStarClass(star)"
@@ -21,10 +21,10 @@
     </div>
 
     <div class="comment-section">
-      <h3>코멘트</h3>
+      <h3>Comment</h3>
       <textarea 
         [(ngModel)]="comment" 
-        placeholder="리뷰를 작성해주세요..."
+        placeholder="Write a review..."
         rows="5"
         class="comment-textarea">
       </textarea>

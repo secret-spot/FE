@@ -17,7 +17,7 @@ export class SplashComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // 3초 후에 로그인 버튼 표시
+    // show login button after 3 seconds
     setTimeout(() => {
       this.showLoginButton = true;
     }, 3000);

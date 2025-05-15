@@ -25,7 +25,7 @@ export class ReviewTabComponent {
   @Input() isMyGuide: boolean = false;
   @Input() reviews: any[] = [];
   @Input() myReview: any = null;
-  @Input() summaryReview: string = '요약할 리뷰 수가 충분하지 않습니다.';
+  @Input() summaryReview: string = 'There are not enough reviews to summarize.';
   @Input() myReviewStatus: string = '';
 
   constructor(

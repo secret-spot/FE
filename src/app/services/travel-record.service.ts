@@ -33,56 +33,56 @@ export class TravelRecordService {
 
   constructor(private apiService: ApiService) {}
 
-  // 여행 기록 생성
+  // create travel record
   createTravelRecord(formData: FormData): Observable<any> {
     console.log('TravelRecordService - Creating Travel Record:', formData);
     return this.apiService.post('guides', formData);
   }
 
-  // 날짜 설정
+  // set dates
   setDates(startDate: string, endDate: string) {
     this.tempRecord.startDate = startDate;
     this.tempRecord.endDate = endDate;
     console.log('TravelRecordService - Dates Set:', this.tempRecord);
   }
 
-  // 제목 설정
+  // set title
   setTitle(title: string): void {
     this.tempRecord.title = title;
   }
 
-  // 내용 설정
+  // set content
   setContent(content: string): void {
     this.tempRecord.content = content;
   }
 
-  // 이미지 설정
+  // set images
   setImages(images: string[]): void {
     this.tempRecord.images = images;
   }
 
-  // 장소 설정
+  // set places
   setPlaces(places: TravelPlace[]) {
-    // 기존 날짜 정보 유지
+    // keep original date information
     const startDate = this.tempRecord.startDate;
     const endDate = this.tempRecord.endDate;
     
-    // 새로운 places로 업데이트
+    // update with new places
     this.tempRecord.places = places;
     
-    // 날짜 정보 복원
+    // restore date information
     this.tempRecord.startDate = startDate;
     this.tempRecord.endDate = endDate;
     
     console.log('TravelRecordService - Places Set:', this.tempRecord);
   }
 
-  // 임시 저장된 데이터 가져오기
+  // get temporary saved data
   getTempRecord(): TravelRecord {
     return this.tempRecord;
   }
 
-  // 임시 저장된 데이터 초기화
+  // clear temporary saved data
   clearTempRecord(): void {
     this.tempRecord = {
       startDate: '',

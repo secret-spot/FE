@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -23,7 +23,8 @@ interface Question {
 })
 export class QnaTabComponent {
   @Input() isMyGuide: boolean = false;
-  @Input() questions: any[] = [];
+  @Input() questions: Question[] = [];
+  @Output() questionSubmitted = new EventEmitter<void>();
 
   newQuestion: string = '';
   selectedQuestion: Question | null = null;
@@ -39,19 +40,24 @@ export class QnaTabComponent {
     if (!this.newQuestion.trim()) return;
     this.apiService.post<any>(`guides/${this.id}/qnas`, {
       question: this.newQuestion,
-    }).subscribe((res) => {
-      console.log(res);
+    }).subscribe({
+      next: (res) => {
+        console.log(res);
+        const newQ: Question = {
+          id: this.questions.length + 1,
+          question: this.newQuestion,
+          author: '현재 사용자', // TODO: Get from auth service
+          createdAt: new Date().toISOString().split('T')[0]
+        };
+
+        this.questions.unshift(newQ);
+        this.newQuestion = '';
+        this.questionSubmitted.emit(); // Emit event after successful submission
+      },
+      error: (err) => {
+        console.error('Error submitting question:', err);
+      }
     });
-
-    const newQ: Question = {
-      id: this.questions.length + 1,
-      question: this.newQuestion,
-      author: '현재 사용자', // TODO: Get from auth service
-      createdAt: new Date().toISOString().split('T')[0]
-    };
-
-    this.questions.unshift(newQ);
-    this.newQuestion = '';
   }
 
   selectQuestion(question: Question): void {

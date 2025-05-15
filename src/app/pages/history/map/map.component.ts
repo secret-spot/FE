@@ -7,6 +7,7 @@ import { takeUntil, debounceTime } from 'rxjs/operators';
 import { PlaceService, Place } from '../../../services/place.service';
 import { TravelRecordService } from '../../../services/travel-record.service';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 
 declare global {
   interface Window {
@@ -36,24 +37,30 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
     private placeService: PlaceService,
     private travelRecordService: TravelRecordService
   ) {
-    // Google Maps API가 로드되었는지 확인
-    if (typeof window.google !== 'undefined') {
-      this.isGoogleMapsLoaded = true;
+    this.loadGoogleMapsScript();
+  }
+
+  private loadGoogleMapsScript(): void {
+    if (typeof window.google === 'undefined') {
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}&libraries=places`;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        this.isGoogleMapsLoaded = true;
+        this.initializeMap();
+      };
+      document.head.appendChild(script);
     } else {
-      // Google Maps API가 로드되지 않았다면 로드 이벤트를 기다림
-      window.addEventListener('load', () => {
-        if (typeof window.google !== 'undefined') {
-          this.isGoogleMapsLoaded = true;
-        }
-      });
+      this.isGoogleMapsLoaded = true;
     }
   }
 
   ngOnInit(): void {
-    // 현재 여행 기록 상태 로깅
+    // log current travel record state
     console.log('Map - Current Travel Record State:', this.travelRecordService.getTempRecord());
 
-    // PlaceService에서 선택된 장소들을 구독
+    // subscribe to selected places from PlaceService
     this.placeService.selectedPlaces$
       .pipe(takeUntil(this.destroy$))
       .subscribe((places: Place[]) => {
@@ -79,7 +86,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
       }
 
       const mapOptions: google.maps.MapOptions = {
-        center: { lat: 37.5665, lng: 126.9780 }, // 서울 중심 좌표
+        center: { lat: 37.5665, lng: 126.9780 }, // seoul center coordinates
         zoom: 13,
         mapTypeControl: true,
         streetViewControl: true,
@@ -88,7 +95,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.map = new google.maps.Map(mapElement, mapOptions);
 
-      // 검색 기능 초기화 - SearchBox 대신 Autocomplete 사용
+      // initialize search feature - use Autocomplete instead of SearchBox
       this.initializeAutocomplete();
     } catch (error) {
       console.error('Error initializing map:', error);
@@ -103,13 +110,13 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
         return;
       }
 
-      // Autocomplete 초기화
+      // initialize Autocomplete
       this.autocomplete = new google.maps.places.Autocomplete(searchInput, {
         types: ['establishment', 'geocode'],
-        componentRestrictions: { country: 'kr' } // 한국으로 제한
+        componentRestrictions: { country: 'kr' } // limit to korea
       });
 
-      // 장소 선택 이벤트 처리
+      // handle place selection event
       this.autocomplete.addListener('place_changed', () => {
         const place = this.autocomplete?.getPlace();
         if (!place || !place.geometry?.location) {
@@ -117,7 +124,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
           return;
         }
 
-        // 선택된 장소 정보 생성
+        // create selected place information
         const selectedPlace: Place = {
           name: place.name || '',
           address: place.formatted_address || '',
@@ -147,16 +154,16 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   selectPlace(place: Place): void {
-    // 캐시된 장소 정보 확인
+    // check cached place information
     const cachedPlace = this.placeService.getCachedPlace(place.placeId);
     if (cachedPlace) {
       this.placeService.addPlace(cachedPlace);
-      // 지도 중심을 선택된 위치로 이동
+      // move map center to selected location
       this.map.panTo({ lat: cachedPlace.lat, lng: cachedPlace.lng });
       return;
     }
 
-    // API 호출 제한을 위한 디바운스 적용
+    // apply debounce to limit API calls
     setTimeout(() => {
       const placeData = this.autocomplete?.getPlace();
       const photo = placeData?.photos?.[0];
@@ -167,10 +174,10 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
       this.placeService.addPlace(enrichedPlace);
       this.placeService.cachePlace(enrichedPlace);
       
-      // 지도 중심을 선택된 위치로 이동
+      // move map center to selected location
       this.map.panTo({ lat: place.lat, lng: place.lng });
       
-      // 장소 선택 후 현재 상태 로깅
+      // log current state after place selection
       console.log('Map - After Place Selection:', this.travelRecordService.getTempRecord());
     }, this.searchDebounceTime);
   }
@@ -178,7 +185,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
   removePlace(place: Place): void {
     this.placeService.removePlace(place);
     
-    // 장소 제거 후 현재 상태 로깅
+    // log current state after place removal
     console.log('Map - After Place Removal:', this.travelRecordService.getTempRecord());
   }
 
@@ -187,11 +194,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
-    // 기존 마커 제거
+    // remove existing markers
     this.markers.forEach(marker => marker.setMap(null));
     this.markers = [];
 
-    // 새로운 마커 추가
+    // add new markers
     this.selectedPlaces.forEach(place => {
       const marker = new google.maps.Marker({
         position: { lat: place.lat, lng: place.lng },

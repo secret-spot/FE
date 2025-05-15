@@ -5,7 +5,7 @@
         <!-- <img src="assets/images/spotty-logo.svg" alt="Spotty Logo" class="logo"> -->
         <h1>Spotty</h1>
       </div>
-      <p class="subtitle">당신의 여행 파트너</p>
+      <p class="subtitle">Your travel partner</p>
     </div>
   </div>
   
@@ -29,7 +29,7 @@
       </div>
     </div>
     
-    <!-- 로딩 표시 -->
+    <!-- loading indicator -->
     <div *ngIf="isLoading" class="message message-bot">
       <div class="message-content">
         <div class="message-avatar">
@@ -60,13 +60,13 @@
     <input type="text" 
            [(ngModel)]="newMessage" 
            (keyup.enter)="sendMessage()"
-           placeholder="메시지를 입력하세요..."
+           placeholder="Enter your message..."
            class="chat-input"
            [disabled]="isLoading">
     <button (click)="sendMessage()" 
             class="send-button"
             [disabled]="isLoading">
-      <span>전송</span>
+      <span>Send</span>
     </button>
   </div>
   <div class="footer"></div>

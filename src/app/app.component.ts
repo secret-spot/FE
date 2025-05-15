@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { NavComponent } from './nav/nav.component';
 import { CommonModule } from '@angular/common';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +11,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'secret-spot';
 
   showNav = true;
 
-  // 네비게이션 바를 숨길 페이지 목록
+  // pages to hide navigation bar
   private hideNavPages = [
     '/splash',
     '/login',
@@ -24,22 +25,27 @@ export class AppComponent {
     '/history/*',
     '/post/*',
     '/ranking'
-     // history 하위의 모든 경로
+     // all paths under history
   ];
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        // 현재 URL이 hideNavPages 목록에 있는지 확인
+        // check if current URL is in hideNavPages list
         this.showNav = !this.hideNavPages.some(page => {
           if (page.endsWith('/*')) {
-            // 와일드카드 패턴 처리
-            const basePath = page.slice(0, -1); // '*' 제거
+            // handle wildcard pattern
+            const basePath = page.slice(0, -1); // remove '*'
             return this.router.url.startsWith(basePath);
           }
           return this.router.url === page;
         });
       }
     });
+  }
+
+  ngOnInit() {
+    // Make environment variables globally available
+    (window as any).environment = environment;
   }
 }

@@ -29,7 +29,7 @@ export class LoadingComponent implements OnInit{
     this.apiService.post<any>(`guides/${id}/analyze`,data).subscribe({
       next: (data) => {
         console.log('Analysis result:', data);
-        // 분석 완료 후 이동
+        // navigate to summary page after analysis is complete
         setTimeout(() => {
           this.router.navigate(['/history/summary/'+id]);
         }, 3000);

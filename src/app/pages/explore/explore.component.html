@@ -1,5 +1,5 @@
 <div class="explore-container">
-  <!-- 검색 헤더 -->
+  <!-- search header -->
   <div class="search-header">
     <div class="search-input-container">
       <input 
@@ -15,7 +15,7 @@
   </div>
 
  
-  <!-- 기본 화면 -->
+  <!-- default view -->
   <div class="default-view" *ngIf="!isSearching && !error">
     <div class="region" *ngIf="showSearchResults&&(isRegion||isPlace)">
       <div class="region-message">
@@ -75,12 +75,12 @@
 
 
 
-  <!-- 로딩 중 화면 -->
+  <!-- loading screen -->
   <div class="loading" *ngIf="isSearching">
     <p></p>
   </div>
 
-  <!-- 오류 화면 -->
+  <!-- error screen -->
   <div class="error" *ngIf="error">
     <p>{{ error }}</p>
   </div>

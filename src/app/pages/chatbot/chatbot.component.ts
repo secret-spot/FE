@@ -40,7 +40,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   constructor(private http: HttpClient) { }
   
   ngOnInit(): void {
-    // 초기 메시지 추가
+    // add initial message
     this.messages.push({
       text: 'Hello! I\'m Spotty.\nHave you found a guide you like?\nShall we start planning transportation, schedule, or travel items?',
       sender: 'bot',
@@ -62,19 +62,19 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   sendMessage(): void {
     if (this.newMessage.trim() === '') return;
     
-    // 사용자 메시지 추가
+    // add user message
     this.messages.push({
       text: this.newMessage,
       sender: 'user',
       timestamp: new Date()
     });
     
-    // 입력 필드 초기화
+    // reset input field
     const userMessage = this.newMessage;
     this.newMessage = '';
     this.isLoading = true;
     
-    // HTTP 요청 직접 처리
+    // handle HTTP request directly
     this.http.post(this.apiUrl, 
       { prompt: userMessage }
     ).subscribe({
@@ -103,7 +103,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   }
   
   selectQuickReply(reply: QuickReply): void {
-    // 선택된 빠른 답변을 메시지로 추가
+    // add selected quick reply to messages
     this.messages.push({
       text: reply.text,
       sender: 'user',
@@ -112,7 +112,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
     
     this.isLoading = true;
     
-    // HTTP 요청 직접 처리
+    // handle HTTP request directly
     this.http.post(this.apiUrl, {
         prompt: reply.text
       }

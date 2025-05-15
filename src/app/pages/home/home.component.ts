@@ -13,17 +13,17 @@ import { GuideListComponent } from '../../components/guide-list/guide-list.compo
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  recommandedGuides: any[] = []; // 가이드 데이터를 저장할 배열
-  topSpotters: any[] = []; // 상위 spotter 데이터를 저장할 배열
-  popularSpots: any[] = []; // 인기 장소 데이터를 저장할 배열
-  recentReviews: any[] = []; // 최근 리뷰 데이터를 저장할 배열
-  recommendedRegions: any[] = []; // 추천 지역 데이터를 저장할 배열
-  userNickname: string = '닉네임'; // 사용자 닉네임
+  recommandedGuides: any[] = []; // guide data array
+  topSpotters: any[] = []; // top spotter data array
+  popularSpots: any[] = []; // popular spot data array
+  recentReviews: any[] = []; // recent review data array
+  recommendedRegions: any[] = []; // recommended region data array
+  userNickname: string = '닉네임'; // user nickname
   error: string | null = null;
   isLoading: boolean = true;
   userName: string = '';
 
-  // 가짜 데이터 (API 요청 실패 시 사용)
+  // fake data (used when API request fails)
   mockData = {
     guides: [
       {
@@ -127,7 +127,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userNickname = localStorage.getItem('username') || '닉네임';
+    this.userNickname = localStorage.getItem('username') || 'Nickname';
     this.fetchHomeData();
   }
 
@@ -135,7 +135,7 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
     this.error = null;
 
-    // 4개의 API 요청을 동시에 실행
+    // execute 4 API requests simultaneously
     forkJoin({
       guides: this.apiService.get<any>('home'),
       topSpotters: this.apiService.get<any>('rankings/home'),
@@ -152,10 +152,10 @@ export class HomeComponent implements OnInit {
         this.userName = data.username.userName;
       },
       error: (err) => {
-        console.error('홈 데이터를 가져오는 중 오류 발생:', err);
-        this.error = '데이터를 가져오는 중 오류가 발생했습니다. 가짜 데이터를 사용합니다.';
+        console.error('Error fetching home data:', err);
+        this.error = 'Error fetching data. Using fake data.';
         
-        // 가짜 데이터 사용
+        // use fake data
         this.recommandedGuides = this.mockData.guides;
         this.topSpotters = this.mockData.topSpotters;
         this.popularSpots = this.mockData.popularSpots;

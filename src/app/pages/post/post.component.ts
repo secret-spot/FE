@@ -6,6 +6,7 @@ import { GuideTabComponent } from './guide-tab/guide-tab.component';
 import { QnaTabComponent } from './qna-tab/qna-tab.component';
 import { ReviewTabComponent } from './review-tab/review-tab.component'
 import { RouterModule } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 declare global {
   interface Window {
@@ -55,7 +56,21 @@ export class PostComponent implements OnInit {
     private router: Router,
     private apiService: ApiService
   ) {
-    if (typeof window.google !== 'undefined') {
+    this.loadGoogleMapsScript();
+  }
+
+  private loadGoogleMapsScript(): void {
+    if (typeof window.google === 'undefined') {
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}&libraries=places`;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        const map = new google.maps.Map(document.createElement('div'));
+        this.placesService = new google.maps.places.PlacesService(map);
+      };
+      document.head.appendChild(script);
+    } else {
       const map = new google.maps.Map(document.createElement('div'));
       this.placesService = new google.maps.places.PlacesService(map);
     }
@@ -70,7 +85,7 @@ export class PostComponent implements OnInit {
     }
     this.id = id;
     
-    // 가이드 기본 정보 가져오기
+    // get guide basic information
     this.apiService.get<any>(`guides/${id}`).subscribe({
       next: (data) => {
         console.log(data);
@@ -93,12 +108,12 @@ export class PostComponent implements OnInit {
         const diffTime = end.getTime() - start.getTime();
         this.tripDuration = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
 
-        // 장소 이미지 URL 가져오기
+        // get place image URL
         this.loadPlacesImages();
 
-        // Q&A 데이터 가져오기
+        // get Q&A data
         this.loadQuestions();
-        // 리뷰 데이터 가져오기
+        // get review data
         this.loadReviews();
       },
       error: (err) => {
@@ -204,6 +219,11 @@ export class PostComponent implements OnInit {
         console.error('Error occurred while scraping:', err);
       }
     });
+  }
+
+  onQuestionSubmitted(): void {
+    // Reload questions when a new question is submitted
+    this.loadQuestions();
   }
 
 }

@@ -4,7 +4,7 @@
       <img src="assets/images/Arrow.svg" alt="back" class="arrow-left">
     </button>
     <h2>Select your travel dates</h2>
-    <button class="next-btn" (click)="onNext()" [disabled]="!startDate || !endDate">다음</button>
+    <button class="next-btn" (click)="onNext()" [disabled]="!startDate || !endDate">Next</button>
 
   </div>
   <div class="calendar-container">
@@ -12,7 +12,7 @@
   <div class="selected-dates">
     <div class="date-range">
       <div class="date-item" *ngIf="startDate">
-        <span class="date">{{startDate | date:'yyyy년 MM월 dd일'}} - {{endDate | date:'yyyy년 MM월 dd일'}}</span>
+        <span class="date">{{startDate | date:'yyyy-MM-dd'}} - {{endDate | date:'yyyy-MM-dd'}}</span>
       </div>
     </div>
     <!-- <button class="clear-btn" (click)="clearDates()" *ngIf="startDate && endDate">선택 초기화</button> -->
@@ -21,7 +21,7 @@
   <div class="calendar-body">
     <div class="calendar-controls">
       <button class="month-btn" (click)="previousMonth()">&lt;</button>
-      <h3>{{currentYear}}년 {{currentMonth + 1}}월</h3>
+      <h3>{{currentYear}} - {{currentMonth + 1}}</h3>
       <button class="month-btn" (click)="nextMonth()">&gt;</button>
     </div>
     
