@@ -1,4 +1,4 @@
-import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -22,7 +22,6 @@ export class MyPageComponent implements OnInit {
   error: string | null = null;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
     private route: ActivatedRoute,
     private apiService: ApiService
@@ -55,7 +54,8 @@ export class MyPageComponent implements OnInit {
         this.error = 'An error occurred while fetching profile data.';
       }
     });
-    }
+  }
+
   navigateToGuide(id: number) {
     this.router.navigate(['/post', id]);
   }

@@ -19,6 +19,7 @@ interface FilePreview {
 })
 export class TravelRecordComponent implements OnInit {
   selectedDate: Date = new Date();
+  isSubmitting: boolean = false;
   
   travelRecord = {
     startDate: '',
@@ -84,6 +85,9 @@ export class TravelRecordComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.isSubmitting) return;
+    this.isSubmitting = true;
+    
     // 선택된 파일들을 FormData에 추가
     const formData = new FormData();
     this.selectedFiles.forEach((file, index) => {
@@ -119,11 +123,10 @@ export class TravelRecordComponent implements OnInit {
         const guideId=response;
         // 로딩 페이지로 이동
         this.router.navigate(['/history/loading/' + guideId]);
-
-       
       },
       error: (error) => {
         console.error('Travel Record - API Error:', error);
+        this.isSubmitting = false;
         // TODO: 에러 처리 (예: 사용자에게 알림 표시)
       }
     });

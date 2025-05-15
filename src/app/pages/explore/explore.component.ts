@@ -1,5 +1,5 @@
-import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../services/api.service';
@@ -26,14 +26,13 @@ export class ExploreComponent implements OnInit {
   recommendedRegions: any[] = [];
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
     private route: ActivatedRoute,
     private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
-    // URL 파라미터에서 검색어 가져오기
+    // get search result from URL parameter
     this.route.queryParams.subscribe(params => {
       if (params['q']) {
         this.searchQuery = params['q'];
@@ -68,7 +67,7 @@ export class ExploreComponent implements OnInit {
     if (this.searchQuery.trim()) {
       this.router.navigate(['/explore'], { queryParams: { q: this.searchQuery } });
     } else {
-      // 검색어가 없으면 기본 화면으로 이동
+      // get default search result
       this.router.navigate(['/explore']);
       this.showSearchResults = false;
       this.fetchGuides();

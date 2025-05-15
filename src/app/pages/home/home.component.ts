@@ -1,5 +1,5 @@
-import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { forkJoin } from 'rxjs';
@@ -122,22 +122,13 @@ export class HomeComponent implements OnInit {
   };
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
     private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
-    // 브라우저 환경에서만 localStorage 접근
-    if (isPlatformBrowser(this.platformId)) {
-      this.userNickname = localStorage.getItem('username') || '닉네임';
-    }
-
+    this.userNickname = localStorage.getItem('username') || '닉네임';
     this.fetchHomeData();
-  }
-
-  navigateToRanking() {
-    this.router.navigate(['/ranking']);
   }
 
   fetchHomeData() {
@@ -172,6 +163,10 @@ export class HomeComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  navigateToRanking() {
+    this.router.navigate(['/ranking']);
   }
 
   navigateToGuide(id: number) {

@@ -26,7 +26,7 @@
       <div class="file-upload-container">
         <div class="file-upload-box" (click)="fileInput.click()">
           <i class="fas fa-plus"></i>
-          <span>이미지 추가</span>
+          <span>Add photos</span>
         </div>
         <input 
           #fileInput
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <button type="submit" class="submit-btn">Save</button>
+    <button type="submit" class="submit-btn" [disabled]="isSubmitting">{{isSubmitting ? 'Saving...' : 'Save'}}</button>
   </form>
   <div class="footer"></div>
 </div>
