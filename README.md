@@ -1,88 +1,80 @@
-# SecretSpot
+# ❤️‍🔥 S2 (Secret-Spot)
+<img width="911" alt="스크린샷 2025-05-15 오후 12 04 39" src="https://github.com/user-attachments/assets/b3129c78-4b63-4d3e-a372-37ce7b133d1e" />
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
 
-## Environment Variables Setup
+### Info
+<img src="https://github.com/secret-spot/AI/blob/main/SecretSpot.svg"/>
+S2 is a service designed to solve the increasingly discussed problem of overtourism. Instead of crowded tourist attractions, it helps users introduce and explore their own secret places so that they can find less crowded places.
 
-Before running the application, you need to set up the environment variables:
+### Architecture
+<img width="824" alt="스크린샷 2025-05-15 오후 12 08 37" src="https://github.com/user-attachments/assets/3f4e40c2-6963-4534-8c43-e67dd40edc04" />
 
-1. Copy the example environment file:
-   ```bash
-   cp src/environments/environment.example.ts src/environments/environment.ts
-   ```
 
-2. Edit the `environment.ts` file and replace the placeholder values with your actual API keys and configuration:
-   ```typescript
-   export const environment = {
-     production: false,
-     apiUrl: 'https://your-api-url.com/',
-     frontendUrl: 'http://localhost:4200',
-     googleMapsApiKey: 'your_google_maps_api_key_here' // Replace with your actual API key
-   };
-   ```
 
-3. For production, create a production environment file:
-   ```bash
-   cp src/environments/environment.example.ts src/environments/environment.prod.ts
-   ```
+## 👨‍👩‍👧‍👦Members
+### Developer
+|FE & Designer|BE & PM|BE|AI|
+|:--:|:--:|:--:|:--:|
+|![jieun](https://avatars.githubusercontent.com/u/143923436?v=4)|![haneul](https://avatars.githubusercontent.com/u/145983374?v=4)|![gyeongeun](https://avatars.githubusercontent.com/u/167386241?v=4)|![eojin](https://avatars.githubusercontent.com/u/166782787?v=4)|
+|GDG on Sookmyung|GDG on Sookmyung|GDG on Sookmyung|GDG on Sookmyung|
+|[Jieun Lee](https://github.com/mariewldms)|[Haneul Lee](https://github.com/tishakong)|[Gyeongeun Lee](https://github.com/ruddmslee)|[Eojin Yang](https://github.com/ydjwls)|
 
-4. Edit the `environment.prod.ts` file with your production configuration.
+---
+## 📌Tech Stack
+![typescript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![googlemaps](https://img.shields.io/badge/Google_Maps_Platform-4285F4?style=for-the-badge&logo=googlemaps&logoColor=white)
 
-**Note:** The environment files are ignored by Git to prevent sensitive information from being exposed. Make sure to keep your API keys and other sensitive information secure.
 
-## Development server
+  + **Language:** Typescript
+  + **FrameWork:** Angular
+  + **Deployment Platform:** Firebase
+  +  **Authentication**: Google OAuth 2.0
+  +  **APIs**: Google Maps API, Google Places API
 
-To start a local development server, run:
+---
+## 📌Key Features
+### 1️⃣ Keyword Extraction Feature 📍
++ **Description:** Automatically extracts relevant keywords from the user's post.
++ **Key Categories:**
+  + **Companion Type:** Solo, Family, Friends, Couple
+  + **Travel Style:** Art, Extreme, Photography, Food, Healing, History, Shopping, Experience
+  + **Region:** Any mentioned region
 
-```bash
-ng serve
+### 2️⃣ Local Etiquette Display Feature 😊
++ **Description:** When a user searches for a specific region, the system provides local etiquette guidelines tailored to that area.
++ **Highlights:**
+  + Utilizes Gemini to generate region-specific etiquette suggestions.
+  + Future updates may involve building a dedicated etiquette dataset per region for even more accurate and localized results.
+
+### 3️⃣ Small City Recommendation Feature 🗺️
++ **Description:** Recommends lesser-known small cities near the user’s selected location to help avoid overcrowded destinations.
++ **Highlights:**
+  + Powered by Gemini to identify nearby under-the-radar cities.
+  + Can be enhanced in the future to base recommendations on accumulated user-generated posts and data.
+
+### 4️⃣ Chatbot Feature 🤖
++ **Description:** An AI-powered companion that assists users like a real travel buddy.
++ **Highlights:**
+  + Provides friendly and personalized travel support, just like a friend on the journey.
+  + When asked for travel recommendations, it suggests hidden gems rather than typical tourist spots.
+---
+## 📂Folder
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+│── app
+│   ├── api/v1
+│       ├── endpoints/      # Modules that handle actual business logic
+│       └── routers.py      # File that registers each endpoint to the FastAPI router
+│   ├── config.py           # Configuration file for the API and Gemini API settings
+│   └── main.py             # Entry point of the FastAPI application (server startup file)
+│── .env                    # File that defines environment variables
+│── requirements.txt        # File listing required packages and libraries
+│── app.yaml                # Deployment configuration file for Google App Engine
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# FE
+## 🌐Deployment & Demo 
++ **Full Deployment URL:** https://secret-spot-22469.web.app/
++ **Demo Video:**
+---
+## Try S2 right now! 
+### 👇[Secret Spot](https://secret-spot-22469.web.app/)
