@@ -62,18 +62,27 @@ S2 is a service designed to solve the increasingly discussed problem of overtour
 ---
 ## 📂Folder
 ```
-│── app
-│   ├── api/v1
-│       ├── endpoints/      # Modules that handle actual business logic
-│       └── routers.py      # File that registers each endpoint to the FastAPI router
-│   ├── config.py           # Configuration file for the API and Gemini API settings
-│   └── main.py             # Entry point of the FastAPI application (server startup file)
-│── .env                    # File that defines environment variables
-│── requirements.txt        # File listing required packages and libraries
-│── app.yaml                # Deployment configuration file for Google App Engine
+src/
+├── app/
+│   ├── components/       # Reusable UI components
+│   ├── core/             # Global configuration and utilities
+│   ├── nav/              # Navigation components and layout
+│   ├── pages/            # Main route-based feature pages
+│   ├── services/         # API communication and business logic
+│   ├── app.module.ts     # Root module
+│   ├── app.routes.ts     # App routing configuration
+│   └── app.component.ts  # Root component
+├── assets/               # Static assets (images, fonts, etc.)
+├── environments/         # Environment-specific variables (dev, prod)
+├── styles/               # Global styles (SCSS)
+├── index.html            # Entry point for SPA
+└── main.ts               # Application bootstrap file
+
 ```
 ## 🌐Deployment & Demo 
-+ **Full Deployment URL:** https://secret-spot-22469.web.app/
++ **Full Deployment URL:** https://secret-spot-22469.web.app
++ **AI Server Deployment URL:** https://basic-radius-459414-h8.du.r.appspot.com
++ **Backend Server Deployment URL:** https://s2-473964008323.us-central1.run.app
 + **Demo Video:**
 ---
 ## Try S2 right now! 
