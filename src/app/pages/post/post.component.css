@@ -1,8 +1,9 @@
 .guide-page {
     font-family: 'Arial', sans-serif;
-    max-width: 500px;
+    max-width: 1200px;
     margin: 0 auto;
     background: white;
+    padding: 0,20px,100px,20px;
     /* border-radius: 20px; */
     overflow-y: auto;
     height:100vh;
@@ -129,13 +130,25 @@
     margin-top: -15px;
   }
   
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  
   .tags span {
-    background:#A0AEA2;
+    background: #A0AEA2;
     color: white;
     border-radius: 20px;
     padding: 7px 11px;
-    margin-right: 6px;
     font-size: 0.9rem;
+    /* flex: 1; */
+    /* min-width: 0; */
+    text-align: center;
+    white-space: nowrap;
+    /* overflow: hidden;
+    text-overflow: ellipsis; */
   }
   
   .tab-nav {

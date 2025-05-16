@@ -169,6 +169,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/ranking']);
   }
 
+  navigateNothing(){
+    
+  }
+
   navigateToGuide(id: number) {
     this.router.navigate(['/post', id]);
   }
