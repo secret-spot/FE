@@ -76,9 +76,7 @@ src/
 ```
 ## 🌐Deployment & Demo 
 + **Full Deployment URL:** https://secret-spot-22469.web.app
-+ **AI Server Deployment URL:** https://basic-radius-459414-h8.du.r.appspot.com
-+ **Backend Server Deployment URL:** https://s2-473964008323.us-central1.run.app
-+ **Demo Video:**
++ **Demo Video:** https://youtu.be/Uf_ZQYjqDIA  
 ---
 ## Try S2 right now! 
 ### 👇[Secret Spot](https://secret-spot-22469.web.app/)
